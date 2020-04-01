@@ -4,9 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DF4A00F3"
+    android:background="@color/colorAccent"
     android:foregroundTint="#4A0D0D"
     tools:context=".HomeActivity">
+
+    <include
+        android:id="@+id/main_page_toolbar"
+        layout="@layout/app_bar_layout"
+        >
+
+    </include>
 
     <TextView
         android:id="@+id/Welcome"

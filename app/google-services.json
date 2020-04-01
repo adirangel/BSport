@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "613058262157",
+    "firebase_url": "https://bsport-4f5cc.firebaseio.com",
+    "project_id": "bsport-4f5cc",
+    "storage_bucket": "bsport-4f5cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613058262157:android:5751fd6d1849945f545ec4",
+        "android_client_info": {
+          "package_name": "com.example.bsport"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "613058262157-rtmckvigid1v8jntu7v6iadifmv5cj5s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDyIrmSL86XphkySOEuYaNMHyVeRO6IMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "613058262157-rtmckvigid1v8jntu7v6iadifmv5cj5s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
