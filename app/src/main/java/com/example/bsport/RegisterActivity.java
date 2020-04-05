@@ -45,14 +45,12 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SendUserToLoginActivity();
-
             }
         });
 
         CreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 CreateNewAccount();
             }
         });
@@ -92,11 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 RootRef.child("Users").child(currentUserID).child("device_token")
                                         .setValue(deviceToken);
-
-
-
                                 SendUserToMainActivity();
-
                                 Toast.makeText(RegisterActivity.this,"Account Created Successfully.",Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                             }
@@ -110,7 +104,6 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
     }
-
 
     private void InitializeFields() {
         CreateAccountButton=(Button)findViewById(R.id.Register_button);
@@ -129,9 +122,9 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(loginIntent);
     }
     private void SendUserToMainActivity() {
-        Intent mainIntent = new Intent(RegisterActivity.this,LoginActivity.class);
-        //mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Intent mainIntent = new Intent(RegisterActivity.this,HomeActivity.class);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainIntent);
-        //finish();
+        finish();
     }
 }
