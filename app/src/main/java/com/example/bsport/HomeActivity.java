@@ -31,7 +31,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void SendUserToLoginActivity() {
-        Intent loginIntent = new Intent( HomeActivity.this , LoginActivity.class);
-        startActivity(loginIntent);
+        Intent LoginIntent = new Intent( HomeActivity.this , LoginActivity.class);
+        startActivity(LoginIntent);
     }
 }
