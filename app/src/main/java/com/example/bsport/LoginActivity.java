@@ -19,6 +19,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthActionCodeException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -27,9 +30,10 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog loadingbar;
 
 
-    private Button LoginButton, phoneLoginButton;
+    private Button LoginButton;
     private EditText UserEmail,UserPassword;
     private TextView NeedNewAccountLink ,ForgetPasswordLink;
+    private DatabaseReference UserRef;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+        UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
 
         initilizedFields();
@@ -78,9 +83,20 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
-                                SendUserToLMainActivity();
-                                Toast.makeText(LoginActivity.this , "Logged in successful" , Toast.LENGTH_SHORT);
-                                loadingbar.dismiss();
+                                String currentUserId = mAuth.getCurrentUser().getUid();
+                                String deviceToken = FirebaseInstanceId.getInstance().getToken();
+                                UserRef.child(currentUserId).child("device_token")
+                                        .setValue(deviceToken)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()){
+                                                    SendUserToLMainActivity();
+                                                    Toast.makeText(LoginActivity.this,"Logged in Successful.",Toast.LENGTH_SHORT).show();
+                                                    loadingbar.dismiss();
+                                                }
+                                            }
+                                        });
                             }
                             else{
                                 String message = task.getException().toString();
@@ -96,7 +112,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initilizedFields() {
         LoginButton = (Button) findViewById(R.id.login_button);
-        LoginButton = (Button) findViewById(R.id.phone_login_button);
         UserEmail = ( EditText) findViewById(R.id.login_email);
         UserPassword = ( EditText) findViewById(R.id.login_password);
         ForgetPasswordLink = ( TextView) findViewById(R.id.forget_password_link);
@@ -106,18 +121,12 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (currentUser != null)
-        {
-            SendUserToLMainActivity();
-        }
-    }
 
     private void SendUserToLMainActivity() {
         Intent MainIntent = new Intent(  LoginActivity.this,HomeActivity.class );
+        MainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(MainIntent);
+        finish();
     }
     private void SendUserToLRegisterActivity() {
         Intent RegisterIntent = new Intent(  LoginActivity.this,RegisterActivity.class );
