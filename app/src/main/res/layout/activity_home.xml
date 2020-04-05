@@ -31,12 +31,29 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/main_tabs_pager"
+    <TextView
+
+        android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/appBarLayout"
-        ></androidx.viewpager.widget.ViewPager>
+        android:layout_below="@id/appBarLayout"
+        android:layout_marginTop="49dp"
+        android:text="חפש שותפים לפעילות ספורט ברחבי העיר באר שבע"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView5"
+        android:layout_marginTop="5dp"
+        android:textDirection="rtl"
+        android:gravity="right"
+        android:text="@string/chooseDay"
+
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
 
