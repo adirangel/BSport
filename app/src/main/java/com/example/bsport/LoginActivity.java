@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog loadingbar;
 
 
-    private Button LoginButton, PhoneLoginButton;
+    private Button LoginButton, phoneLoginButton;
     private EditText UserEmail,UserPassword;
     private TextView NeedNewAccountLink ,ForgetPasswordLink;
 

@@ -78,7 +78,6 @@ public class RegisterActivity extends AppCompatActivity {
             loadingBar.setCanceledOnTouchOutside(true);
             loadingBar.show();
 
-
             mAuth.createUserWithEmailAndPassword(email,password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -132,6 +131,6 @@ public class RegisterActivity extends AppCompatActivity {
         Intent mainIntent = new Intent(RegisterActivity.this,LoginActivity.class);
         //mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainIntent);
-        //finish();
+        finish();
     }
 }
