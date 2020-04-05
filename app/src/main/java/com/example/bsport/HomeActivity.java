@@ -16,4 +16,5 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(mToolBar);
         getSupportActionBar().setTitle("BSport");
     }
+
 }
