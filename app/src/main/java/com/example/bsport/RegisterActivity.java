@@ -129,9 +129,9 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(loginIntent);
     }
     private void SendUserToMainActivity() {
-        Intent mainIntent = new Intent(RegisterActivity.this,MainActivity.class);
-        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Intent mainIntent = new Intent(RegisterActivity.this,LoginActivity.class);
+        //mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainIntent);
-        finish();
+        //finish();
     }
 }
