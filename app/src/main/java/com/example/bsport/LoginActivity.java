@@ -123,7 +123,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void SendUserToLMainActivity() {
         Intent MainIntent = new Intent(  LoginActivity.this,HomeActivity.class );
-        MainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(MainIntent);
         finish();
     }
