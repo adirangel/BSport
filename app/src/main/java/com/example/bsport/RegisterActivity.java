@@ -45,14 +45,12 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SendUserToLoginActivity();
-
             }
         });
 
         CreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 CreateNewAccount();
             }
         });
@@ -85,18 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful())
                             {
-                                String deviceToken = FirebaseInstanceId.getInstance().getToken();
-
-                                String currentUserID = mAuth.getCurrentUser().getUid();
-                                RootRef.child("Users").child(currentUserID).setValue("");
-
-                                RootRef.child("Users").child(currentUserID).child("device_token")
-                                        .setValue(deviceToken);
-
-
-
-                                SendUserToMainActivity();
-
+                                SendUserToLoginActivity();
                                 Toast.makeText(RegisterActivity.this,"Account Created Successfully.",Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                             }
@@ -128,10 +115,10 @@ public class RegisterActivity extends AppCompatActivity {
         Intent loginIntent = new Intent(RegisterActivity.this,LoginActivity.class);
         startActivity(loginIntent);
     }
-    private void SendUserToMainActivity() {
-        Intent mainIntent = new Intent(RegisterActivity.this,MainActivity.class);
+    /*private void SendUserToMainActivity() {
+        Intent mainIntent = new Intent(RegisterActivity.this,HomeActivity.class);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainIntent);
         finish();
-    }
+    }*/
 }

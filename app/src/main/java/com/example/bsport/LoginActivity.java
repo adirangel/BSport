@@ -38,8 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         UserPassword = ( EditText) findViewById(R.id.login_password);
         ForgetPasswordLink = ( TextView) findViewById(R.id.forget_password_link);
         NeedNewAccountLink = ( TextView) findViewById(R.id.Sign_Up_link);
-
-
     }
 
     @Override
