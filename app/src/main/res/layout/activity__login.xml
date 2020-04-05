@@ -84,12 +84,12 @@
                     android:background="@drawable/buttons"
                     />
             <TextView
-                android:id="@+id/alredy_have_account_link"
+                android:id="@+id/Sign_Up_link"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/login_button"
-                android:text="Alredy Have an account ?"
+                android:text="Sign Up"
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="23dp"
@@ -105,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@id/alredy_have_account_link"
+                android:layout_below="@id/Sign_Up_link"
                 android:text="or Login using your"
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="15dp"
