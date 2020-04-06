@@ -10,7 +10,7 @@ stages{
         }
         stage("test") {
             steps{
-                sh"./gradlew integrationTest"
+                sh"./gradlew check"
                 echo "The test stage passed..."
             }
         }
