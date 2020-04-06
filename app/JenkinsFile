@@ -1,65 +1,47 @@
+buildscript {
+    repositories {
+        // Plugin portal
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+    dependencies {
+        classpath 'gradle.plugin.info.vividcode.android.build:vc-gradle-android-sdk-manager:0.9.0'
+    }
+}
 
-pipeline {
-    agent {
-        docker { image 'node:7-alpine'         
+
+if (project.hasProperty('setupAndroidSdk')) {
+    apply plugin: 'info.vividcode.android.sdk-manager'
+
+    androidSdkManager.updateSdkComponents(
+            ["tools", "platform-tools", "extra-android-m2repository", "extra-google-m2repository"],
+            acceptLicenseAutomatically: true)
+    androidSdkManager.updateSdkPlatformAndBuildToolsAfterEvaluate(
+            acceptLicenseAutomatically: true)
+}
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "info.vividcode.android.app.samples.jenkinspipeline"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    
-    stages {
-        stage('Unit & Integration Tests') {
-            steps {
-                script {
-                    try {
-                        sh 'chmod +x gradlew' 
-                    } finally {
-                        junit '**/build/test-results/test/*.xml'
-                    }
-                }
-            }
-        }
-        stage('Frontend Unit Tests') {
-            steps {
-                sshagent(['git']) {
-                    script {
-                        try {
-                            sh './gradlew cleanFrontendTest --no-daemon'
-                            sh './gradlew frontendUnitTest --no-daemon'
-                        } finally {
-                            junit 'publicapi/frontend/test/karma-result.xml'
-                        }
-                    }
-                }
-            }
-        }
-        stage('Frontend Static Code Analysis') {
-            steps {
-                script {
-                    try {
-                        sh './gradlew tslint --no-daemon'
-                    } finally { 
-                        checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'publicapi/frontend/tslint-result.xml', unHealthy: ''
-                    }
-                }
-            }
-        }
-        stage('End 2 End Tests') {
-            steps {
-                script {
-                    try {
-                        sh './gradlew e2e --no-daemon'
-                    } finally { 
-                        junit '**/e2e-results/junit-formatted/*.xml'
-                        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'publicapi/frontend/test/e2e-results/html-formatted/', reportFiles: 'htmlReport.html', reportName: 'End 2 End Test Report', reportTitles: ''])
-                    }
-                }
-            }
-        }
-        stage('Publish Artifact to Nexus') {
-            steps {
-                sh './gradlew publish --no-daemon'
-            }
-        }
-    }
+}
 
-    }
-
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+}
