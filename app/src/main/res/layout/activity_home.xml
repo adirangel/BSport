@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,18 +11,18 @@
     tools:context=".HomeActivity">
 
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints">
+
         <include
             android:id="@+id/main_page_toolbar"
-            layout="@layout/app_bar_layout"
-            >
+            layout="@layout/app_bar_layout">
 
         </include>
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/main_tabs"
             android:layout_width="match_parent"
@@ -31,12 +33,95 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/main_tabs_pager"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/appBarLayout"
-        ></androidx.viewpager.widget.ViewPager>
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/linearlayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+
+                android:id="@+id/homepage1"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginRight="100dp"
+                android:paddingLeft="35dp"
+                android:src="@drawable/homepage"
+                android:layout_marginTop="100dp"
+
+
+                />
+
+            <TextView
+
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="25dp"
+                android:text="חפש שותפים לפעילות ספורט ברחבי העיר באר שבע"
+                android:textSize="28dp"
+                android:textStyle="bold"
+                android:layout_below="@id/homepage1"/>
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="25dp"
+                android:text="@string/chooseDay"
+                android:textSize="20dp"
+                android:layout_below="@id/textView5"/>
+
+
+            />
+
+            <Button
+                android:id="@+id/WatchActivitiesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="200dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/buttons"
+                android:text="צפה בפעילויות"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="22dp"
+                android:layout_below="@id/textView6"
+                />
+
+            <Button
+                android:id="@+id/AddActibityButton"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/buttons"
+                android:paddingRight="15dp"
+                android:text="הוסף פעילות"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="22dp"
+                android:layout_below="@id/textView6"
+                />
+
+            <ImageView
+
+                android:id="@+id/homepage2"
+                android:layout_width="match_parent"
+
+                android:layout_height="250dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/homepage2"
+                android:layout_below="@id/AddActibityButton"
+                />
+
+        </RelativeLayout>
+    </ScrollView>
+
 
 </RelativeLayout>
 

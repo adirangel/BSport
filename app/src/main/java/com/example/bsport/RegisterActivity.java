@@ -61,13 +61,13 @@ public class RegisterActivity extends AppCompatActivity {
         String email = UserEmail.getText().toString();
         String password = UserPassword.getText().toString();
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Please enter email.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"אנא הכנס אימייל",Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Please enter password.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"אנא הכנס סיסמה",Toast.LENGTH_SHORT).show();
         }
         else if(password.length() < 6){
-            Toast.makeText(this,"Password must contain at least 6 characters.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"אנא הכנס סיסמה ארוכה מ6 תווים",Toast.LENGTH_SHORT).show();
         }
         else
         {
