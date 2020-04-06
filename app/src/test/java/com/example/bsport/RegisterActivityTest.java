@@ -27,4 +27,5 @@ public class RegisterActivityTest {
     public void ValidTestName() {
         assertEquals(RegisterActivity.UserName, null);
     }
+    
 }
