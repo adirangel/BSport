@@ -27,7 +27,7 @@ import java.security.NoSuchAlgorithmException;
 public class RegisterActivity extends AppCompatActivity {
 
     private Button CreateAccountButton;
-    private EditText UserEmail, UserPassword, UserName,UserAge,UserAboutMyself; ;
+    public static EditText UserEmail, UserPassword, UserName,UserAge,UserAboutMyself; ;
     private TextView AlreadyHaveAccountLink;
     private FirebaseAuth mAuth;
     private DatabaseReference RootRef;

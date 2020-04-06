@@ -14,5 +14,5 @@ public class LoginActivityTest {
     public void ValidTestpass(){
         assertEquals(LoginActivity.UserPassword,null);
     }
-    
+
 }
