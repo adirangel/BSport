@@ -6,7 +6,7 @@ pipeline {
 stages{
         stage("build") {
             steps{
-                sh '''/gradlew build clean'''
+                sh '''./gradlew build clean'''
                 echo "The build stage passed..."
             }
         }
