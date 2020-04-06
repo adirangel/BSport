@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh 'chmod +x gradlew clean test --no-daemon' 
+                        sh 'chmod +x gradlew clean test' 
                     } finally {
                         junit '**/build/test-results/test/*.xml'
                     }
