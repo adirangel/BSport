@@ -111,7 +111,6 @@
 
                 android:id="@+id/homepage2"
                 android:layout_width="match_parent"
-
                 android:layout_height="250dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="8dp"
