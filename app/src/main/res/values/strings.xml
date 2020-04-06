@@ -10,10 +10,14 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="basic_text1">המר על תוצאת המשחק\u200e:</string>
     <string name="chooseDay">בחר את היום השעה והמיקום כדי לבצע פעילות ספורט עם מי שרק תרצה</string>
-
-    <string-array name="register_sport" >
+    <string name="AlreadyHaveAccountLink">כבר יש לך חשבון?\u200e</string>
+    <string name="CreateAccount">יצירת חשבון</string>
+    <string name="RegisterAboutMyself">קצת על עצמי...</string>
+    <string name="age">גיל</string>
+    <string name="name">שם</string>
+    <string name="password">סיסמה</string>
+    <string-array name="register_sport">
         <item>תחום ספורט</item>
         <item>כדור רגל</item>
         <item>כדור סל</item>
