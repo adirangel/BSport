@@ -19,4 +19,4 @@ post{
             // Jenkins cleans the workspace
             cleanWs()  
         }
-    
+    }
