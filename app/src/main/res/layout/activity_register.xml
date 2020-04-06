@@ -42,7 +42,7 @@
                 android:layout_marginLeft="17dp"
                 android:layout_marginRight="17dp"
 
-               />
+                />
             <EditText
                 android:id="@+id/register_Password"
                 android:layout_width="match_parent"

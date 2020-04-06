@@ -1,28 +1,24 @@
 pipeline {
     agent any
-
-    stages {
-        stage ('Compile Stage'){
-            step{
-                withMaven (maven : 'maven_3_5_0'){
-                    sh 'mvm clean compile'
-                        }
-                }
+    
+stages{
+        stage("build") {
+            steps{
+                sh "chmod +x gradlew"
+                echo "The build stage passed..."
+            }
         }
-        stage ('Testing Stage'){
-            step{
-                withMaven (maven : 'maven_3_5_0'){
-                    sh 'mvm test'
-                            }
-                }
+        stage("test") {
+            steps{
+                echo "The test stage passed..."
+            }
         }
-        stage ('Deployment Stage'){
-            step{
-                withMaven (maven : 'maven_3_5_0'){
-                        sh 'mvm deploy'
-                    }
-                }
+    }
+post{
+        always{
+            echo "post-build will always run after build completed"
+            // Jenkins cleans the workspace
+            cleanWs()  
         }
-
     }
 }
