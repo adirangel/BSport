@@ -1,9 +1,7 @@
 
 pipeline {
     agent {
-        docker { image 'node:7-alpine' 
-    git update-index --chmod=+x gradlew
-        
+        docker { image 'node:7-alpine'         
         }
     }
 stages{
