@@ -10,6 +10,7 @@ stages{
         }
         stage("test") {
             steps{
+            sh './gradlew clean test --no-daemon' 
                 echo "The test stage passed..."
             }
         }
