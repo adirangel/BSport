@@ -1,8 +1,6 @@
 pipeline {
     agent any
-        tools {
-        gradle "GRADLE_LATEST"
-    }
+
 stages{
         stage("build") {
             steps{
@@ -12,7 +10,6 @@ stages{
         }
         stage("test") {
             steps{
-            sh './gradlew clean test --no-daemon' 
                 echo "The test stage passed..."
             }
         }
