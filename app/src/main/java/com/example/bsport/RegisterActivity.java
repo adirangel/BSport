@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,6 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
         CreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                
                 CreateNewAccount();
             }
         });
@@ -59,15 +61,15 @@ public class RegisterActivity extends AppCompatActivity {
     private void CreateNewAccount() {
 
         String email = UserEmail.getText().toString();
-        String password = UserPassword.getText().toString();
+        String password = UserPassword.getText().toString();;
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Please enter email.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"אנא הכנס אימייל",Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Please enter password.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"אנא הכנס סיסמה",Toast.LENGTH_SHORT).show();
         }
         else if(password.length() < 6){
-            Toast.makeText(this,"Password must contain at least 6 characters.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"אנא הכנס סיסמה ארוכה מ6 תווים",Toast.LENGTH_SHORT).show();
         }
         else
         {
