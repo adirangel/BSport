@@ -4,7 +4,7 @@ stages{
 
         stage("build") {
             steps{
-                sh "chmod +x gradelw"
+                sh "chmod +x gradlew"
                 sh '''./gradlew build clean'''
                 echo "The build stage passed..."
             }
