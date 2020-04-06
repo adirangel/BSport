@@ -4,9 +4,10 @@ pipeline {
         docker { image 'node:7-alpine'         
         }
     }
+    
     stages {
         stage('Checkout') {
-            steps { //Checking out the repo
+            steps {
                 checkout changelog: true, poll: true, scm: [$class: 'GitSCM', branches: [[name: '*/master']], browser: [$class: 'BitbucketWeb', repoUrl: 'https://web.com/blah'], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'git', url: 'ssh://git@git.giturl.com/test/test.git']]]
             }
         }
@@ -14,9 +15,9 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh './gradlew clean test --no-daemon' //run a gradle task
+                        sh './gradlew clean test --no-daemon' 
                     } finally {
-                        junit '**/build/test-results/test/*.xml' //make the junit test results available in any case (success & failure)
+                        junit '**/build/test-results/test/*.xml'
                     }
                 }
             }
@@ -40,7 +41,7 @@ pipeline {
                 script {
                     try {
                         sh './gradlew tslint --no-daemon'
-                    } finally { //Make checkstyle results available
+                    } finally { 
                         checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'publicapi/frontend/tslint-result.xml', unHealthy: ''
                     }
                 }
@@ -51,7 +52,7 @@ pipeline {
                 script {
                     try {
                         sh './gradlew e2e --no-daemon'
-                    } finally { //Make selenium/protractor results available and publish the html (containing screenshots)
+                    } finally { 
                         junit '**/e2e-results/junit-formatted/*.xml'
                         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'publicapi/frontend/test/e2e-results/html-formatted/', reportFiles: 'htmlReport.html', reportName: 'End 2 End Test Report', reportTitles: ''])
                     }
@@ -64,5 +65,6 @@ pipeline {
             }
         }
     }
+
     }
 
