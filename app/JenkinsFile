@@ -7,6 +7,7 @@ stages{
                 sh "chmod +x gradlew"
                 sh '''./gradlew build clean'''
                 echo "The build stage passed..."
+                sdk.dir=/Users/Adir/Library/Android/sdk
             }
         }
         stage("test") {
