@@ -16,7 +16,7 @@
     <string name="age">גיל</string>
     <string name="name">שם</string>
     <string name="password">סיסמה</string>
-    <string-array name="register_sport" >
+    <string-array name="register_sport">
         <item>תחום ספורט</item>
         <item>כדורגל</item>
         <item>כדורסל</item>
