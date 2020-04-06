@@ -4,14 +4,13 @@ pipeline {
         docker { image 'node:7-alpine'         
         }
     }
-stages{
-        stage("build") {
-            steps{
-                
-                sh '''chmod +x ./gradlew build clean'''
-                echo "The build stage passed..."
-            }
-        }
+stage('Gradle Build') {
+    if (isUnix()) {
+        sh './gradlew clean build'
+    } else {
+        bat 'gradlew.bat clean build'
+    }
+}
         stage("test") {
             steps{
                 echo "The test stage passed..."
