@@ -24,8 +24,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
+    public static final Pattern EMAIL_PATTERN = Pattern.compile("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" + "\\@" + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" + "(" + "\\." + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" + ")+");
 
     private Button CreateAccountButton;
     public static EditText UserEmail, UserPassword, UserName,UserAge,UserAboutMyself; ;
@@ -64,6 +66,9 @@ public class RegisterActivity extends AppCompatActivity {
         String password = UserPassword.getText().toString();;
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"אנא הכנס אימייל",Toast.LENGTH_SHORT).show();
+        }
+        else if(!EMAIL_PATTERN.matcher(email).matches()){
+            Toast.makeText(this,"אנא הכנס אימייל תיקני",Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(password)){
             Toast.makeText(this,"אנא הכנס סיסמה",Toast.LENGTH_SHORT).show();

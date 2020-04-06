@@ -25,7 +25,10 @@ public class Utils {
     }
 
     private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
-            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+            Pattern.compile("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                                    "\\@" + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                                    "(" + "\\." + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                                    ")+", Pattern.CASE_INSENSITIVE);
 
 
     public static Date calendarDate(long epocSeconds) {

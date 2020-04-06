@@ -22,12 +22,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.util.regex.Pattern;
+
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
     private ProgressDialog loadingbar;
-
+    public static final Pattern  EMAIL_PATTERN = Pattern.compile("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" + "\\@" + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" + "(" + "\\." + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" + ")+");
     private Button LoginButton;
     public static EditText UserEmail;
     public static EditText UserPassword;
@@ -62,13 +64,16 @@ public class LoginActivity extends AppCompatActivity {
         String email = UserEmail.getText().toString();
         String password = UserPassword.getText().toString();
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Please enter email.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"אנא הכנס אימייל",Toast.LENGTH_SHORT).show();
+        }
+        else if(!EMAIL_PATTERN.matcher(email).matches()){
+            Toast.makeText(this,"אנא הכנס אימייל תיקני",Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Please enter password.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"אנא הכנס סיסמה",Toast.LENGTH_SHORT).show();
         }
         else if(password.length() < 6){
-            Toast.makeText(this,"Password must contain at least 6 characters.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"הסיסמה צריכה להיות באורך 6 ומעלה",Toast.LENGTH_SHORT).show();
         }
         else
         {
