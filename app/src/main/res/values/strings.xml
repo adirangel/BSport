@@ -11,7 +11,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="basic_text1">המר על תוצאת המשחק\u200e:</string>
-    <string name="chooseDay">בחר את היום, השעה והמיקום שתרצה. תוכל לשחק בקבוצה או ביחידים.\u200e</string>
+    <string name="chooseDay">בחר את היום השעה והמיקום כדי לבצע פעילות ספורט עם מי שרק תרצה</string>
 
     <string-array name="register_sport" >
         <item>תחום ספורט</item>
