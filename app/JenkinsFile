@@ -1,47 +1,25 @@
-buildscript {
-    repositories {
-        // Plugin portal
-        maven { url 'https://plugins.gradle.org/m2/' }
-    }
-    dependencies {
-        classpath 'gradle.plugin.info.vividcode.android.build:vc-gradle-android-sdk-manager:0.9.0'
-    }
-}
+pipeline {
+    agent any
+stages{
 
-
-if (project.hasProperty('setupAndroidSdk')) {
-    apply plugin: 'info.vividcode.android.sdk-manager'
-
-    androidSdkManager.updateSdkComponents(
-            ["tools", "platform-tools", "extra-android-m2repository", "extra-google-m2repository"],
-            acceptLicenseAutomatically: true)
-    androidSdkManager.updateSdkPlatformAndBuildToolsAfterEvaluate(
-            acceptLicenseAutomatically: true)
-}
-
-apply plugin: 'com.android.application'
-
-android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
-
-    defaultConfig {
-        applicationId "info.vividcode.android.app.samples.jenkinspipeline"
-        minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        stage("build") {
+            steps{
+                sh "chmod +x gradelw"
+                sh '''./gradlew build clean'''
+                echo "The build stage passed..."
+            }
+        }
+        stage("test") {
+            steps{
+                echo "The test stage passed..."
+            }
         }
     }
-}
-
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.3.0'
+post{
+        always{
+            echo "post-build will always run after build completed"
+            // Jenkins cleans the workspace
+            cleanWs()  
+        }
+    }
 }
