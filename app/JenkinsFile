@@ -10,6 +10,7 @@ stages{
         }
         stage("test") {
             steps{
+                $ gradle RUN integrationTest
                 echo "The test stage passed..."
             }
         }
