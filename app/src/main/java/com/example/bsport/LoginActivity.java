@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"אנא הכנס אימייל",Toast.LENGTH_SHORT).show();
         }
-        
+
         else if(!EMAIL_PATTERN.matcher(email).matches()){
             Toast.makeText(this,"אנא הכנס אימייל תיקני",Toast.LENGTH_SHORT).show();
         }

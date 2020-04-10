@@ -10,6 +10,11 @@
     android:foregroundTint="#4A0D0D"
     tools:context=".HomeActivity">
 
+    <include
+        android:id="@+id/main_page_toolbar"
+        layout="@layout/app_bar_layout"
+        >
+    </include>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,8 +36,6 @@
                 />
 
 
-                />
-
             <TextView
 
                 android:id="@+id/textView5"
@@ -53,9 +56,6 @@
                 android:text="@string/chooseDay"
                 android:textSize="20dp"
                 android:layout_below="@id/textView5"/>
-
-
-            />
 
             <ImageView
 
@@ -106,11 +106,6 @@
                 android:text="3. תפגש עם החברים ותתחילו להתאמן! "
                 android:textSize="20dp"
                 android:layout_below="@id/textView10"/>
-
-
-
-
-
 
 
         </RelativeLayout>
