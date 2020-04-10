@@ -30,9 +30,9 @@ public class HomeActivity extends AppCompatActivity {
         mAuth= FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         RootRef = FirebaseDatabase.getInstance().getReference();
-        mToolBar = (Toolbar) findViewById(R.id.main_page_toolbar);
-        setSupportActionBar(mToolBar);
-        getSupportActionBar().setTitle("BSport");
+////        mToolBar = (Toolbar) findViewById(R.id.main_page_toolbar);
+//        setSupportActionBar(mToolBar);
+//        getSupportActionBar().setTitle("BSport");
     }
 
     @Override
