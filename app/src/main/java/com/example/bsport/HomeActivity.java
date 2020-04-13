@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -25,8 +27,11 @@ public class HomeActivity extends AppCompatActivity {
     private Toolbar mToolBar;
     private ViewPager myViewPager;
     private FirebaseUser currentUser;
+    private ImageButton logoutImage;
     private FirebaseAuth mAuth;
     private DatabaseReference RootRef;
+    private TabLayout myTabLayout;
+    private MenuAccessorAdapter myTabsAccessorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +40,15 @@ public class HomeActivity extends AppCompatActivity {
         mAuth= FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         RootRef = FirebaseDatabase.getInstance().getReference();
+
         mToolBar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolBar);
-        getSupportActionBar().setTitle("BSport");
+        logoutImage = (ImageButton) findViewById(R.id.logout_button);
         myViewPager = (ViewPager)findViewById(R.id.main_tabs_pager);
+        myTabsAccessorAdapter = new MenuAccessorAdapter(getSupportFragmentManager());
+        myViewPager.setAdapter(myTabsAccessorAdapter);
+        myTabLayout = (TabLayout) findViewById(R.id.main_tabs);
+        myTabLayout.setupWithViewPager(myViewPager);
     }
 
     @Override
@@ -62,7 +72,6 @@ public class HomeActivity extends AppCompatActivity {
 
                     Toast.makeText(HomeActivity.this,"Welcome",Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
@@ -87,31 +96,13 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
-        if(item.getItemId()==R.id.main_logout_option)
-        {
+        if(item.getItemId()==R.id.logout_item){
+            logoutImage = (ImageButton) findViewById(R.id.logout_button);
             mAuth.signOut();
             SendUserToLoginActivity();
-        }
-        else if(item.getItemId()==R.id.main_home_option)
-        {
-
-        }
-        else if(item.getItemId()==R.id.main_private_area_option)
-        {
-
-        }
-        else if(item.getItemId()==R.id.main_Activities_list_option)
-        {
-
-        }
-        else if(item.getItemId()==R.id.main_Sports_facilities_option)
-        {
-
-        }
-        else if(item.getItemId()==R.id.main_My_activities_option)
-        {
 
         }
         return true;
     }
 }
+

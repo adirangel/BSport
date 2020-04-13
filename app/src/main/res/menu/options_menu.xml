@@ -1,42 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="ראשי"
-        android:id="@+id/main_home_option"
-        app:showAsAction="never"
-        >
+        android:id="@+id/logout_item"
+        android:icon="@drawable/ic_exit_to_app"
+        android:orderInCategory="100"
+        android:title="logout_label"
+        app:showAsAction="ifRoom|collapseActionView">
     </item>
-    <item
-        android:title="אזור אישי"
-        android:id="@+id/main_private_area_option"
-        app:showAsAction="never"
-        >
-    </item>
-    <item
-        android:title="רשימת פעילויות"
-        android:id="@+id/main_Activities_list_option"
-        app:showAsAction="never"
-        >
-    </item>
-    <item
-        android:title="מתקני ספורט בעיר"
-        android:id="@+id/main_Sports_facilities_option"
-        app:showAsAction="never"
-        >
-    </item>
-    <item
-        android:title="הפעילויות שלי"
-        android:id="@+id/main_My_activities_option"
-        app:showAsAction="never"
-        >
-    </item>
-    <item
-        android:title="התנתקות"
-        android:id="@+id/main_logout_option"
-        app:showAsAction="never"
-        >
-    </item>
-
 </menu>
