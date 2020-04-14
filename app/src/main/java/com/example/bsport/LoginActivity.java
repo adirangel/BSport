@@ -35,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     public static EditText UserPassword;
     private TextView NeedNewAccountLink ,ForgetPasswordLink;
     private DatabaseReference UserRef;
+    private String parentDbName = "Users";
+    private TextView AdminLink, NotAdminLink;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +58,25 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AllowUserToLogin();
+            }
+        });
+
+        AdminLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginButton.setText("התחבר כמנהל");
+                AdminLink.setVisibility(View.INVISIBLE);
+                NotAdminLink.setVisibility(View.VISIBLE);
+                parentDbName = "Admins";
+            }
+        });
+        NotAdminLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginButton.setText("התחבר");
+                NotAdminLink.setVisibility(View.INVISIBLE);
+                AdminLink.setVisibility(View.VISIBLE);
+                parentDbName = "Users";
             }
         });
     }
@@ -121,6 +142,8 @@ public class LoginActivity extends AppCompatActivity {
         ForgetPasswordLink = ( TextView) findViewById(R.id.forget_password_link);
         NeedNewAccountLink = ( TextView) findViewById(R.id.Sign_Up_link);
         loadingbar = new ProgressDialog(this);
+        AdminLink = (TextView) findViewById(R.id.Im_Admin);
+        NotAdminLink = (TextView) findViewById(R.id.Im_not_Admin);
 
     }
 
