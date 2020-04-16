@@ -4,10 +4,10 @@ pipeline {
     // Stop the build early in case of compile or test failures
     skipStagesAfterUnstable()
   }
-  chmod +x gradlew
   stages {
     stage('Compile') {
       steps {
+        chmod +x gradlew
         sh './gradlew compileDebugSources'
       }
     }
@@ -19,6 +19,8 @@ pipeline {
     }
     stage('Build APK') {
       steps {
+  chmod +x gradlew
+       
         sh './gradlew assembleDebug'
 
         archiveArtifacts '**/*.apk'
