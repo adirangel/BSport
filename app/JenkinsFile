@@ -1,24 +1,27 @@
 pipeline {
-    agent any
+  agent {
+    label 'android'
+  }
+  options {
+    // Stop the build early in case of compile or test failures
+    skipStagesAfterUnstable()
+  }
+  stages {
+    stage('Compile') {
+      steps {
+        sh './gradlew compileDebugSources'
+      }
+    }
+    stage('Unit test') {
+      steps {
+        sh './gradlew testDebugUnitTest testDebugUnitTest'
+        junit '**/TEST-*.xml'
+      }
+    }
+    stage('Build APK') {
+      steps {
+        sh './gradlew assembleDebug'
 
-stages{
-        stage("build") {
-            steps{
-                sh "chmod +x gradlew"
-                echo "The build stage passed..."
-            }
-        }
-        stage("test") {
-            steps{
-                echo "The test stage passed..."
-            }
-        }
+        archiveArtifacts '**/*.apk'
+      }
     }
-post{
-        always{
-            echo "post-build will always run after build completed"
-            // Jenkins cleans the workspace
-            cleanWs()  
-        }
-    }
-}
