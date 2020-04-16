@@ -32,7 +32,7 @@ public class UtilsTest {
 
     @Test
     public void emailStringEmptyCheck() {
-        Assert.assertThat(Utils.emailStringChecker(""), is(""));
+        Assert.assertThat(Utils.emailStringChecker(null), is(""));
     }
 
     @Test
