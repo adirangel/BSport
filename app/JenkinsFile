@@ -1,30 +1,37 @@
 pipeline {
-     agent any
+  agent {
+    docker {
+      image 'windsekirun/jenkins-android-docker:1.1.1'
+    }
+  }
   options {
-    // Stop the build early in case of compile or test failures
     skipStagesAfterUnstable()
   }
   stages {
+    stage ('Prepare'){
+      steps {
+        sh 'chmod +x ./gradlew'
+      }
+    }
     stage('Compile') {
       steps {
-        chmod +x gradlew
         sh './gradlew compileDebugSources'
       }
     }
-    stage('Unit test') {
+        stage('Unit test') {
       steps {
+        // Compile and run the unit tests for the app and its dependencies
         sh './gradlew testDebugUnitTest testDebugUnitTest'
-        junit '**/TEST-*.xml'
+
+        // Analyse the test results and update the build result as appropriate
+        junit '*/TEST-.xml'
       }
     }
     stage('Build APK') {
       steps {
-  chmod +x gradlew
-       
         sh './gradlew assembleDebug'
-
-        archiveArtifacts '**/*.apk'
       }
     }
+    
   }
 }
