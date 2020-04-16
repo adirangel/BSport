@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    label 'android'
+    node { label 'android' }   
   }
   options {
     // Stop the build early in case of compile or test failures
