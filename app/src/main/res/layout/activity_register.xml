@@ -44,11 +44,27 @@
 
                 />
             <EditText
-                android:id="@+id/register_Password"
+                android:id="@+id/register_UserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/register_email"
+                android:hint="שם משתמש"
+                android:inputType="text"
+                android:background="@drawable/inputs"
+                android:padding="4dp"
+                android:drawableStart="@drawable/username"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="17dp"
+
+                />
+            <EditText
+                android:id="@+id/register_Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/register_UserName"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:background="@drawable/inputs"

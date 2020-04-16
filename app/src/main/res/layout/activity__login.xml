@@ -24,7 +24,7 @@
                 android:src="@drawable/logo" />
 
             <EditText
-                android:id="@+id/login_email"
+                android:id="@+id/login_userName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/login_image"
@@ -33,15 +33,15 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginRight="17dp"
                 android:background="@drawable/inputs"
-                android:hint="...הכנס איימיל"
-                android:inputType="textEmailAddress"
+                android:hint="@string/EnterUserName"
+                android:inputType="text"
                 android:padding="4dp" />
 
             <EditText
                 android:id="@+id/login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/login_email"
+                android:layout_below="@id/login_userName"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="25dp"
@@ -51,11 +51,24 @@
                 android:inputType="textPassword"
                 android:padding="4dp" />
 
+            <CheckBox
+                android:id="@+id/checkRemember"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="זכור אותי"
+                android:layout_below="@id/login_password"
+                android:layout_marginTop="7dp"
+                android:layout_marginRight="270dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                ></CheckBox>
             <TextView
                 android:id="@+id/forget_password_link"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/login_password"
+                android:layout_below="@id/checkRemember"
                 android:layout_marginRight="250dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="7dp"
@@ -72,11 +85,11 @@
                 android:id="@+id/Im_Admin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/login_password"
+                android:layout_below="@id/checkRemember"
                 android:layout_marginTop="7dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginLeft="315dp"
-                android:text="אני מנהל"
+                android:layout_marginLeft="260dp"
+                android:text="@string/adminClickHere"
                 android:textAlignment="textEnd"
                 android:textColor="@color/colorPrimary"
                 android:textSize="17sp"
@@ -87,7 +100,7 @@
                 android:id="@+id/Im_not_Admin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/login_password"
+                android:layout_below="@id/checkRemember"
                 android:layout_marginTop="7dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="290dp"
@@ -128,37 +141,6 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="17sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/login_using"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/Sign_Up_link"
-                android:text="or Login using your"
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="23dp"
-                android:textAlignment="center"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                />
-
-            <Button
-                android:id="@+id/phone_login_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/login_using"
-                android:padding="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginRight="17dp"
-                android:text="Phone"
-                android:textAllCaps="false"
-                android:textSize="24dp"
-                android:textColor="@color/cardview_light_background"
-                android:background="@drawable/buttons"
-                />
 
 
         </RelativeLayout>
