@@ -148,32 +148,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                 }
             });
-
-
-            /*mAuth.createUserWithEmailAndPassword(email,password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful())
-                            {
-                                String deviceToken = FirebaseInstanceId.getInstance().getToken();
-
-                                String currentUserID = mAuth.getCurrentUser().getUid();
-                                RootRef.child("Users").child(currentUserID).setValue("");
-                                RootRef.child("Users").child(currentUserID).child("device_token")
-                                        .setValue(deviceToken);
-
-                                SendUserToMainActivity();
-                                Toast.makeText(RegisterActivity.this,"Account Created Successfully.",Toast.LENGTH_SHORT).show();
-                                loadingBar.dismiss();
-                            }
-                            else{
-                                String message = task.getException().toString();
-                                Toast.makeText(RegisterActivity.this,"Error : "+ message,Toast.LENGTH_LONG).show();
-                                loadingBar.dismiss();
-                            }
-                        }
-                    });*/
         }
 
     }
@@ -194,11 +168,5 @@ public class RegisterActivity extends AppCompatActivity {
     private void SendUserToLoginActivity() {
         Intent loginIntent = new Intent(RegisterActivity.this,LoginActivity.class);
         startActivity(loginIntent);
-    }
-    private void SendUserToMainActivity() {
-        Intent mainIntent = new Intent(RegisterActivity.this,HomeActivity.class);
-        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(mainIntent);
-        finish();
     }
 }
