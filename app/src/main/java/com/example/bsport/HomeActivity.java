@@ -138,6 +138,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
+
     private void SendUserToLoginActivity() {
         Intent LoginIntent = new Intent( HomeActivity.this , LoginActivity.class);
         startActivity(LoginIntent);

@@ -104,6 +104,10 @@ public class LoginActivity extends AppCompatActivity {
             Paper.book().write(Prevalent.UserPasswordKey, password);
 
         }
+        else{
+            Paper.book().write(Prevalent.UserNameKey, userName);
+            Paper.book().write(Prevalent.UserPasswordKey, password);
+        }
         if(TextUtils.isEmpty(userName)){
             Toast.makeText(this,"אנא הכנס שם משתמש",Toast.LENGTH_SHORT).show();
         }

@@ -31,11 +31,6 @@ public class UtilsTest {
     }
 
     @Test
-    public void emailStringEmptyCheck() {
-        Assert.assertThat(Utils.emailStringChecker(""), is(""));
-    }
-
-    @Test
     public void passwordStringLengthSix() {
         String testEmail = "12fsdf";
         Assert.assertThat(String.format("Password Validity Test failed for %s ", testEmail), Utils.checkPasswordLength(testEmail), is(true));

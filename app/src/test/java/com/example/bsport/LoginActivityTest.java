@@ -8,7 +8,7 @@ public class LoginActivityTest {
 
     @Test
     public void validTestemail() {
-        assertEquals(LoginActivity.UserEmail,null);
+        assertEquals(LoginActivity.UserName,null);
     }
     @Test
     public void ValidTestpass(){
