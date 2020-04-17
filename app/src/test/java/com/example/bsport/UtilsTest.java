@@ -29,7 +29,7 @@ public class UtilsTest {
         String testEmail = "   anupamchugh@gmail.com  ";
         Assert.assertThat(String.format("Email Validity Test failed for %s ", testEmail), Utils.checkEmailForValidity(testEmail), is(true));
     }
-
+    
     @Test
     public void passwordStringLengthSix() {
         String testEmail = "12fsdf";

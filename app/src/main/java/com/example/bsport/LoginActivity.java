@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
             Paper.book().write(Prevalent.UserPasswordKey, password);
 
         }
-        else{
+        else {
             Paper.book().write(Prevalent.UserNameKey, userName);
             Paper.book().write(Prevalent.UserPasswordKey, password);
         }
