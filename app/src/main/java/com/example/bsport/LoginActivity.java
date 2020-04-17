@@ -88,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                 LoginButton.setText("התחבר");
                 NotAdminLink.setVisibility(View.INVISIBLE);
                 AdminLink.setVisibility(View.VISIBLE);
+                NeedNewAccountLink.setVisibility(View.VISIBLE);
                 parentDbName = "Users";
             }
         });
