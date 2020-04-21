@@ -60,13 +60,5 @@ public class LoginActivityTest {
     public void passwordValidator_oneTest_ReturnFalse(){
         assertFalse(LoginActivity.Valid_password_check("12345"));
     }
-/*
-    @Test
-    public void validTestemail() {
-        assertEquals(LoginActivity.UserName,null);
-    }
-    @Test
-    public void ValidTestpass(){
-        assertEquals(LoginActivity.UserPassword,null);
-    }*/
+
 }

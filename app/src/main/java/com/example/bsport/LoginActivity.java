@@ -103,16 +103,16 @@ public class LoginActivity extends AppCompatActivity {
             Paper.book().write(Prevalent.UserNameKey, userName);
             Paper.book().write(Prevalent.UserPasswordKey, password);
         } //TextUtils.isEmpty(userName)
-        if(Checking_username_notEmpty(userName)){
+        if(!Checking_username_notEmpty(userName)){
             Toast.makeText(this,"אנא הכנס שם משתמש",Toast.LENGTH_SHORT).show();
         }
-        else if(Valid_username_check(userName)){
+        else if(!Valid_username_check(userName)){
             Toast.makeText(this,"אנא הכנס שם משמש חוקי - אותיות ומספרים בלבד",Toast.LENGTH_SHORT).show();
         }
-        else if(Checking_password_notEmpty(password)){
+        else if(!Checking_password_notEmpty(password)){
             Toast.makeText(this,"אנא הכנס סיסמה",Toast.LENGTH_SHORT).show();
         }
-        else if(Valid_password_check(password)){
+        else if(!Valid_password_check(password)){
             Toast.makeText(this,"הסיסמה צריכה להיות באורך 6 ומעלה",Toast.LENGTH_SHORT).show();
         }
         else
@@ -149,17 +149,17 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                             else{
-                                Toast.makeText(LoginActivity.this, "Password is incorrect", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "סיסמה לא נכונה", Toast.LENGTH_SHORT).show();
                                 loadingbar.dismiss();
                             }
                         }
                         else{
-                            Toast.makeText(LoginActivity.this, "UserName is incorrect", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "שם משתמש לא נמצא", Toast.LENGTH_SHORT).show();
                             loadingbar.dismiss();
                         }
                     }
                     else{
-                        Toast.makeText(LoginActivity.this, "Account with this " + userName + " do not exists.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "השם משתמש " + userName + " לא נמצא במערכת ", Toast.LENGTH_SHORT).show();
                         loadingbar.dismiss();
 
                     }
