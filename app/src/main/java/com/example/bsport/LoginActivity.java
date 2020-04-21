@@ -3,10 +3,8 @@ package com.example.bsport;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.mtp.MtpConstants;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -18,9 +16,6 @@ import android.widget.Toast;
 
 import com.example.bsport.Model.Users;
 import com.example.bsport.Prevalent.Prevalent;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +23,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.regex.Pattern;
 
@@ -108,17 +102,17 @@ public class LoginActivity extends AppCompatActivity {
         else {
             Paper.book().write(Prevalent.UserNameKey, userName);
             Paper.book().write(Prevalent.UserPasswordKey, password);
-        }
-        if(TextUtils.isEmpty(userName)){
+        } //TextUtils.isEmpty(userName)
+        if(Checking_username_notEmpty(userName)){
             Toast.makeText(this,"אנא הכנס שם משתמש",Toast.LENGTH_SHORT).show();
         }
-        else if(!USERNAME_PATTERN.matcher(userName).matches()){
+        else if(Valid_username_check(userName)){
             Toast.makeText(this,"אנא הכנס שם משמש חוקי - אותיות ומספרים בלבד",Toast.LENGTH_SHORT).show();
         }
-        else if(TextUtils.isEmpty(password)){
+        else if(Checking_password_notEmpty(password)){
             Toast.makeText(this,"אנא הכנס סיסמה",Toast.LENGTH_SHORT).show();
         }
-        else if(password.length() < 6){
+        else if(Valid_password_check(password)){
             Toast.makeText(this,"הסיסמה צריכה להיות באורך 6 ומעלה",Toast.LENGTH_SHORT).show();
         }
         else
@@ -178,6 +172,19 @@ public class LoginActivity extends AppCompatActivity {
             });
 
         }
+    }
+
+    public static boolean Checking_username_notEmpty(CharSequence  userName) {
+        return ! (userName=="") ;
+    }
+    public static boolean Valid_username_check(String userName) {
+        return(USERNAME_PATTERN.matcher(userName).matches());
+    }
+    public static boolean Checking_password_notEmpty(CharSequence password) {
+        return !(password == "");
+    }
+    public static boolean Valid_password_check(String password) {
+        return !(password.length() < 6);
     }
 
     private void initilizedFields() {
