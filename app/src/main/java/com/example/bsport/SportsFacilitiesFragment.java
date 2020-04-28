@@ -1,9 +1,10 @@
 package com.example.bsport;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,19 +18,27 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-
 public class SportsFacilitiesFragment extends Fragment {
 
-    private View facilitiesFragmentView;
-    private ListView list_view;
-    private ArrayAdapter<String> arrayAdapter;
-    private ArrayList<String> list_of_facilities = new ArrayList<>();
-    private DatabaseReference FacilitiesRef;
+    // ArrayList for person names, email Id's and mobile numbers
+    ArrayList<String> FacTypes = new ArrayList<>();
+    ArrayList<String> FacNames = new ArrayList<>();
+    ArrayList<String> FacNeighborhoods = new ArrayList<>();
+    ArrayList<String> FacStreets = new ArrayList<>();
+    private View SportsFacilitiesFragment;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
     public SportsFacilitiesFragment() {
         // Required empty public constructor
     }
@@ -37,40 +46,54 @@ public class SportsFacilitiesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        SportsFacilitiesFragment = inflater.inflate(R.layout.fragment_sports_facilities, container, false);
+        recyclerView = (RecyclerView) SportsFacilitiesFragment.findViewById(R.id.recyclerView);
+        linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
 
-        facilitiesFragmentView = inflater.inflate(R.layout.fragment_sports_facilities, container, false);
-        FacilitiesRef = FirebaseDatabase.getInstance().getReference().child("Facilities");
+        try {
+            // get JSONObject from JSON file
+            JSONObject obj = new JSONObject(loadJSONFromAsset());
+            // fetch JSONArray named users
+            JSONArray facArray = obj.getJSONArray("facilities");
+            // implement for loop for getting users list data
+            for (int i = 0; i < facArray.length(); i++) {
+                // create a JSONObject for fetching single user data
+                JSONObject facDetail = facArray.getJSONObject(i);
+                // fetch email and name and store it in arraylist
+                FacTypes.add(facDetail.getString("type"));
+                FacNames.add(facDetail.getString("name"));
+                FacNeighborhoods.add(facDetail.getString("Neighborhood"));
+                FacStreets.add(facDetail.getString("Street"));
+                // create a object for getting contact data from JSONObject
+               // JSONObject contact = userDetail.getJSONObject("contact");
+                // fetch mobile number and store it in arraylist
+              //  mobileNumbers.add(contact.getString("mobile"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //  call the constructor of CustomAdapter to send the reference and data to Adapter
+        CustomAdapter customAdapter = new CustomAdapter(FacTypes, FacNames, FacNeighborhoods, FacStreets);
+        recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
 
-        IntializeFields();
-        RetrieveAndDisplayFacilities();
-
-        return facilitiesFragmentView;
+        return SportsFacilitiesFragment;
     }
 
-    private void RetrieveAndDisplayFacilities() {
-        FacilitiesRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Set<String> set = new HashSet<>();
-                Iterator iterator = dataSnapshot.getChildren().iterator();
-                while (iterator.hasNext()){
-                    set.add(((DataSnapshot)iterator.next()).getKey());
-                }
-                list_of_facilities.clear();
-                list_of_facilities.addAll(set);
-                arrayAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    private void IntializeFields() {
-        list_view = (ListView) facilitiesFragmentView.findViewById(R.id.list_view);
-        arrayAdapter= new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,list_of_facilities);
-        list_view.setAdapter(arrayAdapter);
+    private String loadJSONFromAsset() {
+        String Context = null;
+        String json = null;
+        try {
+            InputStream is = getContext().getAssets().open("dataBaseSport.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
     }
 }
