@@ -48,23 +48,23 @@ public class SportsFacilitiesFragment extends Fragment {
                              Bundle savedInstanceState) {
         SportsFacilitiesFragment = inflater.inflate(R.layout.fragment_sports_facilities, container, false);
         recyclerView = (RecyclerView) SportsFacilitiesFragment.findViewById(R.id.recyclerView);
-        linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
 
         try {
             // get JSONObject from JSON file
             JSONObject obj = new JSONObject(loadJSONFromAsset());
             // fetch JSONArray named users
-            JSONArray facArray = obj.getJSONArray("facilities");
+            JSONArray facArray = obj.getJSONArray("Facilities");
             // implement for loop for getting users list data
             for (int i = 0; i < facArray.length(); i++) {
                 // create a JSONObject for fetching single user data
                 JSONObject facDetail = facArray.getJSONObject(i);
                 // fetch email and name and store it in arraylist
-                FacTypes.add(facDetail.getString("type"));
-                FacNames.add(facDetail.getString("name"));
-                FacNeighborhoods.add(facDetail.getString("Neighborhood"));
-                FacStreets.add(facDetail.getString("Street"));
+                FacTypes.add(facDetail.getString("Type"));
+                FacNames.add(facDetail.getString("Name"));
+                FacNeighborhoods.add(facDetail.getString("neighborho"));
+                FacStreets.add(facDetail.getString("street"));
                 // create a object for getting contact data from JSONObject
                // JSONObject contact = userDetail.getJSONObject("contact");
                 // fetch mobile number and store it in arraylist
