@@ -16,7 +16,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     ArrayList<String> FacNames;
     ArrayList<String> FacNeighborhoods;
     ArrayList<String> FacStreets;
-//    Context context;
 
 
     public CustomAdapter( ArrayList<String> FacTypes,ArrayList<String> FacNames, ArrayList<String> FacNeighborhoods, ArrayList<String> FacStreets) {
@@ -36,7 +35,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         // set the data in items
-        if(FacTypes.size() !=0 && FacNames.size() !=0 && FacNeighborhoods.size() !=0 && FacStreets.size() !=0) {
+        if(FacTypes.size() !=0  && FacNames.size() !=0 && FacNeighborhoods.size() !=0 && FacStreets.size() !=0) {
             holder.type.setText(FacTypes.get(position));
             holder.name.setText(FacNames.get(position));
             holder.neigberhood.setText(FacNeighborhoods.get(position));
@@ -53,8 +52,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         return FacNames.size();
     }
 
-    public void filterList(ArrayList<String> filteredList) {
-        FacTypes = filteredList;
+    public void filterList(ArrayList<String> filteredListType,ArrayList<String> filteredListName,ArrayList<String> filteredListNeig,ArrayList<String> filteredListStre) {
+        FacTypes = filteredListType;
+        FacNames = filteredListName;
+        FacNeighborhoods = filteredListNeig;
+        FacStreets = filteredListStre;
         notifyDataSetChanged();
     }
 

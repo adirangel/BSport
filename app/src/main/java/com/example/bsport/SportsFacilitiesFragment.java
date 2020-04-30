@@ -98,13 +98,20 @@ public class SportsFacilitiesFragment extends Fragment {
     }
 
     private void filter(String text) {
-        ArrayList<String> filteredList = new ArrayList<>();
-        for (String item : FacTypes){
-            if(item.toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(item);
+        ArrayList<String> filteredListType = new ArrayList<>();
+        ArrayList<String> filteredListName = new ArrayList<>();
+        ArrayList<String> filteredListNeig = new ArrayList<>();
+        ArrayList<String> filteredListStre = new ArrayList<>();
+        for (int i = 0 ; i<FacTypes.size();i++){
+            if(FacTypes.get(i).toLowerCase().contains(text.toLowerCase())){
+                filteredListType.add(FacTypes.get(i));
+                filteredListName.add(FacNames.get(i));
+                filteredListNeig.add(FacNeighborhoods.get(i));
+                filteredListStre.add(FacStreets.get(i));
+
             }
         }
-        customAdapter.filterList(filteredList);
+        customAdapter.filterList(filteredListType,filteredListName,filteredListNeig,filteredListStre);
     }
 
     private String loadJSONFromAsset() {
