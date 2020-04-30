@@ -31,4 +31,5 @@
     <string name="pass">\?שכחת סיסמה</string>
     <string name="EnterUserName">הכנס שם משתמש...\u200e</string>
     <string name="adminClickHere">מנהל - לחץ כאן\u200e</string>
+    <string name="search">חיפוש...\u200e</string>
 </resources>

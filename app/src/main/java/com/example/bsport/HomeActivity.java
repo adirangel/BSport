@@ -159,7 +159,6 @@ public class HomeActivity extends AppCompatActivity {
             logoutImage = (ImageButton) findViewById(R.id.logout_button);
             Paper.book().destroy();
             SendUserToLoginActivity();
-
         }
         return true;
     }

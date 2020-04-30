@@ -6,10 +6,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -38,6 +41,7 @@ public class SportsFacilitiesFragment extends Fragment {
     ArrayList<String> FacStreets = new ArrayList<>();
     private View SportsFacilitiesFragment;
     private RecyclerView recyclerView;
+    private CustomAdapter customAdapter;
     private LinearLayoutManager linearLayoutManager;
     public SportsFacilitiesFragment() {
         // Required empty public constructor
@@ -50,6 +54,23 @@ public class SportsFacilitiesFragment extends Fragment {
         recyclerView = (RecyclerView) SportsFacilitiesFragment.findViewById(R.id.recyclerView);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
+        EditText searchFac = (EditText) SportsFacilitiesFragment.findViewById(R.id.search_fac);
+        searchFac.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
 
         try {
             // get JSONObject from JSON file
@@ -65,19 +86,25 @@ public class SportsFacilitiesFragment extends Fragment {
                 FacNames.add(facDetail.getString("Name"));
                 FacNeighborhoods.add(facDetail.getString("neighborho"));
                 FacStreets.add(facDetail.getString("street"));
-                // create a object for getting contact data from JSONObject
-               // JSONObject contact = userDetail.getJSONObject("contact");
-                // fetch mobile number and store it in arraylist
-              //  mobileNumbers.add(contact.getString("mobile"));
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
         //  call the constructor of CustomAdapter to send the reference and data to Adapter
-        CustomAdapter customAdapter = new CustomAdapter(FacTypes, FacNames, FacNeighborhoods, FacStreets);
+        customAdapter = new CustomAdapter(FacTypes, FacNames, FacNeighborhoods, FacStreets);
         recyclerView.setAdapter(customAdapter); // set the Adapter to RecyclerView
 
         return SportsFacilitiesFragment;
+    }
+
+    private void filter(String text) {
+        ArrayList<String> filteredList = new ArrayList<>();
+        for (String item : FacTypes){
+            if(item.toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+        customAdapter.filterList(filteredList);
     }
 
     private String loadJSONFromAsset() {
