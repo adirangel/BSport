@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/Add_Acitivity_item"
+        android:icon="@drawable/add_acitivity_vector"
+        android:orderInCategory="100"
+        android:title="Add Activity"
+        app:showAsAction="ifRoom|collapseActionView">
+    </item>
     <item
         android:id="@+id/logout_item"
         android:icon="@drawable/ic_exit_to_app"
@@ -9,4 +15,5 @@
         android:title="logout_label"
         app:showAsAction="ifRoom|collapseActionView">
     </item>
+
 </menu>

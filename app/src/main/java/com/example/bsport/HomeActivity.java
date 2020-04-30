@@ -3,6 +3,7 @@ package com.example.bsport;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.ProgressDialog;
@@ -34,6 +35,8 @@ public class HomeActivity extends AppCompatActivity {
     private ViewPager myViewPager;
     private FirebaseUser currentUser;
     private ImageButton logoutImage;
+//    private ImageButton addactivityImage;
+
     private String ba;
     private FirebaseAuth mAuth;
     private DatabaseReference RootRef;
@@ -53,6 +56,8 @@ public class HomeActivity extends AppCompatActivity {
         mToolBar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolBar);
         logoutImage = (ImageButton) findViewById(R.id.logout_button);
+//        addactivityImage = (ImageButton) findViewById(R.id.);
+
         myViewPager = (ViewPager)findViewById(R.id.main_tabs_pager);
         myTabsAccessorAdapter = new MenuAccessorAdapter(getSupportFragmentManager());
         myViewPager.setAdapter(myTabsAccessorAdapter);
@@ -144,6 +149,11 @@ public class HomeActivity extends AppCompatActivity {
         Intent LoginIntent = new Intent( HomeActivity.this , LoginActivity.class);
         startActivity(LoginIntent);
     }
+    public Fragment SendUserToAddActivity() {
+        AddActivityFragment addcctivityfragment = new AddActivityFragment();
+        return addcctivityfragment;
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -155,12 +165,17 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
-        if(item.getItemId()==R.id.logout_item){
+        if (item.getItemId() == R.id.logout_item) {
             logoutImage = (ImageButton) findViewById(R.id.logout_button);
             Paper.book().destroy();
             SendUserToLoginActivity();
         }
+        if (item.getItemId() == R.id.Add_Acitivity_item) {
+            SendUserToAddActivity();
+        }
         return true;
+
     }
 }
+
 
