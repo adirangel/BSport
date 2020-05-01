@@ -6,7 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MyActivitiesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <Button
         android:id="@+id/new_activity"
         android:layout_width="155dp"
