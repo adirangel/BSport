@@ -1,5 +1,7 @@
 package com.example.bsport;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,58 +9,93 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+import com.example.bsport.Prevalent.Prevalent;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
+import io.paperdb.Paper;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MyActivitiesFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MyActivitiesFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public MyActivitiesFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MyActivitiesFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MyActivitiesFragment newInstance(String param1, String param2) {
-        MyActivitiesFragment fragment = new MyActivitiesFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private Button MyActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        //initilizedFields();
+
+
     }
 
-    @Override
+
+
+    /*private void initilizedFields() {
+        MyActivity = (Button) MyActivity.findViewById(R.id.new_activity);
+
+    }*/
+
+   /* @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Button MyActivity = (Button) View.findViewById(R.id.new_activity);
         return inflater.inflate(R.layout.fragment_my_activities, container, false);
+    }*/
+
+   /* public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        MyActivity = (Button) view.findViewById(R.id.new_activity);
+        MyActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }*/
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_my_activities, container, false);
+        Button MyActivity = (Button) view.findViewById(R.id.new_activity);
+        MyActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.layout.fragment_my_activities);
+
+                final View mView = getLayoutInflater().inflate(R.layout.newactiviry, null);
+                Button newActivitySub = (Button) mView.findViewById(R.id.submit_activity);
+                builder.setView(mView);
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+                newActivitySub.setOnClickListener(new View.OnClickListener() {
+                    @Override
+
+                    public void onClick(View v) {
+                        final String name = Paper.book().read(Prevalent.UserNameKey).toString();
+                        final String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());;
+                        final EditText type = (EditText) mView.findViewById(R.id.game_type);
+                        final EditText description=(EditText)mView.findViewById(R.id.activity_type);
+                        final EditText number_of_players = (EditText) mView.findViewById(R.id.number_of_players);
+                        String type1= type.getText().toString();
+                        String description1= description.getText().toString();
+                        String number_of_players1= number_of_players.getText().toString();
+                        dialog.cancel();
+                    }
+
+                });
+
+            }
+        });
+        return view;
     }
+
 }
