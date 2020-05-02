@@ -13,7 +13,7 @@
     <string name="chooseDay">בחר את היום, השעה, והמיקום כדי לבצע פעילות ספורט עם מי שרק תרצה!</string>
     <string name="AlreadyHaveAccountLink">כבר יש לך חשבון?\u200e</string>
     <string name="CreateAccount">יצירת חשבון</string>
-    <string name="RegisterAboutMyself">קצת על עצמי...</string>
+    <string name="RegisterAboutMyself">קצת על עצמי…\u200e</string>
     <string name="age">גיל</string>
     <string name="name">שם</string>
     <string name="password">סיסמה</string>
@@ -25,11 +25,20 @@
         <item>גודו</item>
         <item>חדר כושר</item>
     </string-array>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="pass">\?שכחת סיסמה</string>
-    <string name="EnterUserName">הכנס שם משתמש...\u200e</string>
+    <string name="EnterUserName">הכנס שם משתמש…\u200e</string>
     <string name="adminClickHere">מנהל - לחץ כאן\u200e</string>
-    <string name="search">חיפוש...\u200e</string>
+    <string name="search">חיפוש…\u200e</string>
+    <string name="Enter_your_activity">הזן את הפעילות שלך…\u200e</string>
+    <string name="type_activity">הכנס את סוג הפעילות..\u200e</string>
+    <string name="Quantity_of_players">הכנס כמות שחקנים לפעילות..\u200e</string>
+    <string name="Create_activity">צור פעילות</string>
+    <string name="date_activity">הכנס תאריך פעילות…\u200e</string>
+    <string name="Create_new_activity">יצירת פעילות חדשה</string>
+    <string name="type">Type</string>
+    <string name="activity_type1">סוג הפעילות</string>
+    <string name="name_activity">שם הפעילות</string>
+    <string name="game_date1">תאריך הפעילות</string>
+    <string name="location_activity">מיקום הפעילות</string>
 </resources>
