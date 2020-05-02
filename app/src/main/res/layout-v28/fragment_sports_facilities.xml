@@ -22,10 +22,10 @@
         android:layout_below="@id/search_fac"
         android:text="נגישות לנכים"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="200dp"
+        android:layout_marginLeft="300dp"
+        android:outlineSpotShadowColor="@color/colorPrimary"
         android:shadowColor="@color/colorPrimary"
         android:visibility="visible"
-        android:padding="6dp"
         />
 
 

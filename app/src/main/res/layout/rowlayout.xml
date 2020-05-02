@@ -30,9 +30,7 @@
             android:singleLine="true"
             android:textColor="#FFFFFF"
 
-            android:layout_marginLeft="70dp"
-
-
+            android:layout_marginRight="15dp"
             android:textSize="20sp" />
 
         <TextView
@@ -44,9 +42,9 @@
             android:text="Name"
             android:textColor="#FFFFFF"
             android:textSize="15sp"
-            android:layout_marginLeft="200dp"
+            android:layout_marginRight="15dp"
 
-            android:layout_marginTop="23dp"
+            android:layout_marginTop="30dp"
             />
 
         <TextView
@@ -58,9 +56,9 @@
             android:text="neighborhood"
             android:textColor="#FFFFFF"
             android:textSize="15sp"
-            android:layout_marginLeft="200dp"
+            android:layout_marginRight="15dp"
 
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="50dp"
             />
 
         <TextView
@@ -71,8 +69,8 @@
             android:layout_height="wrap_content"
             android:text="street"
             android:textColor="#FFFFFF"
-            android:layout_marginLeft="200dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="70dp"
 
             android:textSize="15sp" />
 

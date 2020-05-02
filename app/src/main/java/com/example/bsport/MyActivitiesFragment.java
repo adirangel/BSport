@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -28,8 +30,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -41,19 +50,20 @@ public class MyActivitiesFragment extends Fragment {
 
     private Button MyActivity;
     private DatabaseReference RootRef,CountActivityRef;
-    static int count=0,size=0;
+    private static int count=0,size=0;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private View view;
     private ActivityAdapter activityAdapter;
-
+    private AutoCompleteTextView acTextView;
     private String username = Paper.book().read(Prevalent.UserNameKey).toString();
-    ArrayList<String> My_name_activity = new ArrayList<>();
-    ArrayList<String> My_activity_type = new ArrayList<>();
-    ArrayList<String> My_game_date = new ArrayList<>();
-    ArrayList<String> My_location = new ArrayList<>();
-    ArrayList<String> My_number_of_players = new ArrayList<>();
-    ArrayList<String> My_date_created = new ArrayList<>();
+    private ArrayList<String> My_name_activity = new ArrayList<>();
+    private ArrayList<String> My_activity_type = new ArrayList<>();
+    private ArrayList<String> My_game_date = new ArrayList<>();
+    private ArrayList<String> My_location = new ArrayList<>();
+    private ArrayList<String> My_number_of_players = new ArrayList<>();
+    private ArrayList<String> My_date_created = new ArrayList<>();
+    private ArrayList<String> locations = new ArrayList<>();
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,6 +74,24 @@ public class MyActivitiesFragment extends Fragment {
         CountActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities");
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewNewActivity);
         linearLayoutManager = new LinearLayoutManager(getActivity());
+        try {
+            // get JSONObject from JSON file
+            JSONObject obj = new JSONObject(loadJSONFromAsset());
+            // fetch JSONArray named users
+            JSONArray facArray = obj.getJSONArray("Facilities");
+            // implement for loop for getting users list data
+            for (int i = 0; i < facArray.length(); i++) {
+
+                // create a JSONObject for fetching single user data
+                JSONObject facDetail = facArray.getJSONObject(i);
+                // fetch email and name and store it in arraylist
+                if(!(locations.contains("רחוב: " + facDetail.getString("street"))) && !facDetail.getString("street").equals(""))
+                    locations.add("רחוב: " + facDetail.getString("street"));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         recyclerView.setLayoutManager(linearLayoutManager);
 
         MyActivity.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +104,10 @@ public class MyActivitiesFragment extends Fragment {
                 final View mView = getLayoutInflater().inflate(R.layout.newactiviry, null);
                 Button newActivitySub = (Button) mView.findViewById(R.id.submit_activity);
                 builder.setView(mView);
+                acTextView = (AutoCompleteTextView) mView.findViewById(R.id.autoCompleteTextView_activity);
+                ArrayAdapter adapter = new ArrayAdapter(getActivity(),android.R.layout.select_dialog_item,locations);
+                acTextView.setThreshold(1);
+                acTextView.setAdapter(adapter);
                 final AlertDialog dialog = builder.create();
                 dialog.show();
                 newActivitySub.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +120,8 @@ public class MyActivitiesFragment extends Fragment {
                         final EditText description=(EditText)mView.findViewById(R.id.activity_type);
                         final EditText number_of_players = (EditText) mView.findViewById(R.id.number_of_players);
                         final EditText game_date = (EditText) mView.findViewById(R.id.game_date);
+                        final AutoCompleteTextView location = (AutoCompleteTextView) mView.findViewById(R.id.autoCompleteTextView_activity);
+
                         HashMap<String,Object> userdataMap1 = new HashMap<>();
                         CountActivityRef.addValueEventListener(new ValueEventListener() {
                             @Override
@@ -115,6 +149,8 @@ public class MyActivitiesFragment extends Fragment {
                                     userdataMap.put("type", type.getText().toString());
                                     userdataMap.put("game_date", game_date.getText().toString());
                                     userdataMap.put("id",count);
+                                    userdataMap.put("location",location.getText().toString());
+
                                     RootRef.child("Activities").child(String.valueOf(count)).updateChildren(userdataMap)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
@@ -140,9 +176,15 @@ public class MyActivitiesFragment extends Fragment {
             }
         });
 
-        CountActivityRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        CountActivityRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                My_name_activity.clear();
+                My_activity_type.clear();
+                My_game_date.clear();
+                My_location.clear();
+                My_number_of_players.clear();
+                My_date_created.clear();
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     if(ds.child("created_by").getValue().toString().equals(username))
                     {
@@ -168,4 +210,20 @@ public class MyActivitiesFragment extends Fragment {
         return view;
     }
 
+    private String loadJSONFromAsset() {
+        String Context = null;
+        String json = null;
+        try {
+            InputStream is = getContext().getAssets().open("dataBaseSport.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
 }

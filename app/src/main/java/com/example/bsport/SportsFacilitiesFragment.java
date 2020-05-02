@@ -42,16 +42,16 @@ import java.util.Set;
 public class SportsFacilitiesFragment extends Fragment {
 
     // ArrayList for person names, email Id's and mobile numbers
-    ArrayList<String> FacTypes = new ArrayList<>();
-    ArrayList<String> FacNames = new ArrayList<>();
-    ArrayList<String> FacNeighborhoods = new ArrayList<>();
-    ArrayList<String> FacStreets = new ArrayList<>();
-    ArrayList<String> FacHandi = new ArrayList<>();
-    ArrayList<String> filteredListType = new ArrayList<>();
-    ArrayList<String> filteredListName = new ArrayList<>();
-    ArrayList<String> filteredListNeig = new ArrayList<>();
-    ArrayList<String> filteredListStre = new ArrayList<>();
-    CheckBox CheckBox_Handi;
+    private ArrayList<String> FacTypes = new ArrayList<>();
+    private ArrayList<String> FacNames = new ArrayList<>();
+    private ArrayList<String> FacNeighborhoods = new ArrayList<>();
+    private ArrayList<String> FacStreets = new ArrayList<>();
+    private ArrayList<String> FacHandi = new ArrayList<>();
+    private ArrayList<String> filteredListType = new ArrayList<>();
+    private ArrayList<String> filteredListName = new ArrayList<>();
+    private ArrayList<String> filteredListNeig = new ArrayList<>();
+    private ArrayList<String> filteredListStre = new ArrayList<>();
+    private CheckBox CheckBox_Handi;
     private String SearchTxt = "";
     private Boolean isCheckedBool = false;
     private View SportsFacilitiesFragment;
