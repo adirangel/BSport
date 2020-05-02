@@ -26,11 +26,5 @@ public class ActivitiesListFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_activities_list, container, false);
     }
-    /*public void onStart() {
-        super.onStart();
-       FirebaseRecyclerOptions<Activity> options =
-               new FirebaseRecyclerOptions.Builder<Activity>()
-                       .setQuery(ChatRequestsRef.child(currentUserID), Activity.class).build();
 
-   }*/
 }
