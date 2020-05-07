@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,9 +51,8 @@ public class MyActivitiesFragment extends Fragment {
 
     private Button MyActivity;
     private DatabaseReference RootRef,CountActivityRef;
-    private static int count=0,size=0;
+    private static int count=0;
     private RecyclerView recyclerView;
-    private LinearLayoutManager linearLayoutManager;
     private View view;
     private ActivityAdapter activityAdapter;
     private AutoCompleteTextView acTextView;
@@ -73,7 +73,7 @@ public class MyActivitiesFragment extends Fragment {
         RootRef = FirebaseDatabase.getInstance().getReference();
         CountActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities");
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewNewActivity);
-        linearLayoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         try {
             // get JSONObject from JSON file
             JSONObject obj = new JSONObject(loadJSONFromAsset());
@@ -98,9 +98,6 @@ public class MyActivitiesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-
-                //AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.layout.fragment_my_activities);
-
                 final View mView = getLayoutInflater().inflate(R.layout.newactiviry, null);
                 Button newActivitySub = (Button) mView.findViewById(R.id.submit_activity);
                 builder.setView(mView);
@@ -122,7 +119,6 @@ public class MyActivitiesFragment extends Fragment {
                         final EditText game_date = (EditText) mView.findViewById(R.id.game_date);
                         final AutoCompleteTextView location = (AutoCompleteTextView) mView.findViewById(R.id.autoCompleteTextView_activity);
 
-                        HashMap<String,Object> userdataMap1 = new HashMap<>();
                         CountActivityRef.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -138,6 +134,7 @@ public class MyActivitiesFragment extends Fragment {
 
                             }
                         });
+
                         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

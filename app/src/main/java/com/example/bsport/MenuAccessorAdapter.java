@@ -27,8 +27,8 @@ public class MenuAccessorAdapter extends FragmentPagerAdapter
                 ActivitiesListFragment activitiesListFragment = new ActivitiesListFragment();
                 return activitiesListFragment;
             case 3:
-                SportsFacilitiesFragment sportsFacilitiesFragment = new SportsFacilitiesFragment();
-                return sportsFacilitiesFragment;
+                SportFacFragment sportFacFragment = new SportFacFragment();
+                return sportFacFragment;
             case 4:
                 MyActivitiesFragment myActivitiesFragment = new MyActivitiesFragment();
                 return myActivitiesFragment;

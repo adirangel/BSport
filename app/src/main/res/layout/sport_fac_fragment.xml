@@ -3,10 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorAccent"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
     tools:context=".SportsFacilitiesFragment">
+
+    <Button
+        android:id="@+id/create_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttons"
+        android:text="@string/Create_new_activity"
+        android:layout_alignParentBottom="true"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="220dp"
+        tools:layout_editor_absoluteY="496dp"
+        />
 
     <EditText
         android:id="@+id/search_fac"
@@ -16,7 +33,8 @@
         android:drawableRight="@drawable/search"
 
         />
-    <CheckBox android:id="@+id/checkbox_Handi"
+    <CheckBox
+        android:id="@+id/checkbox_Handi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/search_fac"
@@ -28,16 +46,13 @@
         android:padding="6dp"
         />
 
-
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/checkbox_Handi"
-        android:padding="6dp"
         android:background="@color/colorAccent"
-        android:scrollbars="vertical"/>
-
+        android:padding="6dp"
+        android:scrollbars="vertical"
+        />
 </RelativeLayout>

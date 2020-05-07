@@ -1,8 +1,10 @@
 package com.example.bsport;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,18 +19,26 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     ArrayList<String> FacNeighborhoods;
     ArrayList<String> FacStreets;
 
+    public int getPos() {
+        return pos;
+    }
+
+    int pos;
+
 
     public CustomAdapter( ArrayList<String> FacTypes,ArrayList<String> FacNames, ArrayList<String> FacNeighborhoods, ArrayList<String> FacStreets) {
         this.FacNames = FacNames;
         this.FacNeighborhoods = FacNeighborhoods;
         this.FacStreets = FacStreets;
         this.FacTypes = FacTypes;
+
     }
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // infalte the item Layout
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.rowlayout, parent, false);
         MyViewHolder vh = new MyViewHolder(v); // pass the view to View Holder
+
         return vh;
     }
 
@@ -40,11 +50,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             holder.name.setText(FacNames.get(position));
             holder.neigberhood.setText(FacNeighborhoods.get(position));
             holder.street.setText(FacStreets.get(position));
-        }
-        else{
+            holder.create_activity.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(),"בחרת מגרש להוספת פעילות" + "\n" + "מוזמן ללחוץ על יצירת פעילות חדשה", Toast.LENGTH_LONG).show();
 
-        }
+                    pos = position;
 
+                }
+            });
+        }
     }
 
     @Override
@@ -62,6 +77,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView type, name, neigberhood, street;// init the item view's
+        ImageButton create_activity;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -71,6 +87,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             name = (TextView) itemView.findViewById(R.id.name);
             neigberhood = (TextView) itemView.findViewById(R.id.neighborhood);
             street = (TextView) itemView.findViewById(R.id.street);
+            create_activity= (ImageButton)itemView.findViewById(R.id.create_activity_image);
 
         }
     }

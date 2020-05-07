@@ -44,12 +44,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        /*mAuth= FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
-        RootRef = FirebaseDatabase.getInstance().getReference();*/
         loadingbar = new ProgressDialog(this);
         Paper.init(this);
-
         mToolBar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolBar);
         logoutImage = (ImageButton) findViewById(R.id.logout_button);

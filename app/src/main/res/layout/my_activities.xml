@@ -10,10 +10,9 @@
     >
 
     <androidx.cardview.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view1"
         android:layout_gravity="center"
-        android:layout_width="350dp"
+        android:layout_width="320dp"
         android:layout_height="140dp"
         card_view:cardCornerRadius="20dp"
         card_view:cardBackgroundColor="@color/design_default_color_secondary_variant"
