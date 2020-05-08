@@ -50,13 +50,13 @@ public class MenuAccessorAdapter extends FragmentPagerAdapter
             case 0:
                 return "דף\nהבית";
             case 1:
-                return "איזור אישי";
+                return "איזור\nאישי";
             case 2:
                 return "רשימת פעילויות";
             case 3:
                 return "ספורט בעיר";
             case 4:
-                return "הפעילויות שלי";
+                return "הפעילות שלי";
             default:
                 return null;
 

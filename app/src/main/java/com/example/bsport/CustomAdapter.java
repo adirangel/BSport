@@ -23,7 +23,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         return pos;
     }
 
-    int pos;
+    int pos=-1;
 
 
     public CustomAdapter( ArrayList<String> FacTypes,ArrayList<String> FacNames, ArrayList<String> FacNeighborhoods, ArrayList<String> FacStreets) {
@@ -54,7 +54,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(),"בחרת מגרש להוספת פעילות" + "\n" + "מוזמן ללחוץ על יצירת פעילות חדשה", Toast.LENGTH_LONG).show();
-
                     pos = position;
 
                 }

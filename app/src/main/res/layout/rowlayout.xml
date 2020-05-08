@@ -73,12 +73,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="280dp"
-                android:layout_marginTop="30dp"
-                android:src="@drawable/create_activity"
-                android:singleLine="true"
+                android:layout_marginTop="40dp"
                 android:background="@color/design_default_color_secondary_variant"
+                android:singleLine="true"
 
-                />
+                android:src="@drawable/ic_add_circle_black_24dp" />
 
 
         </androidx.cardview.widget.CardView>

@@ -133,13 +133,10 @@ public class LoginActivity extends AppCompatActivity {
                             if(usersData.getPassword().equals(password)){
                                 if(parentDbName.equals("Admin")){
                                     Paper.book().write(Prevalent.UserAdminKey, "true");
-
-                                    Toast.makeText(LoginActivity.this,"ברוך הבא מנהל",Toast.LENGTH_SHORT).show();
                                     loadingbar.dismiss();
                                     SendUserToLMainActivityAdmin();
                                 }
                                 else if(parentDbName.equals("Users")){
-                                    Toast.makeText(LoginActivity.this,"התחברת בהצלחה",Toast.LENGTH_SHORT).show();
                                     loadingbar.dismiss();
                                     SendUserToLMainActivity();
                                 }

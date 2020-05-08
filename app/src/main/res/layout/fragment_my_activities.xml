@@ -9,7 +9,7 @@
     android:orientation="vertical"
     tools:context=".MyActivitiesFragment">
 
-    <Button
+   <!-- <Button
         android:id="@+id/new_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="220dp"
-        tools:layout_editor_absoluteY="496dp" />
+        tools:layout_editor_absoluteY="496dp" /> -->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewNewActivity"

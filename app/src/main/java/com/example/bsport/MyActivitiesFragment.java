@@ -69,7 +69,7 @@ public class MyActivitiesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_my_activities, container, false);
-        Button MyActivity = (Button) view.findViewById(R.id.new_activity);
+        //Button MyActivity = (Button) view.findViewById(R.id.new_activity);
         RootRef = FirebaseDatabase.getInstance().getReference();
         CountActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities");
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewNewActivity);
@@ -94,7 +94,7 @@ public class MyActivitiesFragment extends Fragment {
         }
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        MyActivity.setOnClickListener(new View.OnClickListener() {
+       /* MyActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -171,7 +171,7 @@ public class MyActivitiesFragment extends Fragment {
 
                 });
             }
-        });
+        });*/
 
         CountActivityRef.addValueEventListener(new ValueEventListener() {
             @Override

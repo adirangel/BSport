@@ -30,7 +30,7 @@
     <string name="EnterUserName">הכנס שם משתמש…\u200e</string>
     <string name="adminClickHere">מנהל - לחץ כאן\u200e</string>
     <string name="search">חיפוש…\u200e</string>
-    <string name="Enter_your_activity">הזן את הפעילות שלך…\u200e</string>
+    <string name="Enter_your_activity">הזן את שם הפעילות שלך…\u200e</string>
     <string name="type_activity">הכנס את סוג הפעילות..\u200e</string>
     <string name="Quantity_of_players">הכנס כמות שחקנים לפעילות..\u200e</string>
     <string name="Create_activity">צור פעילות</string>
