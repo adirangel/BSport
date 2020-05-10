@@ -63,12 +63,12 @@ pipeline {
           mail to: 'adirangel2@gmail.com', subject: 'New build available!', body: 'Check it out!'
         }
       }
-      post {
-        failure {
-          // Notify developer team of the failure
-          mail to: 'adirangel2@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
-       }
-     }
+    }
+  }
+  post {
+    failure {
+      // Notify developer team of the failure
+      mail to: 'adirangel2@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
     }
   }
 }
