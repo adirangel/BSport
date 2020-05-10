@@ -40,10 +40,10 @@ pipeline {
       post {
         success {
           // Notify if the upload succeeded
-          mail to: 'adirangel2@gmail.com', subject: 'New build available!', body: 'Check it out!'
-          mail to: 'tairhadad1@gmail.com', subject: 'New build available!', body: 'Check it out!'
-          mail to: 'yoni6232@gmail.com', subject: 'New build available!', body: 'Check it out!'
-          mail to: 'asafrdt@gmail.com', subject: 'New build available!', body: 'Check it out!'
+          mail to: 'adirangel2@gmail.com', subject: 'New build available!', body: "Build ${env.BUILD_NUMBER} succeeded; ${env.BUILD_URL}"
+          mail to: 'tairhadad1@gmail.com', subject: 'New build available!', body: "Build ${env.BUILD_NUMBER} succeeded; ${env.BUILD_URL}"
+          mail to: 'yoni6232@gmail.com', subject: 'New build available!', body: "Build ${env.BUILD_NUMBER} succeeded; ${env.BUILD_URL}"
+          mail to: 'asafrdt@gmail.com', subject: 'New build available!', body: "Build ${env.BUILD_NUMBER} succeeded; ${env.BUILD_URL}"
         }
       }
     }
