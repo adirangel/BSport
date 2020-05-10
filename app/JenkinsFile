@@ -35,7 +35,7 @@ pipeline {
     }
     stage('Email Posting') {
       steps{
-      
+        echo 'email posting stage'
       }
       post {
         success {
