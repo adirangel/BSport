@@ -64,7 +64,7 @@ pipeline {
         }
       }
     }
-  }
+  
   post {
     failure {
       // Notify developer team of the failure
