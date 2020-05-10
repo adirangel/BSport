@@ -33,7 +33,11 @@ pipeline {
         sh './gradlew assembleDebug'
       }
     }
-  
+    stage('Deploy') {
+      when {
+        // Only execute this stage when building from the `beta` branch
+        branch 'beta'
+      }
       steps {
         // Build the app in release mode, and sign the APK using the environment variables
         sh './gradlew assembleRelease'
@@ -47,13 +51,15 @@ pipeline {
       post {
         success {
           // Notify if the upload succeeded
-          mail to: 'adirangel2@gmail.com', subject: 'New build available!', body: 'Check it out!'
+          mail to: 'beta-testers@example.com', subject: 'New build available!', body: 'Check it out!'
         }
       }
+    }
+  }
   post {
     failure {
       // Notify developer team of the failure
-      mail to: 'adirangel2@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
+      mail to: 'android-devs@example.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
     }
   }
 }
