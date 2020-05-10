@@ -4,6 +4,10 @@ pipeline {
       image 'windsekirun/jenkins-android-docker:1.1.1'
     }
   }
+      triggers {
+        cron('H */8 * * *') //regular builds
+        pollSCM('* * * * *') //polling for changes, here once a minute
+    }
   options {
     skipStagesAfterUnstable()
   }
