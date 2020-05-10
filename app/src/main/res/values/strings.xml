@@ -42,4 +42,5 @@
     <string name="game_date1">תאריך הפעילות</string>
     <string name="location_activity">מיקום הפעילות</string>
     <string name="activity_location">הכנס את רחוב הפעילות</string>
+    <string name="remove_activity">מחיקת פעילות</string>
 </resources>

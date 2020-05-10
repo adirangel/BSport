@@ -133,21 +133,28 @@ public class SportFacFragment extends Fragment {
                             final String game_date = ((EditText) mView.findViewById(R.id.game_date)).getText().toString();
                             if (Checking_description_Empty(description)) {
                                 Toast.makeText(getActivity(), "אנא הכנס את שם הפעילות שלך", Toast.LENGTH_SHORT).show();
-                            } else if (Checking_number_of_players_Empty(number_of_players)) {
+                            }
+                            else if (Checking_number_of_players_Empty(number_of_players)) {
                                 Toast.makeText(getActivity(), "אנא הכנס מספר משתתפים שלך", Toast.LENGTH_SHORT).show();
-                            } else if (Checking_number_of_players_valid_value(number_of_players)) {
+                            }
+                            else if (Checking_number_of_players_valid_value(number_of_players)) {
                                 Toast.makeText(getActivity(), "אנא הכנס מספרים בלבד לכמות שחקנים", Toast.LENGTH_SHORT).show();
-                            } else if (Checking_game_date_Empty(game_date)) {
+                            }
+                            else if (Checking_game_date_Empty(game_date)) {
                                 Toast.makeText(getActivity(), "אנא הכנס את תאריך הפעילות שלך", Toast.LENGTH_SHORT).show();
-                            } else if (Checking_game_date_valid_value(game_date)) {
+                            }
+                            else if (Checking_game_date_valid_value(game_date)) {
                                 Toast.makeText(getActivity(), "אנא הכנס תאריך מהצורה dd-mm-yyyy", Toast.LENGTH_SHORT).show();
-                            } else if(Check_that_date_after_today(game_date,date) ){
+                            }
+                            else if(Check_that_date_after_today(game_date,date) ){
                                 Toast.makeText(getActivity(), "תאריך זה כבר עבר", Toast.LENGTH_SHORT).show();
-                            } else {
+                            }
+                            else {
 
                                 RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        String keyId = FirebaseDatabase.getInstance().getReference("Activities").push().getKey();
                                         HashMap<String, Object> userdataMap = new HashMap<>();
                                         userdataMap.put("created_by", name);
                                         userdataMap.put("date_created", date);
@@ -155,9 +162,9 @@ public class SportFacFragment extends Fragment {
                                         userdataMap.put("numbers_of_players", number_of_players);
                                         userdataMap.put("type", filteredListType.get(pos));
                                         userdataMap.put("game_date", game_date);
-                                        userdataMap.put("id", count);
+                                        userdataMap.put("id", keyId);
                                         userdataMap.put("location", filteredListNeig.get(pos) + ", " + filteredListStre.get(pos));
-                                        RootRef.child("Activities").child(String.valueOf(count)).updateChildren(userdataMap)
+                                        RootRef.child("Activities").child(String.valueOf(keyId)).updateChildren(userdataMap)
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {

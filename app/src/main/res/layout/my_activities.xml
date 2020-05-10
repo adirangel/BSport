@@ -88,6 +88,16 @@ p        <TextView
             android:text="תאריך יצירה"
             android:textColor="#FFFFFF"
             android:textSize="15sp" />
+        <ImageButton
+            android:id="@+id/remove_activity_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="280dp"
+            android:layout_marginTop="60dp"
+            android:background="@color/design_default_color_secondary_variant"
+            android:singleLine="true"
+
+            android:src="@drawable/ic_remove_circle_black_24dp" />
 
     </androidx.cardview.widget.CardView>
 

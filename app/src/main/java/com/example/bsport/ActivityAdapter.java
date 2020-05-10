@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +31,12 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
     ArrayList<String> My_number_of_players;
     ArrayList<String> My_date_created;
 
+    public int getPos() {
+        return pos;
+    }
+
+    int pos=-1;
+
     public ActivityAdapter(ArrayList<String> My_name_activity,ArrayList<String> My_activity_type,ArrayList<String> My_game_date,ArrayList<String> My_location,ArrayList<String> My_number_of_players,ArrayList<String> My_date_created) {
         this.My_name_activity=My_name_activity;
         this.My_activity_type=My_activity_type;
@@ -45,13 +53,20 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
         return vh;    }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.name.setText(My_name_activity.get(position));
         holder.type.setText(My_activity_type.get(position));
         holder.game_date.setText(My_game_date.get(position));
         holder.location.setText(My_location.get(position));
         holder.number_of_players.setText(My_number_of_players.get(position));
         holder.date_create.setText(My_date_created.get(position));
+        holder.remove_activity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),"בחרת פעילות להסרה" + "\n" + "מוזמן ללחוץ על מחיקת פעילות", Toast.LENGTH_LONG).show();
+                pos = position;
+            }
+        });
     }
 
     @Override
@@ -62,6 +77,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView type, name, game_date, location,number_of_players,date_create;// init the item view's
+        ImageButton remove_activity;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -72,6 +88,8 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
             location = (TextView) itemView.findViewById(R.id.location);
             number_of_players = (TextView) itemView.findViewById(R.id.number_of_players1);
             date_create = (TextView) itemView.findViewById(R.id.date_created);
+            remove_activity= (ImageButton)itemView.findViewById(R.id.remove_activity_image);
+
 
         }
     }
