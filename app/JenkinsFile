@@ -50,7 +50,7 @@ pipeline {
           mail to: 'adirangel2@gmail.com', subject: 'New build available!', body: 'Check it out!'
         }
       }
-    }
+    
   }
   post {
     failure {
