@@ -25,7 +25,7 @@ public class PrivateAreaTest {
     }
     @Test
     public void ageNotEmpty_oneTest_ReturnTrue(){
-        assertTrue(PrivateAreaFragment.Checking_age_notEmpty("23"));
+        assertTrue(PrivateAreaFragment.Checking_age_notEmpty("21"));
     }
     @Test
     public void ageEmpty_onetTest_ReturnFalse(){
