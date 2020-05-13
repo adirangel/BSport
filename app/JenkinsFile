@@ -56,5 +56,5 @@ pipeline {
 //      mail to: 'yoni6232@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
 //      mail to: 'yoni6232@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
  //   }
-//  }
+  }
 }
