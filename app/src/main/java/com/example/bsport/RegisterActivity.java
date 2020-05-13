@@ -80,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this,"אנא הכנס אימייל",Toast.LENGTH_SHORT).show();
         }
         else if(!EMAIL_PATTERN.matcher(email).matches()){
-            Toast.makeText(this,"אנא הכנס אימייל תיקניי",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"אנא הכנס אימייל תיקני",Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(username)){
             Toast.makeText(this,"אנא הכנס שם משתמש בעל אותיות ומספרים בלבד",Toast.LENGTH_SHORT).show();
