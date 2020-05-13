@@ -25,11 +25,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import io.paperdb.Paper;
 
 
 public class PrivateAreaFragment extends Fragment {
+    public static final Pattern EMAIL_PATTERN = Pattern.compile("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" + "\\@" + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" + "(" + "\\." + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" + ")+");
+    public static final Pattern USERNAME_PATTERN = Pattern.compile("[a-zA-Z0-9]+$");
     private String UserAge, UserFullName, User_about_myself,UserEmail;
     private TextView CurrentUser;
     private DatabaseReference RootRef;
@@ -41,6 +44,19 @@ public class PrivateAreaFragment extends Fragment {
     public PrivateAreaFragment() {
         // Required empty public constructor
     }
+
+       public static boolean Checking_email_notEmpty(String email) {
+        return !(email=="") ;
+    }
+
+    public static boolean Checking_email_good(String email) {
+        return  (EMAIL_PATTERN.matcher(email).matches()) ;
+    }
+
+    public static boolean Checking_age_notEmpty(String age) {
+        return ! (age=="") ;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -140,7 +156,7 @@ public class PrivateAreaFragment extends Fragment {
                         about = ((EditText)mView.findViewById(R.id.change_about)).getText().toString();
                         age = ((EditText)mView.findViewById(R.id.change_age)).getText().toString();
                         Query Userquery = RootRef.child("Users").orderByChild(username).equalTo(username);
-                        if(!email.equals("")){
+                        if(!Checking_email_notEmpty(email)){
 
                             Map<String, Object> map = new HashMap<>();
                             map.put("email", email);
