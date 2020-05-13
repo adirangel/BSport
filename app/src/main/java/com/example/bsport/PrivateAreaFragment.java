@@ -181,7 +181,7 @@ public class PrivateAreaFragment extends Fragment {
                                 }
                             });
                         }
-                        if(!age.equals("")){
+                        if(!Checking_age_notEmpty(age)){
                             Map<String, Object> map = new HashMap<>();
                             map.put("age",age);
                             RootRef.child(username).updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
