@@ -21,11 +21,11 @@ public class PrivateAreaTest {
     }
     @Test
     public void aboutNotEmpty_oneTest_ReturnTrue(){
-        assertTrue(PrivateAreaFragment.Checking_email_good("email@gmail.com"));
+        assertTrue(PrivateAreaFragment.Checking_email_good("email@hotmail.com"));
     }
     @Test
     public void ageNotEmpty_oneTest_ReturnTrue(){
-        assertTrue(PrivateAreaFragment.Checking_age_notEmpty("21"));
+        assertTrue(PrivateAreaFragment.Checking_age_notEmpty("25"));
     }
     @Test
     public void ageEmpty_onetTest_ReturnFalse(){
