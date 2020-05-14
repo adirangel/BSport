@@ -2,8 +2,11 @@
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardview_id"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_width="170dp"
     android:layout_height="190dp"
-    android:layout_width="180dp"
     android:layout_margin="5dp"
     card_view:cardCornerRadius="4dp"
     >
@@ -13,16 +16,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-
         >
         <ImageView
             android:id="@+id/image_type"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:scaleType="centerCrop"
-            android:background="#2d2d2d"/>
-
-
+            android:background="@drawable/fui_ic_anonymous_white_24dp"/>
 
         <TextView
             android:id="@+id/name_activity"
@@ -54,7 +54,7 @@
             android:textColor="#2d2d2d"
             android:gravity="center"
             android:singleLine="true"
-            android:textSize="13sp" />
+            android:textSize="12sp" />
 
 
 

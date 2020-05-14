@@ -21,6 +21,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,26 +54,26 @@ import io.paperdb.Paper;
 
 public class ActivitiesListFragment extends Fragment {
 
-    private Button MyActivity;
-    private DatabaseReference RootRef,CountActivityRef;
+    private DatabaseReference CountActivityRef;
     private static int count=0;
     private RecyclerView recyclerView;
-    private View view;
     private ListOfActivitiesAdapter list_of_activity_adapter;
     private String username = Paper.book().read(Prevalent.UserNameKey).toString();
     private ArrayList<String> My_Created_by = new ArrayList<>();
     private ArrayList<String> My_name_activity = new ArrayList<>();
     private ArrayList<String> My_game_date = new ArrayList<>();
     private ArrayList<String> My_location = new ArrayList<>();
-
+    private ArrayList<Integer> Arr_image = new ArrayList<>();
     private ArrayList<String> locations = new ArrayList<>();
+    private ArrayList<String> type_activity = new ArrayList<>();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_activities_list, container, false);
-        RootRef = FirebaseDatabase.getInstance().getReference();
+        View view = inflater.inflate(R.layout.fragment_activities_list, container, false);
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         CountActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities");
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewNewActivity);
+        create_Arr_Image(Arr_image);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         try {
             // get JSONObject from JSON file
@@ -94,23 +95,22 @@ public class ActivitiesListFragment extends Fragment {
         }
         recyclerView.setLayoutManager(linearLayoutManager);
 
-
-
         CountActivityRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 My_name_activity.clear();
                 My_game_date.clear();
                 My_location.clear();
-
+                type_activity.clear();
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
 
                         My_name_activity.add(ds.child("description").getValue().toString());
                         My_game_date.add(ds.child("game_date").getValue().toString());
                         My_location.add(ds.child("location").getValue().toString());
+                        type_activity.add(ds.child("type").getValue().toString());
 
                 }
-                list_of_activity_adapter = new ListOfActivitiesAdapter(My_name_activity,My_game_date,My_location);
+                list_of_activity_adapter = new ListOfActivitiesAdapter(My_name_activity,My_game_date,My_location,Arr_image,type_activity);
                 recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
                 recyclerView.setAdapter(list_of_activity_adapter); // set the Adapter to RecyclerView
 
@@ -121,6 +121,19 @@ public class ActivitiesListFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    private void create_Arr_Image(ArrayList<Integer> arr_image) {
+        arr_image.add(R.drawable.basketball);
+        arr_image.add(R.drawable.football);
+        arr_image.add(R.drawable.tennis);
+        arr_image.add(R.drawable.pool);
+        arr_image.add(R.drawable.athletics);
+        arr_image.add(R.drawable.fitness);
+        arr_image.add(R.drawable.patnak);
+        arr_image.add(R.drawable.mini);
+        arr_image.add(R.drawable.judo);
+        arr_image.add(R.drawable.logo);
     }
 
     private String loadJSONFromAsset() {
