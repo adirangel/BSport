@@ -85,7 +85,7 @@ public class HomeActivity extends AppCompatActivity {
                     if(usersData.getUsername().equals(userName)){
 
                         if(usersData.getPassword().equals(password)){
-                            String UserAdminKey = Paper.book().read(Prevalent.UserAdminKey);
+                            Paper.book().write(Prevalent.UserAdminKey, "false");
                             Toast.makeText(HomeActivity.this,"התחברות הצליחה\n ברוך הבא",Toast.LENGTH_SHORT).show();
                             loadingbar.dismiss();
                         }

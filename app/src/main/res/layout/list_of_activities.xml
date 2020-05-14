@@ -11,12 +11,10 @@
     card_view:cardCornerRadius="4dp"
     >
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        >
+        android:layout_height="match_parent">
         <ImageView
             android:id="@+id/image_type"
             android:layout_width="match_parent"
@@ -24,6 +22,16 @@
             android:scaleType="centerCrop"
             android:background="@drawable/fui_ic_anonymous_white_24dp"/>
 
+
+        <ImageButton
+            android:id="@+id/deleteButton"
+            android:clickable="true"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="95dp"
+            android:layout_marginLeft="145dp"
+            android:src="@drawable/ic_remove_circle_black_24dp"
+            />
         <TextView
             android:id="@+id/name_activity"
             android:layout_width="match_parent"
@@ -31,6 +39,7 @@
             android:text="@string/name_activity"
             android:textColor="#2d2d2d"
             android:gravity="center"
+            android:layout_below="@id/image_type"
             android:singleLine="true"
             android:textSize="18sp" />
 
@@ -42,6 +51,7 @@
             android:layout_height="23dp"
             android:text="@string/game_date1"
             android:textColor="#2d2d2d"
+            android:layout_below="@id/name_activity"
             android:gravity="center"
             android:singleLine="true"
             android:textSize="13sp" />
@@ -52,14 +62,13 @@
             android:layout_height="23dp"
             android:text="מיקום הפעילות"
             android:textColor="#2d2d2d"
+            android:layout_below="@id/game_date1"
             android:gravity="center"
             android:singleLine="true"
             android:textSize="12sp" />
 
 
-
-
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </androidx.cardview.widget.CardView>

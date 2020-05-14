@@ -11,32 +11,27 @@
         android:id="@+id/WelcomeSign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ברוך הבא לאזור האישי
-"
+        android:text="ברוך הבא לאזור האישי"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
         android:textAllCaps="false"
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/currentUserName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/WelcomeSign"
 
-        android:textSize="18sp"
-        android:textStyle="bold" />
     <TextView
         android:id="@+id/UserEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/currentUserName"
-        android:background="@drawable/inputs"
-        android:padding="4dp"
-        android:drawableStart="@drawable/email"
+        android:layout_below="@+id/WelcomeSign"
+        android:padding="2dp"
+        android:textSize="18sp"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/ic_email_black_24dp"
         android:layout_marginTop="25dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="17dp"
+        android:text="blablbal"
+        android:layout_marginLeft="25dp"
         />
     <TextView
         android:id="@+id/UserFullName"
@@ -44,12 +39,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/UserEmail"
-        android:background="@drawable/inputs"
-        android:padding="4dp"
-        android:drawableStart="@drawable/name"
+        android:padding="2dp"
+        android:text="blablbal"
+        android:layout_marginLeft="25dp"
+
+        android:textSize="18sp"
+        android:drawablePadding="10dp"
+
+        android:drawableStart="@drawable/ic_person_black_24dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="17dp"
 
         />
     <TextView
@@ -58,12 +56,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/UserFullName"
-        android:background="@drawable/inputs"
-        android:padding="4dp"
-        android:drawableStart="@drawable/age"
+        android:padding="2dp"
+        android:textSize="18sp"
+        android:text="blablbal"
+        android:drawablePadding="10dp"
+
+        android:drawableStart="@drawable/ic_cake_black_24dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="17dp"
+        android:layout_marginLeft="25dp"
         />
     <TextView
         android:id="@+id/User_about_myself"
@@ -71,12 +71,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/UserAge"
-        android:background="@drawable/inputs"
-        android:padding="4dp"
-        android:drawableStart="@drawable/about"
+        android:padding="2dp"
+        android:textSize="18sp"
+        android:text="blablbal"
+        android:drawablePadding="10dp"
+
+        android:drawableStart="@drawable/ic_textsms_black_24dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="17dp"
+        android:layout_marginLeft="25dp"
         />
 
     <Button
@@ -87,7 +89,7 @@
 
         android:layout_below="@id/User_about_myself"
         android:layout_marginLeft="17dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="17dp"
         android:background="@drawable/buttons"
         android:padding="4dp"

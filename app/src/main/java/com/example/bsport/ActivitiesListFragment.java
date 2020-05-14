@@ -66,6 +66,7 @@ public class ActivitiesListFragment extends Fragment {
     private ArrayList<Integer> Arr_image = new ArrayList<>();
     private ArrayList<String> locations = new ArrayList<>();
     private ArrayList<String> type_activity = new ArrayList<>();
+    private ArrayList<String> My_id = new ArrayList<>();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -102,7 +103,10 @@ public class ActivitiesListFragment extends Fragment {
                 My_game_date.clear();
                 My_location.clear();
                 type_activity.clear();
+                My_id.clear();
+
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    My_id.add(ds.child("id").getValue().toString());
 
                         My_name_activity.add(ds.child("description").getValue().toString());
                         My_game_date.add(ds.child("game_date").getValue().toString());
@@ -110,7 +114,7 @@ public class ActivitiesListFragment extends Fragment {
                         type_activity.add(ds.child("type").getValue().toString());
 
                 }
-                list_of_activity_adapter = new ListOfActivitiesAdapter(My_name_activity,My_game_date,My_location,Arr_image,type_activity);
+                list_of_activity_adapter = new ListOfActivitiesAdapter(My_name_activity,My_game_date,My_location,Arr_image,type_activity,My_id);
                 recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
                 recyclerView.setAdapter(list_of_activity_adapter); // set the Adapter to RecyclerView
 
