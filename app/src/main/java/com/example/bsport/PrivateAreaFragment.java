@@ -63,8 +63,12 @@ public class PrivateAreaFragment extends Fragment {
                              Bundle savedInstanceState) {
         username = Paper.book().read(Prevalent.UserNameKey).toString();
         // Inflate the layout for this fragment
-        RootRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
+        RootRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        if(Paper.book().read(Prevalent.UserAdminKey).toString().equals("true")){
+            RootRef = FirebaseDatabase.getInstance().getReference().child("Admin");
+
+        }
         theCurrentUser = inflater.inflate(R.layout.fragment_private_area, container, false);
         ChangePass = (Button) theCurrentUser.findViewById(R.id.ChangePass);
         ChangePersonalDetails = (Button) theCurrentUser.findViewById(R.id.ChangeDetails);
