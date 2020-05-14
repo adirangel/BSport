@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,7 +62,6 @@ public class ActivitiesListFragment extends Fragment {
     private String username = Paper.book().read(Prevalent.UserNameKey).toString();
     private ArrayList<String> My_Created_by = new ArrayList<>();
     private ArrayList<String> My_name_activity = new ArrayList<>();
-    private ArrayList<String> My_activity_type = new ArrayList<>();
     private ArrayList<String> My_game_date = new ArrayList<>();
     private ArrayList<String> My_location = new ArrayList<>();
 
@@ -100,18 +100,18 @@ public class ActivitiesListFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 My_name_activity.clear();
-                My_activity_type.clear();
                 My_game_date.clear();
                 My_location.clear();
 
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                        My_name_activity.add("שם הפעילות: "+ds.child("description").getValue().toString());
-                        My_activity_type.add("סוג הפעילות: "+ds.child("type").getValue().toString());
-                        My_game_date.add("תאריך הפעילות: "+ ds.child("game_date").getValue().toString());
-                        My_location.add("מיקום הפעילות: "+ds.child("location").getValue().toString());
+
+                        My_name_activity.add(ds.child("description").getValue().toString());
+                        My_game_date.add(ds.child("game_date").getValue().toString());
+                        My_location.add(ds.child("location").getValue().toString());
 
                 }
-                list_of_activity_adapter = new ListOfActivitiesAdapter(My_name_activity,My_activity_type,My_game_date,My_location);
+                list_of_activity_adapter = new ListOfActivitiesAdapter(My_name_activity,My_game_date,My_location);
+                recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
                 recyclerView.setAdapter(list_of_activity_adapter); // set the Adapter to RecyclerView
 
             }
