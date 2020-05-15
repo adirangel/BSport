@@ -52,7 +52,6 @@ import io.paperdb.Paper;
 
 public class MyActivitiesFragment extends Fragment {
 
-    private Button MyActivity;
     private DatabaseReference RootRef,CountActivityRef;
     private static int count=0;
     private RecyclerView recyclerView;
@@ -67,12 +66,10 @@ public class MyActivitiesFragment extends Fragment {
     private ArrayList<String> My_date_created = new ArrayList<>();
     private ArrayList<String> My_id = new ArrayList<>();
     private ArrayList<String> locations = new ArrayList<>();
-    private int pos;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_my_activities, container, false);
-        Button MyActivity = (Button) view.findViewById(R.id.remove_activity);
         RootRef = FirebaseDatabase.getInstance().getReference();
         CountActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities");
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewNewActivity);
@@ -97,55 +94,6 @@ public class MyActivitiesFragment extends Fragment {
         }
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        MyActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pos = activityAdapter.getPos();
-                if(pos==-1) {
-                    Toast.makeText(getActivity(),"בחר תחילה פעילות למחיקה",Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                    builder.setTitle("בטוח?");
-                    builder.setMessage("האם אתה בטוח?");
-                    builder.setPositiveButton("כן", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Do nothing but close the dialog
-                            String po= My_id.get(pos);
-                            Query activityQuery = RootRef.child("Activities").orderByChild("id").equalTo(po);
-                            activityQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    for(DataSnapshot ds: dataSnapshot.getChildren()){
-                                        ds.getRef().removeValue();
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                }
-                            });
-                            dialog.dismiss();
-                        }
-                    });
-
-                    builder.setNegativeButton("לא", new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            // Do nothing
-                            dialog.dismiss();
-                        }
-                    });
-
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                }
-
-            }
-        });
 
         CountActivityRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -170,7 +118,7 @@ public class MyActivitiesFragment extends Fragment {
 
                     }
                 }
-                activityAdapter = new ActivityAdapter(My_name_activity,My_activity_type,My_game_date,My_location,My_number_of_players,My_date_created);
+                activityAdapter = new ActivityAdapter(My_name_activity,My_activity_type,My_game_date,My_location,My_number_of_players,My_date_created,My_id);
                 recyclerView.setAdapter(activityAdapter); // set the Adapter to RecyclerView
 
             }

@@ -30,7 +30,7 @@
             android:layout_height="20dp"
             android:layout_marginTop="95dp"
             android:layout_marginLeft="145dp"
-            android:src="@drawable/ic_remove_circle_black_24dp"
+            android:src="@drawable/ic_remove_circle_gray_24dp"
             />
         <TextView
             android:id="@+id/name_activity"

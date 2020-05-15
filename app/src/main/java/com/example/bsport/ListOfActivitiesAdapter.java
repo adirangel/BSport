@@ -65,8 +65,12 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.name.setText(My_name_activity.get(position));
         holder.game_date.setText(My_game_date.get(position));
-        holder.location.setText(My_location.get(position));
-
+        if(My_location.get(position).toLowerCase().contains("זמינה".toLowerCase()) ){
+            holder.location.setVisibility(View.INVISIBLE);
+        }
+        else {
+            holder.location.setText(My_location.get(position));
+        }
         holder.imageType.setImageResource(Arr_image.get(isCheckedWord(activity_type.get(position).toString())));
         if (isAdmin.equals("false")) {
             holder.Remove_button.setVisibility(View.INVISIBLE);
@@ -76,9 +80,9 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                 @Override
                 public void onClick(View v) {
                     RootRef = FirebaseDatabase.getInstance().getReference();
-                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                    builder.setTitle("בטוח?");
-                    builder.setMessage("האם אתה בטוח?");
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext(),R.style.AlertDialogStyle);
+
+                    builder.setMessage("למחוק את הפעילות?");
                     builder.setPositiveButton("כן", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // Do nothing but close the dialog
@@ -136,7 +140,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
     private Integer isCheckedWord(String type) {
         if( type.toLowerCase().contains("סל".toLowerCase()))
             return 0;
-        else if( type.toLowerCase().contains("כדוררגל".toLowerCase()) && type.toLowerCase().contains("כדורגל".toLowerCase()))
+        else if( type.toLowerCase().contains("כדוררגל".toLowerCase()) || type.toLowerCase().contains("כדורגל".toLowerCase()))
             return 1;
         else if (type.toLowerCase().contains("טניס".toLowerCase()))
             return 2;

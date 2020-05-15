@@ -1,6 +1,7 @@
 package com.example.bsport;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +12,16 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bsport.Prevalent.Prevalent;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,20 +38,22 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
     ArrayList<String> My_location;
     ArrayList<String> My_number_of_players;
     ArrayList<String> My_date_created;
+    ArrayList<String> My_id;
+    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
 
-    public int getPos() {
-        return pos;
-    }
 
-    int pos=-1;
 
-    public ActivityAdapter(ArrayList<String> My_name_activity,ArrayList<String> My_activity_type,ArrayList<String> My_game_date,ArrayList<String> My_location,ArrayList<String> My_number_of_players,ArrayList<String> My_date_created) {
+
+
+
+    public ActivityAdapter(ArrayList<String> My_name_activity,ArrayList<String> My_activity_type,ArrayList<String> My_game_date,ArrayList<String> My_location,ArrayList<String> My_number_of_players,ArrayList<String> My_date_created,ArrayList<String> My_id) {
         this.My_name_activity=My_name_activity;
         this.My_activity_type=My_activity_type;
         this.My_game_date=My_game_date;
         this.My_location=My_location;
         this.My_number_of_players=My_number_of_players;
         this.My_date_created=My_date_created;
+        this.My_id = My_id;
     }
 
     @Override
@@ -63,8 +73,43 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
         holder.remove_activity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),"בחרת פעילות להסרה" + "\n" + "מוזמן ללחוץ על מחיקת פעילות", Toast.LENGTH_LONG).show();
-                pos = position;
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setTitle("בטוח?");
+                builder.setMessage("האם אתה בטוח?");
+                builder.setPositiveButton("כן", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing but close the dialog
+                        String po= My_id.get(position);
+                        Query activityQuery = rootRef.child("Activities").orderByChild("id").equalTo(po);
+                        activityQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                                    ds.getRef().removeValue();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("לא", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
     }

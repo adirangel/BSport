@@ -59,8 +59,6 @@ public class SportFacFragment extends Fragment {
     public static SportFacFragment newInstance() {
         return new SportFacFragment();
     }
-    public static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+$");
-    public static final Pattern DATE_PATTERN = Pattern.compile("^([0-2][0-9]|(3)[0-1])(\\-)(((0)[0-9])|((1)[0-2]))(\\-)\\d{4}$");
 
     private ArrayList<String> FacTypes = new ArrayList<>();
     private ArrayList<String> FacNames = new ArrayList<>();
@@ -92,103 +90,6 @@ public class SportFacFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         EditText searchFac = (EditText) sportsFacilitiesFragment.findViewById(R.id.search_fac);
-        Button myActivity = (Button)sportsFacilitiesFragment.findViewById(R.id.create_activity);
-        myActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pos = customAdapter.getPos();
-                if(pos==-1) {
-                    Toast.makeText(getActivity(),"בחר תחילה מגרש",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    final View mView = getLayoutInflater().inflate(R.layout.newactiviry, null);
-                    Button newActivitySub = (Button) mView.findViewById(R.id.submit_activity);
-                    builder.setView(mView);
-                    final AlertDialog dialog = builder.create();
-                    dialog.show();
-                    newActivitySub.setOnClickListener(new View.OnClickListener() {
-                        @Override
-
-                        public void onClick(View v) {
-                            final String name = Paper.book().read(Prevalent.UserNameKey).toString();
-                            final String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-                            CountActivityRef.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    if (dataSnapshot.exists()) {
-                                        count = (int) dataSnapshot.getChildrenCount() + 1;
-                                    } else {
-                                        count = 1;
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                }
-                            });
-                            final String description = ((EditText) mView.findViewById(R.id.activity_type)).getText().toString();
-                            final String number_of_players = ((EditText) mView.findViewById(R.id.number_of_players)).getText().toString();
-                            final String game_date = ((EditText) mView.findViewById(R.id.game_date)).getText().toString();
-                            if (Checking_description_Empty(description)) {
-                                Toast.makeText(getActivity(), "אנא הכנס את שם הפעילות שלך", Toast.LENGTH_SHORT).show();
-                            }
-                            else if (Checking_number_of_players_Empty(number_of_players)) {
-                                Toast.makeText(getActivity(), "אנא הכנס מספר משתתפים שלך", Toast.LENGTH_SHORT).show();
-                            }
-                            else if (Checking_number_of_players_valid_value(number_of_players)) {
-                                Toast.makeText(getActivity(), "אנא הכנס מספרים בלבד לכמות שחקנים", Toast.LENGTH_SHORT).show();
-                            }
-                            else if (Checking_game_date_Empty(game_date)) {
-                                Toast.makeText(getActivity(), "אנא הכנס את תאריך הפעילות שלך", Toast.LENGTH_SHORT).show();
-                            }
-                            else if (Checking_game_date_valid_value(game_date)) {
-                                Toast.makeText(getActivity(), "אנא הכנס תאריך מהצורה dd-mm-yyyy", Toast.LENGTH_SHORT).show();
-                            }
-                            else if(Check_that_date_after_today(game_date,date) ){
-                                Toast.makeText(getActivity(), "תאריך זה כבר עבר", Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-
-                                RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        String keyId = FirebaseDatabase.getInstance().getReference("Activities").push().getKey();
-                                        HashMap<String, Object> userdataMap = new HashMap<>();
-                                        userdataMap.put("created_by", name);
-                                        userdataMap.put("date_created", date);
-                                        userdataMap.put("description", description);
-                                        userdataMap.put("numbers_of_players", number_of_players);
-                                        userdataMap.put("type", filteredListType.get(pos));
-                                        userdataMap.put("game_date", game_date);
-                                        userdataMap.put("id", keyId);
-                                        userdataMap.put("location", filteredListNeig.get(pos) + ", " + filteredListStre.get(pos));
-                                        RootRef.child("Activities").child(String.valueOf(keyId)).updateChildren(userdataMap)
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful()) {
-
-                                                            Toast.makeText(getActivity(), "הפעילות נוספה בהצלחה", Toast.LENGTH_SHORT).show();
-                                                        } else {
-                                                            Toast.makeText(getActivity(), "הפעילות לא התווספה בהצלחה- אנא נסה שנית", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    }
-                                                });
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                                    }
-                                });
-                                dialog.cancel();
-                            }
-                        }
-                    });
-                }
-            }
-        });
 
         searchFac.addTextChangedListener(new TextWatcher() {
             @Override
@@ -228,8 +129,19 @@ public class SportFacFragment extends Fragment {
                 if (isCheckedWord(facDetail.getString("Type"))) {
                     FacTypes.add(facDetail.getString("Type"));
                     FacNames.add("מיקום: " + facDetail.getString("Name"));
-                    FacNeighborhoods.add("שכונה: " + facDetail.getString("neighborho"));
-                    FacStreets.add("רחוב: " + facDetail.getString("street"));
+                    if(!facDetail.getString("neighborho").equals("")) {
+                        FacNeighborhoods.add("שכונה: " + facDetail.getString("neighborho"));
+                    }
+                    else{
+                        FacNeighborhoods.add("שכונה לא זמינה");
+                    }
+                    if(!facDetail.getString("street").equals("")) {
+
+                        FacStreets.add("רחוב: " + facDetail.getString("street"));
+                    }
+                    else{
+                        FacStreets.add("רחוב לא זמין");
+                    }
                     FacHandi.add(facDetail.getString("handicappe"));
                 }
             }
@@ -250,37 +162,6 @@ public class SportFacFragment extends Fragment {
         return sportsFacilitiesFragment;
     }
 
-    public static boolean Check_that_date_after_today(String game_date, String dateToday) {
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            Date date1=format.parse(game_date);
-            Date date2=format.parse(dateToday);
-            return date2.after(date1);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
-
-    public static boolean Checking_game_date_valid_value(String game_date) {
-        return !DATE_PATTERN.matcher(game_date).matches();
-    }
-
-    public static boolean Checking_number_of_players_valid_value(String number_of_players) {
-        return !NUMBER_PATTERN.matcher(number_of_players).matches();
-    }
-
-    public static boolean Checking_game_date_Empty(String game_date) {
-        return game_date.equals("");
-    }
-
-    public static boolean Checking_number_of_players_Empty(String number_of_players) {
-        return number_of_players.equals("");
-    }
-
-    public static boolean Checking_description_Empty(String description) {
-        return description.equals("");
-    }
 
     private boolean isCheckedWord(String type) {
         return type.toLowerCase().contains("כדור".toLowerCase()) || type.toLowerCase().contains("מיני".toLowerCase()) ||
@@ -310,7 +191,6 @@ public class SportFacFragment extends Fragment {
             }
         }
         customAdapter.filterList(filteredListType,filteredListName,filteredListNeig,filteredListStre);
-        pos = customAdapter.getPos();
 
     }
 

@@ -9,19 +9,6 @@
     android:orientation="vertical"
     tools:context=".MyActivitiesFragment">
 
-   <Button
-        android:id="@+id/remove_activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/buttons"
-        android:text="@string/remove_activity"
-        android:layout_alignParentBottom="true"
-        android:textColor="@android:color/background_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="220dp"
-        tools:layout_editor_absoluteY="496dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewNewActivity"
