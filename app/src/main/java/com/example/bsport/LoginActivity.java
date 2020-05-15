@@ -137,6 +137,8 @@ public class LoginActivity extends AppCompatActivity {
                                     SendUserToLMainActivityAdmin();
                                 }
                                 else if(parentDbName.equals("Users")){
+                                    Paper.book().write(Prevalent.UserAdminKey, "false");
+
                                     loadingbar.dismiss();
                                     SendUserToLMainActivity();
                                 }

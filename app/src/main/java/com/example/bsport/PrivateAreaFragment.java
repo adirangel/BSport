@@ -67,14 +67,10 @@ public class PrivateAreaFragment extends Fragment {
         RootRef = FirebaseDatabase.getInstance().getReference().child("Users");
         if(Paper.book().read(Prevalent.UserAdminKey).toString().equals("true")){
             RootRef = FirebaseDatabase.getInstance().getReference().child("Admin");
-
         }
         theCurrentUser = inflater.inflate(R.layout.fragment_private_area, container, false);
         ChangePass = (Button) theCurrentUser.findViewById(R.id.ChangePass);
         ChangePersonalDetails = (Button) theCurrentUser.findViewById(R.id.ChangeDetails);
-        //TextView CurrentUserEmail;
-        //CurrentUserEmail = (TextView)theCurrentUser.findViewById(R.id.UserEmail);
-        //CurrentUserEmail.setText(Paper.book().read(Prevalent.));
         CurrentUser = (TextView)theCurrentUser.findViewById(R.id.UserFullName);
         CurrentUserEmail = (TextView)theCurrentUser.findViewById(R.id.UserEmail);
         CurrentUserAge = (TextView)theCurrentUser.findViewById(R.id.UserAge);
