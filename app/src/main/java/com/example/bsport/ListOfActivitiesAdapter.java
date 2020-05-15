@@ -34,18 +34,18 @@ import io.paperdb.Paper;
 
 public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActivitiesAdapter.MyViewHolder> {
 
-    ArrayList<String> My_name_activity;
-    ArrayList<String> My_game_date;
-    ArrayList<String> My_location;
-    ArrayList<Integer> Arr_image;
-    ArrayList<String> activity_type;
-    ArrayList<String> My_id;
+    private ArrayList<String> My_name_activity;
+    private ArrayList<String> My_game_date;
+    private ArrayList<String> My_location;
+    private ArrayList<Integer> Arr_image;
+    private ArrayList<String> activity_type;
+    private ArrayList<String> My_id;
     private String isAdmin = Paper.book().read(Prevalent.UserAdminKey).toString();
     private DatabaseReference RootRef;
 
 
 
-    public ListOfActivitiesAdapter(ArrayList<String> My_name_activity,ArrayList<String> My_game_date,ArrayList<String> My_location,ArrayList<Integer> Arr_Image,ArrayList<String> activity_type,ArrayList<String> My_id) {
+    ListOfActivitiesAdapter(ArrayList<String> My_name_activity, ArrayList<String> My_game_date, ArrayList<String> My_location, ArrayList<Integer> Arr_Image, ArrayList<String> activity_type, ArrayList<String> My_id) {
         this.My_name_activity=My_name_activity;
         this.My_game_date=My_game_date;
         this.My_location=My_location;
@@ -55,11 +55,11 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
 
     }
 
+    @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_of_activities, parent, false);
-        MyViewHolder vh = new MyViewHolder(v); // pass the view to View Holder
-        return vh;    }
+        return new MyViewHolder(v);    }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
@@ -71,7 +71,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
         else {
             holder.location.setText(My_location.get(position));
         }
-        holder.imageType.setImageResource(Arr_image.get(isCheckedWord(activity_type.get(position).toString())));
+        holder.imageType.setImageResource(Arr_image.get(isCheckedWord(activity_type.get(position))));
         if (isAdmin.equals("false")) {
             holder.Remove_button.setVisibility(View.INVISIBLE);
         }
@@ -150,9 +150,9 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
             return 4;
         else if (type.toLowerCase().contains("כושר".toLowerCase()))
             return 5;
-        else if (type.toLowerCase().contains("פטנאק".toLowerCase()))
+        else if (type.toLowerCase().contains("פטאנק".toLowerCase()))
             return 6;
-        else if (type.toLowerCase().contains("מיני".toLowerCase()))
+        else if (type.toLowerCase().contains("מיני".toLowerCase()) || type.toLowerCase().contains("קטרגל".toLowerCase()))
             return 7;
         else if (type.toLowerCase().contains("גודו".toLowerCase()) || type.toLowerCase().contains("ג'ודו".toLowerCase()))
             return 8;
@@ -160,20 +160,20 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
             return 9;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView name, game_date, location;// init the item view's
         ImageView imageType;
         CardView cardView;
         ImageButton Remove_button;
 
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
-            Remove_button = (ImageButton) itemView.findViewById(R.id.deleteButton);
-            name = (TextView) itemView.findViewById(R.id.name_activity);
-            game_date = (TextView) itemView.findViewById(R.id.game_date1);
-            location = (TextView) itemView.findViewById(R.id.location);
-            imageType = (ImageView) itemView.findViewById(R.id.image_type);
-            cardView = (CardView) itemView.findViewById(R.id.cardview_id);
+            Remove_button = itemView.findViewById(R.id.deleteButton);
+            name = itemView.findViewById(R.id.name_activity);
+            game_date = itemView.findViewById(R.id.game_date1);
+            location = itemView.findViewById(R.id.location);
+            imageType = itemView.findViewById(R.id.image_type);
+            cardView = itemView.findViewById(R.id.cardview_id);
         }
     }
 }
