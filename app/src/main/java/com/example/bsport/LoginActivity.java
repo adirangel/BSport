@@ -132,12 +132,12 @@ public class LoginActivity extends AppCompatActivity {
 
                             if(usersData.getPassword().equals(password)){
                                 if(parentDbName.equals("Admin")){
-                                    Paper.book().write(Prevalent.UserAdminKey, "true");
+                                    Prevalent.setUserAdminKey("true");
                                     loadingbar.dismiss();
                                     SendUserToLMainActivityAdmin();
                                 }
                                 else if(parentDbName.equals("Users")){
-                                    Paper.book().write(Prevalent.UserAdminKey, "false");
+                                    Prevalent.setUserAdminKey("false");
 
                                     loadingbar.dismiss();
                                     SendUserToLMainActivity();

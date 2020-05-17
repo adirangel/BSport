@@ -74,53 +74,42 @@ public class PrivateAreaFragment extends Fragment {
         CurrentUserEmail = (TextView)theCurrentUser.findViewById(R.id.UserEmail);
         CurrentUserAge = (TextView)theCurrentUser.findViewById(R.id.UserAge);
         CurrentUserDescription = (TextView)theCurrentUser.findViewById(R.id.User_about_myself);
-
-
-
-
-
         return theCurrentUser;
     }
-
-
 
     @Override
     public void onResume() {
         super.onResume();
-        if (Paper.book().read(Prevalent.UserAdminKey).toString().equals("true")) {
+        if (Prevalent.getUserAdminKey().equals("true")) {
             RootRef = FirebaseDatabase.getInstance().getReference().child("Admin");
         }
-
         RootRef.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                if (Paper.book().read(Prevalent.UserAdminKey)!= null) {
-
-                    username = Paper.book().read(Prevalent.UserNameKey).toString();
-
-                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
-
-                        if (ds.child("username").getValue().toString().equals(username)) {
-                            UserAge = ds.child("age").getValue().toString();
-                            UserFullName = ds.child("name").getValue().toString();
-                            UserEmail = ds.child("email").getValue().toString();
-                            User_about_myself = ds.child("aboutMyself").getValue().toString();
-                        }
+                username = Paper.book().read(Prevalent.UserNameKey).toString();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    if (ds.child("username").getValue().toString().equals(username)) {
+                        UserAge = ds.child("age").getValue().toString();
+                        UserFullName = ds.child("name").getValue().toString();
+                        UserEmail = ds.child("email").getValue().toString();
+                        User_about_myself = ds.child("aboutMyself").getValue().toString();
                     }
-
-
-                    CurrentUser.setText(UserFullName);
-                    CurrentUserAge.setText(UserAge);
-                    CurrentUserEmail.setText(UserEmail);
-                    CurrentUserDescription.setText(User_about_myself);
                 }
+                CurrentUser.setText(UserFullName);
+                CurrentUserAge.setText(UserAge);
+                CurrentUserEmail.setText(UserEmail);
+                CurrentUserDescription.setText(User_about_myself);
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
+
+
+
         ChangePass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

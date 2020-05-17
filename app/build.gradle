@@ -47,15 +47,10 @@ dependencies {
     implementation 'io.paperdb:paperdb:2.6'
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    testImplementation "org.mockito:mockito-core:3.3.3"
     // Required -- JUnit 4 framework
     testImplementation 'junit:junit:4.12'
     testImplementation "org.json:json:20140107"
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
     // Optional -- Robolectric environment
     testImplementation 'androidx.test:core:1.2.0'
     // Optional -- Mockito framework
@@ -64,6 +59,7 @@ dependencies {
     androidTestImplementation 'androidx.annotation:annotation:1.1.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation "androidx.test:runner:1.2.0"
 
 }
 tasks.withType(Test) {

@@ -85,7 +85,7 @@ public class HomeActivity extends AppCompatActivity {
                     if(usersData.getUsername().equals(userName)){
 
                         if(usersData.getPassword().equals(password)){
-                            Paper.book().write(Prevalent.UserAdminKey, "false");
+                            Prevalent.setUserAdminKey("false");
                             Toast.makeText(HomeActivity.this," ברוך הבא",Toast.LENGTH_SHORT).show();
                             loadingbar.dismiss();
                         }
@@ -104,7 +104,7 @@ public class HomeActivity extends AppCompatActivity {
                     if(usersData.getUsername().equals(userName)){
 
                         if(usersData.getPassword().equals(password)){
-                            Paper.book().write(Prevalent.UserAdminKey, "true");
+                            Prevalent.setUserAdminKey("true");
                             String UserAdminKey = Paper.book().read(Prevalent.UserAdminKey);
                             Toast.makeText(HomeActivity.this,"ברוך הבא מנהל",Toast.LENGTH_SHORT).show();
                             loadingbar.dismiss();

@@ -40,7 +40,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
     private ArrayList<Integer> Arr_image;
     private ArrayList<String> activity_type;
     private ArrayList<String> My_id;
-    private String isAdmin = Paper.book().read(Prevalent.UserAdminKey).toString();
+    private String isAdmin = Prevalent.getUserAdminKey();
     private DatabaseReference RootRef;
 
 

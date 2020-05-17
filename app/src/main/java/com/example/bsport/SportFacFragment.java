@@ -54,8 +54,6 @@ import io.paperdb.Paper;
 
 public class SportFacFragment extends Fragment {
 
-    private SportFacViewModel mViewModel;
-
     public static SportFacFragment newInstance() {
         return new SportFacFragment();
     }
@@ -74,19 +72,17 @@ public class SportFacFragment extends Fragment {
     private Boolean isCheckedBool = false;
     private CustomAdapter customAdapter;
     private List<Integer> FilterArray;
-    private DatabaseReference RootRef,CountActivityRef;
     private static int count=0;
-    private View sportsFacilitiesFragment;
     private int pos ;
-    private RecyclerView recyclerView;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        sportsFacilitiesFragment =  inflater.inflate(R.layout.sport_fac_fragment, container, false);
-        recyclerView = (RecyclerView) sportsFacilitiesFragment.findViewById(R.id.recyclerView);
+        View sportsFacilitiesFragment = inflater.inflate(R.layout.sport_fac_fragment, container, false);
+        RecyclerView recyclerView = (RecyclerView) sportsFacilitiesFragment.findViewById(R.id.recyclerView);
         CheckBox_Handi = (CheckBox) sportsFacilitiesFragment.findViewById(R.id.checkbox_Handi);
-        RootRef = FirebaseDatabase.getInstance().getReference();
-        CountActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities");
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference countActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         EditText searchFac = (EditText) sportsFacilitiesFragment.findViewById(R.id.search_fac);
@@ -174,7 +170,7 @@ public class SportFacFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(SportFacViewModel.class);
+        SportFacViewModel mViewModel = ViewModelProviders.of(this).get(SportFacViewModel.class);
     }
 
     private void CheckFilterArray() {
