@@ -50,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(mToolBar);
         logoutImage = (ImageButton) findViewById(R.id.logout_button);
         myViewPager = (ViewPager)findViewById(R.id.main_tabs_pager);
+
         myTabsAccessorAdapter = new MenuAccessorAdapter(getSupportFragmentManager());
         myViewPager.setAdapter(myTabsAccessorAdapter);
         myTabLayout = (TabLayout) findViewById(R.id.main_tabs);
@@ -158,5 +159,6 @@ public class HomeActivity extends AppCompatActivity {
         }
         return true;
     }
+
 }
 
