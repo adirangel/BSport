@@ -112,9 +112,9 @@ public class LoginActivity extends AppCompatActivity {
         else if(!Checking_password_notEmpty(password)){
             Toast.makeText(this,"אנא הכנס סיסמה",Toast.LENGTH_SHORT).show();
         }
-        else if(!Valid_password_check(password)){
+       /* else if(!Valid_password_check(password)){
             Toast.makeText(this,"הסיסמה צריכה להיות באורך 6 ומעלה",Toast.LENGTH_SHORT).show();
-        }
+        }*/
         else
         {
 
