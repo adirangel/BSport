@@ -17,6 +17,22 @@ pipeline {
         sh 'chmod +x ./gradlew'
       }
     }
+    stage("Verifing working space file exists"){
+      step{
+        echo "Verifing working space file"
+        script{
+            def exist = fileExists 'var/jenkins_home/workspace/Team_7/Check'
+            if(exists){
+                echo "The file is exists"
+                echo "The working space is : ${WORKSPACE}"
+                }
+            else{
+                echo "The file doesnt exist"
+                echo "The working space is : ${WORKSPACE}"
+                }
+           }
+       }
+   }
     stage('Compile') {
       steps {
         sh './gradlew compileDebugSources'
@@ -28,6 +44,7 @@ pipeline {
         sh './gradlew testDebugUnitTest testDebugUnitTest' 
       }
     }
+    
     stage('Build APK') {
       steps {
         sh './gradlew assembleDebug'
