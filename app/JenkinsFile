@@ -21,7 +21,7 @@ pipeline {
       steps{
         echo "Verifing working space file"
         script{
-            def exists = fileExists 'var/jenkins_home/workspace/Team_7/Check'
+            def exists = fileExists '/var/jenkins_home/workspace/Team_7/Check'
             if (exists){
                 echo "The file is exists"
                 echo "The working space is : ${WORKSPACE}"
