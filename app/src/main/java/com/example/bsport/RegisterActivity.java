@@ -39,7 +39,6 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView AlreadyHaveAccountLink;
     private FirebaseAuth mAuth;
     private DatabaseReference RootRef;
-    private Spinner UserSport1,UserSport2;
     private ProgressDialog loadingBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         InitializeFields();
         AlreadyHaveAccountLink.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 SendUserToLoginActivity();
@@ -159,8 +159,8 @@ public class RegisterActivity extends AppCompatActivity {
         UserPassword = (EditText)findViewById(R.id.register_Password);
         Name = (EditText)findViewById(R.id.register_name);
         UserAge = (EditText)findViewById(R.id.register_age);
-        UserSport1 = (Spinner)findViewById(R.id.register_sport1);
-        UserSport2 = (Spinner)findViewById(R.id.register_sport2);
+        Spinner userSport1 = (Spinner) findViewById(R.id.register_sport1);
+        Spinner userSport2 = (Spinner) findViewById(R.id.register_sport2);
         UserAboutMyself = (EditText)findViewById(R.id.register_about_myself);
         AlreadyHaveAccountLink = (TextView)findViewById(R.id.already_have_account_link);
         loadingBar = new ProgressDialog(this);
