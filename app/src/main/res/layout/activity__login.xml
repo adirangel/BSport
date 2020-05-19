@@ -136,7 +136,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginRight="23dp"
-                android:text="לחץ כאן ,עדיין לא רשום"
+                android:text="הרשמה"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
                 android:textSize="17sp"
