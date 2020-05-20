@@ -20,6 +20,9 @@ pipeline {
     stage("Verifing working space file exists"){
       steps{
         echo "Verifing working space file"
+            dir('subDir') {
+        checkout scm
+                           }
         script{
             def exists = fileExists '/var/jenkins_home/workspace/Team_7/Check'
             if (exists){
