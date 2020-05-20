@@ -30,7 +30,7 @@ pipeline {
                     echo 'gradle.properties has been found'
                 }
                 else{
-                    echo 'Some files are missing!!!!"
+                    echo 'Some files are missing!!!!'
                 }
              }
            }
