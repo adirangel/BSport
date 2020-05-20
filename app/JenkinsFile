@@ -20,9 +20,20 @@ pipeline {
     stage("Verifing working space file exists"){
       steps{
         echo "Verifing working space file"
-            dir('subDir') {
-        checkout scm
-                           }
+        dir('subDir') {
+             checkout scm
+             script {
+                def CheckRepo = fileExists 'build.gradle'
+                def CheckProp = fileExists'gradle.properties'
+                if (CheckRepo & CheckProp){
+                    echo 'build.gradle has been found'
+                    echo 'gradle.properties has been found'
+                }
+                else{
+                    echo 'Some files are missing!!!!"
+                }
+             }
+           }
         script{
             def exists = fileExists '/var/jenkins_home/workspace/Team_7/Check'
             if (exists){
