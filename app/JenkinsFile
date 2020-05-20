@@ -52,7 +52,7 @@ pipeline {
     }
     stage('Email Posting') {
       steps{
-        echo -e 'email posting stage'
+        echo 'email posting stage'
       }
       post {
         success {
