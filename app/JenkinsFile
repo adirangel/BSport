@@ -25,7 +25,7 @@ pipeline {
              script {
                 def CheckRepo = fileExists 'build.gradle'
                 def CheckProp = fileExists'gradle.properties'
-                if (CheckRepo & CheckProp){
+                if (CheckRepo && CheckProp){
                     echo 'build.gradle has been found'
                     echo 'gradle.properties has been found'
                 }
