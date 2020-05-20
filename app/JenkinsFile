@@ -19,7 +19,7 @@ pipeline {
     }
     stage("Verifing working space file exists"){
       steps{
-        echo -e "Verifing working space file"
+        echo "Verifing working space file"
         script{
             def exists = fileExists '/var/jenkins_home/workspace/Team_7/Check'
             if (exists){
@@ -52,7 +52,7 @@ pipeline {
     }
     stage('Email Posting') {
       steps{
-        echo 'email posting stage'
+        echo -e 'email posting stage'
       }
       post {
         success {
