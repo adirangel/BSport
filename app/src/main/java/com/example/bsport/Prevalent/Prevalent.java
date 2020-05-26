@@ -8,9 +8,9 @@ public class Prevalent {
     public static String UserAdminKey = "false";
 
     public Prevalent(String UserNameKey, String UserPasswordKey,String UserAdminKey) {
-        this.UserNameKey = UserNameKey;
-        this.UserPasswordKey = UserPasswordKey;
-        this.UserAdminKey = UserAdminKey;
+        Prevalent.UserNameKey = UserNameKey;
+        Prevalent.UserPasswordKey = UserPasswordKey;
+        Prevalent.UserAdminKey = UserAdminKey;
 
     }
 

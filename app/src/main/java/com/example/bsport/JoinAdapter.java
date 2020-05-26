@@ -13,10 +13,11 @@ import java.util.ArrayList;
 
 class JoinAdapter extends RecyclerView.Adapter<JoinAdapter.MyViewHolder>{
     private ArrayList<String> UserJoin = new ArrayList<>();
-    public JoinAdapter(ArrayList<String> UserJoin) {
+    JoinAdapter(ArrayList<String> UserJoin) {
         this.UserJoin = UserJoin;
     }
 
+    @NonNull
     @Override
     public JoinAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.join_activity_layout, parent, false);

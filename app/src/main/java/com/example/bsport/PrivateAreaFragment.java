@@ -47,7 +47,7 @@ public class PrivateAreaFragment extends Fragment {
         // Required empty public constructor
     }
 
-       public static boolean Checking_email_notEmpty(String email) {
+    public static boolean Checking_email_notEmpty(String email) {
         return !(email.equals("")) ;
     }
 

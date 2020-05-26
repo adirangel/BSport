@@ -35,7 +35,6 @@ import io.paperdb.Paper;
 public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActivitiesAdapter.MyViewHolder> {
 
     private ArrayList<String> My_created_By;
-    private ArrayList<String> Date_created;
     private ArrayList<String> My_name_activity;
     private ArrayList<String> My_game_date;
     private ArrayList<String> My_location;
@@ -56,7 +55,6 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
     private int countPlayer = 0;
     ListOfActivitiesAdapter(
             ArrayList<String> My_created_By,
-            ArrayList<String> date_created,
             ArrayList<String> My_name_activity,
             ArrayList<String> My_game_date,
             ArrayList<String> My_id,
@@ -65,7 +63,6 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
             ArrayList<String> activity_type,
             ArrayList<Integer> Arr_Image) {
         this.My_created_By = My_created_By;
-        this.Date_created = date_created;
         this.My_name_activity=My_name_activity;
         this.My_game_date=My_game_date;
         this.num_of_players = num_of_players;
