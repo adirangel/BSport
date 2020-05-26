@@ -53,7 +53,8 @@ import io.paperdb.Paper;
 
 
 public class ActivitiesListFragment extends Fragment {
-
+    static int monthDays[] = {31, 28, 31, 30, 31, 30,
+            31, 31, 30, 31, 30, 31};
     private DatabaseReference CountActivityRef;
     private static int count=0;
     private RecyclerView recyclerView;
@@ -66,6 +67,8 @@ public class ActivitiesListFragment extends Fragment {
     private ArrayList<Integer> Arr_image = new ArrayList<>();
     private ArrayList<String> locations = new ArrayList<>();
     private ArrayList<String> type_activity = new ArrayList<>();
+    private ArrayList<String> date_created = new ArrayList<>();
+    private ArrayList<String> num_of_players = new ArrayList<>();
     private ArrayList<String> My_id = new ArrayList<>();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -99,22 +102,29 @@ public class ActivitiesListFragment extends Fragment {
         CountActivityRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                My_Created_by.clear();
+                date_created.clear();
                 My_name_activity.clear();
                 My_game_date.clear();
-                My_location.clear();
-                type_activity.clear();
                 My_id.clear();
+                My_location.clear();
+                num_of_players.clear();
+                type_activity.clear();
+
 
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    My_Created_by.add(ds.child("created_by").getValue().toString());
+                    date_created.add(ds.child("date_created").getValue().toString());
+                    My_name_activity.add(ds.child("description").getValue().toString());
+                    My_game_date.add(ds.child("game_date").getValue().toString());
                     My_id.add(ds.child("id").getValue().toString());
+                    My_location.add(ds.child("location").getValue().toString());
+                    num_of_players.add(ds.child("numbers_of_players").getValue().toString());
+                    type_activity.add(ds.child("type").getValue().toString());
 
-                        My_name_activity.add(ds.child("description").getValue().toString());
-                        My_game_date.add(ds.child("game_date").getValue().toString());
-                        My_location.add(ds.child("location").getValue().toString());
-                        type_activity.add(ds.child("type").getValue().toString());
 
                 }
-                list_of_activity_adapter = new ListOfActivitiesAdapter(My_name_activity,My_game_date,My_location,Arr_image,type_activity,My_id);
+                list_of_activity_adapter = new ListOfActivitiesAdapter(My_Created_by, date_created, My_name_activity, My_game_date, My_id, My_location, num_of_players, type_activity, Arr_image);
                 recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
                 recyclerView.setAdapter(list_of_activity_adapter); // set the Adapter to RecyclerView
 

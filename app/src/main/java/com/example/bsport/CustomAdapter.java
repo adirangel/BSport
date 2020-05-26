@@ -72,15 +72,6 @@ private DatabaseReference RootRef;
                 @Override
                 public void onClick(View v) {
 
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-//                    final AlertDialog dialog = builder.create();
-//
-//                    LayoutInflater inflater = dialog.getLayoutInflater();
-//
-//                    final View mView = inflater.inflate(R.layout.newactiviry, null);
-//                    Button newActivitySub = (Button) mView.findViewById(R.id.submit_activity);
-//                    builder.setView(mView);
-//                    dialog.show();
                     final Dialog dialog = new Dialog(v.getContext());
                     dialog.setContentView(R.layout.newactiviry);
 
