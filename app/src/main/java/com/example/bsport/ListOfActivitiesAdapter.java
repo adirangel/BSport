@@ -19,6 +19,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bsport.Prevalent.Prevalent;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,10 +31,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import io.paperdb.Paper;
 
@@ -47,9 +53,10 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
     private ArrayList<String> activity_type;
     private ArrayList<String> My_id;
     private String isAdmin = Prevalent.getUserAdminKey();
-    private DatabaseReference RootRef;
+    private static String username = Prevalent.getUserNameKey();
+    private static int count=1;
 
-
+    private static DatabaseReference RootRef,JoinRef,CountJoinRef,CountActivityRef;
 
     ListOfActivitiesAdapter(
             ArrayList<String> My_created_By,
@@ -83,6 +90,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.name.setText(My_name_activity.get(position));
         holder.game_date.setText(My_game_date.get(position));
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +106,67 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                 num_of_playersTV.setText(num_of_players.get(position).toString());
                 TextView My_locationTV = (TextView) dialog.findViewById(R.id.location11);
                 My_locationTV.setText(My_location.get(position).toString());
+                Button newActivitySub = (Button) dialog.findViewById(R.id.add_comments_button);
+                Button submit_activity2 = (Button) dialog.findViewById(R.id.submit_activity2);
+                JoinRef = FirebaseDatabase.getInstance().getReference().child("Activities").child(My_id.get(position).toString());
+                CountJoinRef = FirebaseDatabase.getInstance().getReference().child("Activities").child(My_id.get(position).toString());
+                CountActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities").child(My_id.get(position).toString());
+
+
+            /*submit_activity2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    JoinRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                HashMap<String, Object> userdataMap = new HashMap<>();
+                                userdataMap.put("created_by", name);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                });*/
+
+
+                newActivitySub.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        RootRef = FirebaseDatabase.getInstance().getReference();
+
+                        final String comment;
+                        comment = ((EditText)dialog.findViewById(R.id.add_comments)).getText().toString();
+                        CountActivityRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if ((dataSnapshot.child("comments")).exists()) {
+                                    count = (int) dataSnapshot.child("comments").getChildrenCount() + 1;
+
+                                } else {
+                                    count = 1;
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        if(!comment.equals("")){
+                            Map<String, Object> map = new HashMap<>();
+                            map.put("username",username);
+                            map.put("comment",comment);
+                            RootRef.child("Activities").child(My_id.get(position).toString()).child("comments").child(String.valueOf(count)).updateChildren(map);
+                        }
+
+                    }
+
+                });
 
 
 
@@ -204,8 +273,9 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
         CardView cardView;
         ImageButton Remove_button;
         TextView created_by11, date_created11,name11,game_date11,location11,number_of_players11;
+        Button newActivitySub;
 
-        MyViewHolder(View itemView) {
+        MyViewHolder(final View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.cardview_id);
             Remove_button = itemView.findViewById(R.id.deleteButton);
@@ -218,6 +288,8 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
             game_date11 = itemView.findViewById(R.id.game_date11);
             location11 = itemView.findViewById(R.id.location11);
             number_of_players11 = itemView.findViewById(R.id.number_of_players11);
+
+
         }
     }
 }
