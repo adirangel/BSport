@@ -2,20 +2,16 @@ package com.example.bsport;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bsport.Prevalent.Prevalent;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,12 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-
-import io.paperdb.Paper;
 
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyViewHolder> {
 
@@ -39,6 +30,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
     ArrayList<String> My_number_of_players;
     ArrayList<String> My_date_created;
     ArrayList<String> My_id;
+    ArrayList<String> My_join;
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
 
 
@@ -46,7 +38,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
 
 
 
-    public ActivityAdapter(ArrayList<String> My_name_activity,ArrayList<String> My_activity_type,ArrayList<String> My_game_date,ArrayList<String> My_location,ArrayList<String> My_number_of_players,ArrayList<String> My_date_created,ArrayList<String> My_id) {
+    public ActivityAdapter(ArrayList<String> My_name_activity,ArrayList<String> My_activity_type,ArrayList<String> My_game_date,ArrayList<String> My_location,ArrayList<String> My_number_of_players,ArrayList<String> My_date_created,ArrayList<String> My_id,ArrayList<String> My_join) {
         this.My_name_activity=My_name_activity;
         this.My_activity_type=My_activity_type;
         this.My_game_date=My_game_date;
@@ -54,6 +46,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
         this.My_number_of_players=My_number_of_players;
         this.My_date_created=My_date_created;
         this.My_id = My_id;
+        this.My_join = My_join;
     }
 
     @Override
@@ -70,13 +63,15 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
         holder.location.setText(My_location.get(position));
         holder.number_of_players.setText(My_number_of_players.get(position));
         holder.date_create.setText(My_date_created.get(position));
+        holder.join1.setText("שחקנים שהצטרפו: "+My_join.get(position));
+
         holder.remove_activity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setTitle("בטוח?");
+                builder.setTitle(Html.fromHtml("<font color='#FF7F27'>מחיקת פעילות</font>"));
                 builder.setMessage("האם אתה בטוח?");
-                builder.setPositiveButton("כן", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(Html.fromHtml("<font color='#FF7F27'>כן</font>"), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Do nothing but close the dialog
                         String po= My_id.get(position);
@@ -98,7 +93,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
                     }
                 });
 
-                builder.setNegativeButton("לא", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(Html.fromHtml("<font color='#FF7F27'>לא</font>"), new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -121,12 +116,12 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView type, name, game_date, location,number_of_players,date_create;// init the item view's
+        TextView type, name, game_date, location,number_of_players,date_create,join1;// init the item view's
         ImageButton remove_activity;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
+            join1 = (TextView) itemView.findViewById(R.id.joinParticipates);
             name = (TextView) itemView.findViewById(R.id.name_activity);
             type = (TextView) itemView.findViewById(R.id.activity_type1);
             game_date = (TextView) itemView.findViewById(R.id.game_date1);

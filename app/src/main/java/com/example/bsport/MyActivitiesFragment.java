@@ -1,36 +1,20 @@
 package com.example.bsport;
 
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.bsport.Prevalent.Prevalent;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
@@ -39,33 +23,33 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
 
 import io.paperdb.Paper;
 
 
 public class MyActivitiesFragment extends Fragment {
+    private int i=0;
 
     private DatabaseReference RootRef,CountActivityRef;
     private static int count=0;
     private RecyclerView recyclerView;
     private View view;
     private ActivityAdapter activityAdapter;
+    private StringBuilder names = new StringBuilder();
     private String username = Paper.book().read(Prevalent.UserNameKey).toString();
     private ArrayList<String> My_name_activity = new ArrayList<>();
+    private String names2;
     private ArrayList<String> My_activity_type = new ArrayList<>();
     private ArrayList<String> My_game_date = new ArrayList<>();
+    private ArrayList<String> My_Join = new ArrayList<String>();
     private ArrayList<String> My_location = new ArrayList<>();
     private ArrayList<String> My_number_of_players = new ArrayList<>();
     private ArrayList<String> My_date_created = new ArrayList<>();
     private ArrayList<String> My_id = new ArrayList<>();
+    private DataSnapshot bbs;
     private ArrayList<String> locations = new ArrayList<>();
+    private DatabaseReference counter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -105,7 +89,12 @@ public class MyActivitiesFragment extends Fragment {
                 My_number_of_players.clear();
                 My_date_created.clear();
                 My_id.clear();
+                My_Join.clear();
+
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    names.setLength(0);
+                    names2 = "";
+
                     if(ds.child("created_by").getValue().toString().equals(username))
                     {
                         My_name_activity.add("שם הפעילות: "+ds.child("description").getValue().toString());
@@ -115,10 +104,48 @@ public class MyActivitiesFragment extends Fragment {
                         My_number_of_players.add("מספר השחקנים: "+ds.child("numbers_of_players").getValue().toString());
                         My_date_created.add("תאריך יצירת הפעילות: "+ds.child("date_created").getValue().toString());
                         My_id.add(ds.child("id").getValue().toString());
+                        bbs = ds.child("join");
+                        for (DataSnapshot bs : bbs.getChildren()) {
+                            if (bs.exists()) {
+                                count = count + 1;
+                            }
+                        }
+                        for(DataSnapshot bs: bbs.getChildren()){
+
+                            if(i<count - 1) {
+                                names.append(bs.getValue().toString() + ", ");
+                                i++;
+                            }
+                            else {
+                                names.append(bs.getValue().toString());
+                                i++;
+                            }
+                        }
+                        i=0;
+                        count=0;
+                        names2 = names.toString();
+                        My_Join.add(names2);
+
+//                        counter.addListenerForSingleValueEvent(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+//                                    names.append(ds.getValue().toString() + ",");
+//                                }
+//                                My_Join.add(names);
+//
+//
+//                            }
+//                            @Override
+//                            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                            }
+//                        });
 
                     }
+
                 }
-                activityAdapter = new ActivityAdapter(My_name_activity,My_activity_type,My_game_date,My_location,My_number_of_players,My_date_created,My_id);
+                activityAdapter = new ActivityAdapter(My_name_activity,My_activity_type,My_game_date,My_location,My_number_of_players,My_date_created,My_id,My_Join);
                 recyclerView.setAdapter(activityAdapter); // set the Adapter to RecyclerView
 
             }
