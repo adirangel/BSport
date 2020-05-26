@@ -17,6 +17,36 @@ pipeline {
         sh 'chmod +x ./gradlew'
       }
     }
+    stage("Verifing working space file exists"){
+      steps{
+        echo "Verifing working space file"
+        dir('subDir') {
+             checkout scm
+             script {
+                def CheckRepo = fileExists 'build.gradle'
+                def CheckProp = fileExists'gradle.properties'
+                if (CheckRepo && CheckProp){
+                    echo 'build.gradle has been found'
+                    echo 'gradle.properties has been found'
+                }
+                else{
+                    echo 'Some files are missing!!!!'
+                }
+             }
+           }
+        script{
+            def exists = fileExists '/var/jenkins_home/workspace/Team_7/Check'
+            if (exists){
+                echo "The file is exists"
+                echo "The working space is : ${WORKSPACE}"
+                }
+            else{
+                echo "The file doesnt exist"
+                echo "The working space is : ${WORKSPACE}"
+                }
+           }
+       }
+   }
     stage('Compile') {
       steps {
         sh './gradlew compileDebugSources'
@@ -28,33 +58,34 @@ pipeline {
         sh './gradlew testDebugUnitTest testDebugUnitTest' 
       }
     }
+    
     stage('Build APK') {
       steps {
         sh './gradlew assembleDebug'
       }
     }
-//    stage('Email Posting') {
-//      steps{
-//        echo 'email posting stage'
-//      }
-//      post {
-//        success {
-//          // Notify if the upload succeeded
-//          mail to: 'adirangel2@gmail.com', subject: 'New build available!', body: "Build ${env.BUILD_NUMBER} succeeded; ${env.BUILD_URL}"
-//          mail to: 'tairhadad1@gmail.com', subject: 'New build available!', body: "Build ${env.BUILD_NUMBER} succeeded; ${env.BUILD_URL}"
-//          mail to: 'yoni6232@gmail.com', subject: 'New build available!', body: "Build ${env.BUILD_NUMBER} succeeded; ${env.BUILD_URL}"
-//          mail to: 'asafrdt@gmail.com', subject: 'New build available!', body: "Build ${env.BUILD_NUMBER} succeeded; ${env.BUILD_URL}"
-//        }
-//      }
-//    }
-//  }
-//  post {
-//    failure {
+    stage('Email Posting') {
+      steps{
+        echo 'email posting stage'
+      }
+      post {
+        success {
+          // Notify if the upload succeeded
+          mail to: 'adirangel2@gmail.com', subject: 'New build available!', body: "Build ${env.BUILD_NUMBER} succeeded; ${env.BUILD_URL}"
+          mail to: 'tairhadad1@gmail.com', subject: 'New build available!', body: "Build ${env.BUILD_NUMBER} succeeded; ${env.BUILD_URL}"
+          mail to: 'yoni6232@gmail.com', subject: 'New build available!', body: "Build ${env.BUILD_NUMBER} succeeded; ${env.BUILD_URL}"
+          mail to: 'asafrdt@gmail.com', subject: 'New build available!', body: "Build ${env.BUILD_NUMBER} succeeded; ${env.BUILD_URL}"
+        }
+      }
+    }
+  }
+  post {
+    failure {
       // Notify developer team of the failure
-//      mail to: 'adirangel2@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
-//      mail to: 'tairhadad1@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
-//      mail to: 'yoni6232@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
-//      mail to: 'yoni6232@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
- //   }
+      mail to: 'adirangel2@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}" 
+      mail to: 'tairhadad1@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
+      mail to: 'yoni6232@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
+      mail to: 'asafrdt@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
+    }
   }
 }
