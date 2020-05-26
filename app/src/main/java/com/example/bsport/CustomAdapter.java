@@ -35,9 +35,9 @@ import java.util.regex.Pattern;
 import io.paperdb.Paper;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
-    private ArrayList<String> FacTypes;
-    private ArrayList<String> FacNames;
-    private ArrayList<String> FacNeighborhoods;
+    ArrayList<String> FacTypes;
+    ArrayList<String> FacNames;
+    ArrayList<String> FacNeighborhoods;
     ArrayList<String> FacStreets;
     private static int count=0;
     public static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+$");
@@ -142,17 +142,17 @@ private DatabaseReference RootRef;
                                         userdataMap.put("id", keyId);
                                         userdataMap.put("location", FacNeighborhoods.get(position) + ", " + FacStreets.get(position));
                                         RootRef.child("Activities").child(String.valueOf(keyId)).updateChildren(userdataMap)
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()) {
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()) {
 
-                                                    Toast.makeText(v.getContext(), "הפעילות נוספה בהצלחה", Toast.LENGTH_SHORT).show();
-                                                } else {
-                                                    Toast.makeText(v.getContext(), "הפעילות לא התווספה בהצלחה- אנא נסה שנית", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        });
+                                                            Toast.makeText(v.getContext(), "הפעילות נוספה בהצלחה", Toast.LENGTH_SHORT).show();
+                                                        } else {
+                                                            Toast.makeText(v.getContext(), "הפעילות לא התווספה בהצלחה- אנא נסה שנית", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+                                                });
                                         HashMap<String, Object> joindataMap = new HashMap<>();
                                         joindataMap.put("name1",name);
                                         RootRef.child("Activities").child(String.valueOf(keyId)).child("join").updateChildren(joindataMap);
