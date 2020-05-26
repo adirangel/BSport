@@ -2,8 +2,6 @@ package com.example.bsport;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.os.Bundle;
-import android.provider.DocumentsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +10,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bsport.Prevalent.Prevalent;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,14 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
-import java.io.BufferedReader;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import io.paperdb.Paper;
@@ -52,11 +41,14 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
     private ArrayList<Integer> Arr_image;
     private ArrayList<String> activity_type;
     private ArrayList<String> My_id;
+    private ArrayList<String> UserCommit = new ArrayList<>();
+    private ArrayList<String> Comment = new ArrayList<>();
     private String isAdmin = Prevalent.getUserAdminKey();
     private static String username = Prevalent.getUserNameKey();
     private static int count=1;
+    private CommentAdapter comment_adapter;
 
-    private static DatabaseReference RootRef,JoinRef,CountJoinRef,CountActivityRef;
+    private static DatabaseReference RootRef,JoinRef,CountActivityRef1,CountActivityRef;
 
     ListOfActivitiesAdapter(
             ArrayList<String> My_created_By,
@@ -109,10 +101,34 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                 Button newActivitySub = (Button) dialog.findViewById(R.id.add_comments_button);
                 Button submit_activity2 = (Button) dialog.findViewById(R.id.submit_activity2);
                 JoinRef = FirebaseDatabase.getInstance().getReference().child("Activities").child(My_id.get(position).toString());
-                CountJoinRef = FirebaseDatabase.getInstance().getReference().child("Activities").child(My_id.get(position).toString());
                 CountActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities").child(My_id.get(position).toString());
+                CountActivityRef1 = FirebaseDatabase.getInstance().getReference().child("Activities").child(My_id.get(position).toString()).child("comments");
+                final RecyclerView recyclerView = (RecyclerView) dialog.findViewById(R.id.recylerCommit);
 
 
+                CountActivityRef1.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        UserCommit.clear();
+                        Comment.clear();
+
+
+                        for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                            UserCommit.add(ds.child("username").getValue().toString());
+                            Comment.add(ds.child("comment").getValue().toString());
+
+
+                        }
+                        comment_adapter = new CommentAdapter(UserCommit,Comment);
+                        recyclerView.setLayoutManager(new GridLayoutManager(dialog.getContext(),1));
+                        recyclerView.setAdapter(comment_adapter); // set the Adapter to RecyclerView
+
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             /*submit_activity2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -159,6 +175,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                         });
                         if(!comment.equals("")){
                             Map<String, Object> map = new HashMap<>();
+                            username = Paper.book().read(Prevalent.UserNameKey);
                             map.put("username",username);
                             map.put("comment",comment);
                             RootRef.child("Activities").child(My_id.get(position).toString()).child("comments").child(String.valueOf(count)).updateChildren(map);
