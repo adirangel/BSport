@@ -133,6 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                             if(usersData.getPassword().equals(password)){
                                 if(parentDbName.equals("Admin")){
                                     Prevalent.setUserAdminKey("true");
+
                                     loadingbar.dismiss();
                                     SendUserToLMainActivityAdmin();
                                 }

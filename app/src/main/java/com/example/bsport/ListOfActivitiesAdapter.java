@@ -47,12 +47,13 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
     private ArrayList<String> UserCommit = new ArrayList<>();
     private ArrayList<String> Comment = new ArrayList<>();
     private String isAdmin = Prevalent.getUserAdminKey();
-    private static String username = Paper.book().read(Prevalent.UserNameKey);
+    private TextView spotsLeft, num_of_playersTV;
+    private static String username = Prevalent.getUserNameKey();
     private static int count=1,countJoin=1;
     private CommentAdapter comment_adapter;
     private JoinAdapter join_adapter;
     private static DatabaseReference RootRef,CountActivityRef2,CountActivityRef1,CountActivityRef;
-
+    private int countPlayer = 0;
     ListOfActivitiesAdapter(
             ArrayList<String> My_created_By,
             ArrayList<String> date_created,
@@ -104,7 +105,11 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                             for (DataSnapshot bs : dataSnapshot.child("join").getChildren()){
                                 if (bs.getValue().equals(username)) {
                                     submit_activity2.setClickable(false);
-
+                                    break;
+                                }
+                                else {
+                                    submit_activity2.setClickable(true);
+                                    spotsLeft.setText("נשארו עוד " + (countPlayer - countJoin+1) + " מקומות");
                                 }
                             }
                         }
@@ -116,10 +121,10 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                 });
                 final TextView num_of_playersTV = (TextView) dialog.findViewById(R.id.number_of_players11);
                 num_of_playersTV.setText(num_of_players.get(position).toString());
-                TextView spotsLeft = (TextView) dialog.findViewById(R.id.spotsLeft);
-                int size = Integer.parseInt(num_of_playersTV.getText().toString()) - countJoin;
-                spotsLeft.setText("נשארו עוד " + size + " מקומות");
-
+                spotsLeft = (TextView) dialog.findViewById(R.id.spotsLeft);
+                countPlayer = Integer.parseInt(num_of_playersTV.getText().toString());
+                int size = countPlayer- countJoin;
+                spotsLeft.setText("נשארו עוד " + size+ " מקומות");
                 TextView createdbyTV = (TextView) dialog.findViewById(R.id.created_by11);
                 createdbyTV.setText(My_created_By.get(position).toString());
                 TextView My_name_activityTV = (TextView) dialog.findViewById(R.id.name11);
@@ -196,7 +201,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                         }
                         else{
                             TextView spotsLeft = (TextView) dialog.findViewById(R.id.spotsLeft);
-                            int size = Integer.valueOf(num_of_playersTV.getText().toString()) - countJoin;
+                            int size = countPlayer - countJoin;
                             spotsLeft.setText("נשארו עוד " + size + " מקומות");
                             Map<String, Object> map = new HashMap<>();
                             map.put("name"+String.valueOf(countJoin),username);

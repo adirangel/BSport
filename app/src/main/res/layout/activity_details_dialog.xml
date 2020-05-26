@@ -178,29 +178,30 @@
 
     <EditText
         android:id="@+id/add_comments"
-        android:layout_width="274dp"
-        android:layout_height="48dp"
-        android:padding="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/recylerJoin"
-        android:layout_marginLeft="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"
         android:gravity="center"
         android:hint="הוסף תגובה"
         android:inputType="text"
+        android:padding="6dp"
         android:textSize="18sp" />
 
     <Button
         android:id="@+id/add_comments_button"
-        android:layout_width="155dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/add_comments"
-        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginRight="20dp"
+
         android:background="@drawable/buttons"
         android:text="הוסף תגובה"
-        android:gravity="center"
-        android:textColor="@android:color/background_light"
-        android:layout_marginLeft="110dp"
-
-        />
+        android:textColor="@android:color/background_light" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recylerCommit"

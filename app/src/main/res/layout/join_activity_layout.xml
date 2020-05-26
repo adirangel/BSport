@@ -15,7 +15,7 @@
             android:layout_width="70dp"
             android:layout_height="25dp"
             card_view:cardCornerRadius="20dp"
-            card_view:cardBackgroundColor="@color/cardview_light_background"
+            card_view:cardBackgroundColor="#DFDFDF"
             >
         <!--
         items for a single row of RecyclerView
