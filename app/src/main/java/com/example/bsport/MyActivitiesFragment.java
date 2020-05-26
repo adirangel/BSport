@@ -126,21 +126,6 @@ public class MyActivitiesFragment extends Fragment {
                         names2 = names.toString();
                         My_Join.add(names2);
 
-//                        counter.addListenerForSingleValueEvent(new ValueEventListener() {
-//                            @Override
-//                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-//                                    names.append(ds.getValue().toString() + ",");
-//                                }
-//                                My_Join.add(names);
-//
-//
-//                            }
-//                            @Override
-//                            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                            }
-//                        });
 
                     }
 

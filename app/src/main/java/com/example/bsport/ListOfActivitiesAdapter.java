@@ -1,4 +1,5 @@
 package com.example.bsport;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -41,14 +43,15 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
     private ArrayList<Integer> Arr_image;
     private ArrayList<String> activity_type;
     private ArrayList<String> My_id;
+    private ArrayList<String> UserJoin = new ArrayList<>();
     private ArrayList<String> UserCommit = new ArrayList<>();
     private ArrayList<String> Comment = new ArrayList<>();
     private String isAdmin = Prevalent.getUserAdminKey();
-    private static String username = Prevalent.getUserNameKey();
-    private static int count=1;
+    private static String username = Paper.book().read(Prevalent.UserNameKey);
+    private static int count=1,countJoin=1;
     private CommentAdapter comment_adapter;
-
-    private static DatabaseReference RootRef,JoinRef,CountActivityRef1,CountActivityRef;
+    private JoinAdapter join_adapter;
+    private static DatabaseReference RootRef,CountActivityRef2,CountActivityRef1,CountActivityRef;
 
     ListOfActivitiesAdapter(
             ArrayList<String> My_created_By,
@@ -84,26 +87,52 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
         holder.game_date.setText(My_game_date.get(position));
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
                 final Dialog dialog = new Dialog(v.getContext());
                 dialog.setContentView(R.layout.activity_details_dialog);
+
+                CountActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities").child(My_id.get(position).toString());
+                final Button submit_activity2 = (Button) dialog.findViewById(R.id.submit_activity2);
+
+                CountActivityRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if ((dataSnapshot.child("join")).exists()) {
+                            countJoin = (int) dataSnapshot.child("join").getChildrenCount() + 1;
+                            for (DataSnapshot bs : dataSnapshot.child("join").getChildren()){
+                                if (bs.getValue().equals(username)) {
+                                    submit_activity2.setClickable(false);
+
+                                }
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                final TextView num_of_playersTV = (TextView) dialog.findViewById(R.id.number_of_players11);
+                num_of_playersTV.setText(num_of_players.get(position).toString());
+                TextView spotsLeft = (TextView) dialog.findViewById(R.id.spotsLeft);
+                int size = Integer.parseInt(num_of_playersTV.getText().toString()) - countJoin;
+                spotsLeft.setText("נשארו עוד " + size + " מקומות");
+
                 TextView createdbyTV = (TextView) dialog.findViewById(R.id.created_by11);
                 createdbyTV.setText(My_created_By.get(position).toString());
                 TextView My_name_activityTV = (TextView) dialog.findViewById(R.id.name11);
                 My_name_activityTV.setText(My_name_activity.get(position).toString());
                 TextView My_game_dateTV = (TextView) dialog.findViewById(R.id.game_date11);
                 My_game_dateTV.setText(My_game_date.get(position).toString());
-                TextView num_of_playersTV = (TextView) dialog.findViewById(R.id.number_of_players11);
-                num_of_playersTV.setText(num_of_players.get(position).toString());
                 TextView My_locationTV = (TextView) dialog.findViewById(R.id.location11);
                 My_locationTV.setText(My_location.get(position).toString());
                 Button newActivitySub = (Button) dialog.findViewById(R.id.add_comments_button);
-                Button submit_activity2 = (Button) dialog.findViewById(R.id.submit_activity2);
-                JoinRef = FirebaseDatabase.getInstance().getReference().child("Activities").child(My_id.get(position).toString());
-                CountActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities").child(My_id.get(position).toString());
                 CountActivityRef1 = FirebaseDatabase.getInstance().getReference().child("Activities").child(My_id.get(position).toString()).child("comments");
+                CountActivityRef2 = FirebaseDatabase.getInstance().getReference().child("Activities").child(My_id.get(position).toString()).child("join");
                 final RecyclerView recyclerView = (RecyclerView) dialog.findViewById(R.id.recylerCommit);
+                final RecyclerView recyclerJoin = (RecyclerView) dialog.findViewById(R.id.recylerJoin);
 
 
                 CountActivityRef1.addValueEventListener(new ValueEventListener() {
@@ -111,8 +140,6 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         UserCommit.clear();
                         Comment.clear();
-
-
                         for(DataSnapshot ds : dataSnapshot.getChildren()) {
                             UserCommit.add(ds.child("username").getValue().toString());
                             Comment.add(ds.child("comment").getValue().toString());
@@ -129,32 +156,60 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
 
                     }
                 });
-            /*submit_activity2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    JoinRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                CountActivityRef2.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        UserJoin.clear();
+                        for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                            UserJoin.add(ds.getValue().toString());
+                        }
+                        join_adapter = new JoinAdapter(UserJoin);
+                        recyclerJoin.setLayoutManager(new GridLayoutManager(dialog.getContext(),2));
+                        recyclerJoin.setAdapter(join_adapter); // set the Adapter to RecyclerView
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                submit_activity2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        RootRef = FirebaseDatabase.getInstance().getReference();
+                        CountActivityRef.addValueEventListener(new ValueEventListener() {
+                            @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                HashMap<String, Object> userdataMap = new HashMap<>();
-                                userdataMap.put("created_by", name);
+                                if ((dataSnapshot.child("join")).exists()) {
+                                    countJoin = (int) dataSnapshot.child("join").getChildrenCount() + 1;
+                                }
                             }
-
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
 
                             }
                         });
-                    }
-                });*/
+                        if(num_of_players.get(position).toString().equals(String.valueOf(countJoin))){
+                            Toast.makeText(v.getContext(),"לא נשארו מקומות פנויים", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            TextView spotsLeft = (TextView) dialog.findViewById(R.id.spotsLeft);
+                            int size = Integer.valueOf(num_of_playersTV.getText().toString()) - countJoin;
+                            spotsLeft.setText("נשארו עוד " + size + " מקומות");
+                            Map<String, Object> map = new HashMap<>();
+                            map.put("name"+String.valueOf(countJoin),username);
+                            RootRef.child("Activities").child(My_id.get(position).toString()).child("join").updateChildren(map);
 
+                        }
+                    }
+                });
 
                 newActivitySub.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         RootRef = FirebaseDatabase.getInstance().getReference();
-
                         final String comment;
                         comment = ((EditText)dialog.findViewById(R.id.add_comments)).getText().toString();
                         CountActivityRef.addValueEventListener(new ValueEventListener() {
@@ -167,7 +222,6 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                                     count = 1;
                                 }
                             }
-
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -184,13 +238,6 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                     }
 
                 });
-
-
-
-
-
-
-
                 dialog.show();
             }
         });
@@ -251,9 +298,6 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                 }
             });
         }
-
-
-
     }
 
     @Override
