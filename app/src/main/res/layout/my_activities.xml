@@ -13,7 +13,7 @@
         android:id="@+id/card_view1"
         android:layout_gravity="center"
         android:layout_width="320dp"
-        android:layout_height="140dp"
+        android:layout_height="180dp"
         card_view:cardCornerRadius="20dp"
         card_view:cardBackgroundColor="@color/design_default_color_secondary_variant"
 
@@ -90,6 +90,18 @@ p        <TextView
             android:text="תאריך יצירה"
             android:textColor="#FFFFFF"
             android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/joinParticipates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="130dp"
+            android:text="שחקנים שנוספו"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
         <ImageButton
             android:id="@+id/remove_activity_image"
             android:layout_width="wrap_content"

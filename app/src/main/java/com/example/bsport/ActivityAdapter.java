@@ -39,6 +39,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
     ArrayList<String> My_number_of_players;
     ArrayList<String> My_date_created;
     ArrayList<String> My_id;
+    ArrayList<String> My_join;
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
 
 
@@ -46,7 +47,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
 
 
 
-    public ActivityAdapter(ArrayList<String> My_name_activity,ArrayList<String> My_activity_type,ArrayList<String> My_game_date,ArrayList<String> My_location,ArrayList<String> My_number_of_players,ArrayList<String> My_date_created,ArrayList<String> My_id) {
+    public ActivityAdapter(ArrayList<String> My_name_activity,ArrayList<String> My_activity_type,ArrayList<String> My_game_date,ArrayList<String> My_location,ArrayList<String> My_number_of_players,ArrayList<String> My_date_created,ArrayList<String> My_id,ArrayList<String> My_join) {
         this.My_name_activity=My_name_activity;
         this.My_activity_type=My_activity_type;
         this.My_game_date=My_game_date;
@@ -54,6 +55,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
         this.My_number_of_players=My_number_of_players;
         this.My_date_created=My_date_created;
         this.My_id = My_id;
+        this.My_join = My_join;
     }
 
     @Override
@@ -70,6 +72,8 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
         holder.location.setText(My_location.get(position));
         holder.number_of_players.setText(My_number_of_players.get(position));
         holder.date_create.setText(My_date_created.get(position));
+        holder.join1.setText("שחקנים שהצטרפו: "+My_join.get(position));
+
         holder.remove_activity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,12 +125,12 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView type, name, game_date, location,number_of_players,date_create;// init the item view's
+        TextView type, name, game_date, location,number_of_players,date_create,join1;// init the item view's
         ImageButton remove_activity;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
+            join1 = (TextView) itemView.findViewById(R.id.joinParticipates);
             name = (TextView) itemView.findViewById(R.id.name_activity);
             type = (TextView) itemView.findViewById(R.id.activity_type1);
             game_date = (TextView) itemView.findViewById(R.id.game_date1);
