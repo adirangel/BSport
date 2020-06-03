@@ -68,8 +68,7 @@ dependencies {
 
 }
 
-// https://mvnrepository.com/artifact/com.sonyericsson.jenkins.plugins.bfa/build-failure-analyzer
-compile group: 'com.sonyericsson.jenkins.plugins.bfa', name: 'build-failure-analyzer', version: '1.19.2'
+
 
 tasks.withType(Test) {
     testLogging {
