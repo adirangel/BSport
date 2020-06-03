@@ -11,6 +11,12 @@ pipeline {
   options {
     skipStagesAfterUnstable()
   }
+  buildPlugin(
+    platforms: ['linux'],
+    jenkinsVersions: [null],
+    findbugs: [run: true, archive: true],
+    checkstyle: [archive: true, unstableTotalAll: 0]
+  )
   stages {
     stage ('Prepare'){
       steps {
