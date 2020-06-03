@@ -53,9 +53,6 @@ import io.paperdb.Paper;
 
 
 public class ActivitiesListFragment extends Fragment {
-    static int monthDays[] = {31, 28, 31, 30, 31, 30,
-            31, 31, 30, 31, 30, 31};
-    private DatabaseReference CountActivityRef;
     private static int count=0;
     private RecyclerView recyclerView;
     private ListOfActivitiesAdapter list_of_activity_adapter;
@@ -67,7 +64,7 @@ public class ActivitiesListFragment extends Fragment {
     private ArrayList<Integer> Arr_image = new ArrayList<>();
     private ArrayList<String> locations = new ArrayList<>();
     private ArrayList<String> type_activity = new ArrayList<>();
-    private ArrayList<String> date_created = new ArrayList<>();
+    //private ArrayList<String> date_created = new ArrayList<>();
     private ArrayList<String> num_of_players = new ArrayList<>();
     private ArrayList<String> My_id = new ArrayList<>();
 
@@ -75,7 +72,7 @@ public class ActivitiesListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activities_list, container, false);
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        CountActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities");
+        DatabaseReference countActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities");
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewNewActivity);
         create_Arr_Image(Arr_image);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -99,11 +96,11 @@ public class ActivitiesListFragment extends Fragment {
         }
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        CountActivityRef.addValueEventListener(new ValueEventListener() {
+        countActivityRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 My_Created_by.clear();
-                date_created.clear();
+                //date_created.clear();
                 My_name_activity.clear();
                 My_game_date.clear();
                 My_id.clear();
@@ -114,7 +111,7 @@ public class ActivitiesListFragment extends Fragment {
 
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     My_Created_by.add(ds.child("created_by").getValue().toString());
-                    date_created.add(ds.child("date_created").getValue().toString());
+                    //date_created.add(ds.child("date_created").getValue().toString());
                     My_name_activity.add(ds.child("description").getValue().toString());
                     My_game_date.add(ds.child("game_date").getValue().toString());
                     My_id.add(ds.child("id").getValue().toString());
@@ -124,7 +121,7 @@ public class ActivitiesListFragment extends Fragment {
 
 
                 }
-                list_of_activity_adapter = new ListOfActivitiesAdapter(My_Created_by, date_created, My_name_activity, My_game_date, My_id, My_location, num_of_players, type_activity, Arr_image);
+                list_of_activity_adapter = new ListOfActivitiesAdapter(My_Created_by, My_name_activity, My_game_date, My_id, My_location, num_of_players, type_activity, Arr_image);
                 recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
                 recyclerView.setAdapter(list_of_activity_adapter); // set the Adapter to RecyclerView
 
