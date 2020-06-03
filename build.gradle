@@ -7,6 +7,12 @@ buildscript {
         jcenter()
         
     }
+    buildPlugin(
+    platforms: ['linux'],
+    jenkinsVersions: [null],
+    findbugs: [run: true, archive: true],
+    checkstyle: [archive: true, unstableTotalAll: 0]
+  )
     dependencies {
 
         classpath 'com.android.tools.build:gradle:3.6.3'
