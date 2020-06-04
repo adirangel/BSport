@@ -47,7 +47,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
     private ArrayList<String> Comment = new ArrayList<>();
     private String isAdmin = Prevalent.getUserAdminKey();
     private TextView spotsLeft, num_of_playersTV;
-    private static String username = Prevalent.getUserNameKey();
+    private static String username = Paper.book().read(Prevalent.UserNameKey);
     private static int count=1,countJoin=1;
     private CommentAdapter comment_adapter;
     private JoinAdapter join_adapter;
@@ -116,7 +116,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
 
                                 if (size <=0) {
 
-                                    submit_activity2.setVisibility(View.INVISIBLE);
+                                    submit_activity2.setClickable(false);
                                     break;
                                 }
                                 else {
@@ -157,7 +157,9 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                 final RecyclerView recyclerView = (RecyclerView) dialog.findViewById(R.id.recylerCommit);
                 final RecyclerView recyclerJoin = (RecyclerView) dialog.findViewById(R.id.recylerJoin);
 
-
+                if(username==null){
+                    username=Prevalent.getUserNameKey();
+                }
                 CountActivityRef1.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -170,6 +172,14 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
 
                         }
                         comment_adapter = new CommentAdapter(UserCommit,Comment);
+                        size = countPlayer- countJoin+1;
+                        if (size <= 0) {
+                            spotsLeft.setText(" אין עוד מקום בפעילות זו " );
+                            submit_activity2.setClickable(false);
+                        }
+                        else {
+                            spotsLeft.setText("נשארו עוד " + size + " מקומות");
+                        }
                         recyclerView.setLayoutManager(new GridLayoutManager(dialog.getContext(),1));
                         recyclerView.setAdapter(comment_adapter); // set the Adapter to RecyclerView
 
@@ -252,7 +262,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                         });
                         if(!comment.equals("")){
                             Map<String, Object> map = new HashMap<>();
-                            username = Paper.book().read(Prevalent.UserNameKey);
+                            //username = Paper.book().read(Prevalent.UserNameKey);
                             map.put("username",username);
                             map.put("comment",comment);
                             RootRef.child("Activities").child(My_id.get(position).toString()).child("comments").child(String.valueOf(count)).updateChildren(map);
