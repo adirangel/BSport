@@ -16,11 +16,7 @@
         android:layout_height="180dp"
         card_view:cardCornerRadius="20dp"
         card_view:cardBackgroundColor="@color/design_default_color_secondary_variant"
-
         >
-
-
-
         <TextView
             android:id="@+id/name_activity"
             android:layout_width="wrap_content"
@@ -68,7 +64,7 @@
             android:textColor="#FFFFFF"
             android:textSize="15sp" />
 
-p        <TextView
+           <TextView
             android:id="@+id/number_of_players1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
