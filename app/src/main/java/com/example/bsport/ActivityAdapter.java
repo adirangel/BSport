@@ -49,11 +49,11 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
         this.My_join = My_join;
     }
 
+    @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_activities, parent, false);
-        MyViewHolder vh = new MyViewHolder(v); // pass the view to View Holder
-        return vh;    }
+        return new MyViewHolder(v);    }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
@@ -115,7 +115,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.MyView
     }
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView type, name, game_date, location,number_of_players,date_create,join1;// init the item view's
         ImageButton remove_activity;
 

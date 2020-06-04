@@ -24,7 +24,7 @@
                 android:id="@+id/nameJoin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="username"
+                android:text="@string/username2"
                 android:singleLine="true"
                 android:textColor="#C1000000"
                 android:textStyle="bold"

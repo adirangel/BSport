@@ -9,7 +9,7 @@
     android:layout_height="190dp"
     android:layout_margin="5dp"
     card_view:cardCornerRadius="4dp"
-    >
+    android:focusable="true">
 
     <RelativeLayout
         android:orientation="vertical"
@@ -29,9 +29,9 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="95dp"
-            android:layout_marginLeft="145dp"
+            android:layout_marginStart="145dp"
             android:src="@drawable/ic_remove_circle_gray_24dp"
-            />
+            android:focusable="true" />
 
         <TextView
             android:id="@+id/name_activity"
@@ -61,7 +61,7 @@
             android:id="@+id/location"
             android:layout_width="match_parent"
             android:layout_height="23dp"
-            android:text="מיקום הפעילות"
+            android:text="@string/locationActiv"
             android:textColor="#2d2d2d"
             android:layout_below="@id/game_date1"
             android:gravity="center"

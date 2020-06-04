@@ -51,6 +51,7 @@ private DatabaseReference RootRef;
         this.FacTypes = FacTypes;
 
     }
+    @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // infalte the item Layout
@@ -61,7 +62,7 @@ private DatabaseReference RootRef;
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         // set the data in items
         if(FacTypes.size() !=0  && FacNames.size() !=0 && FacNeighborhoods.size() !=0 && FacStreets.size() !=0) {
             holder.type.setText(FacTypes.get(position));
@@ -185,7 +186,7 @@ private DatabaseReference RootRef;
         notifyDataSetChanged();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView type, name, neigberhood, street;// init the item view's
         ImageButton create_activity;
 

@@ -21,8 +21,7 @@ class JoinAdapter extends RecyclerView.Adapter<JoinAdapter.MyViewHolder>{
     @Override
     public JoinAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.join_activity_layout, parent, false);
-        JoinAdapter.MyViewHolder vh = new JoinAdapter.MyViewHolder(v); // pass the view to View Holder
-        return vh;    }
+        return new MyViewHolder(v);    }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {

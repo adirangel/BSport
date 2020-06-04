@@ -31,10 +31,8 @@ import io.paperdb.Paper;
 public class MyActivitiesFragment extends Fragment {
     private int i=0;
 
-    private DatabaseReference RootRef,CountActivityRef;
     private static int count=0;
     private RecyclerView recyclerView;
-    private View view;
     private ActivityAdapter activityAdapter;
     private StringBuilder names = new StringBuilder();
     private String username ;
@@ -53,9 +51,9 @@ public class MyActivitiesFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_my_activities, container, false);
-        RootRef = FirebaseDatabase.getInstance().getReference();
-        CountActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities");
+        View view = inflater.inflate(R.layout.fragment_my_activities, container, false);
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference countActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities");
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewNewActivity);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         try {
@@ -79,7 +77,7 @@ public class MyActivitiesFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
 
-        CountActivityRef.addValueEventListener(new ValueEventListener() {
+        countActivityRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 My_name_activity.clear();
@@ -115,7 +113,7 @@ public class MyActivitiesFragment extends Fragment {
                         for(DataSnapshot bs: bbs.getChildren()){
 
                             if(i<count - 1) {
-                                names.append(bs.getValue().toString() + ", ");
+                                names.append(bs.getValue().toString()).append(", ");
                                 i++;
                             }
                             else {

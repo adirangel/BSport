@@ -37,14 +37,13 @@ public class RegisterActivity extends AppCompatActivity {
     private Button CreateAccountButton;
     public static EditText UserEmail, UserName,UserPassword, Name,UserAge,UserAboutMyself; ;
     private TextView AlreadyHaveAccountLink;
-    private FirebaseAuth mAuth;
     private DatabaseReference RootRef;
     private ProgressDialog loadingBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         RootRef = FirebaseDatabase.getInstance().getReference();
 
         InitializeFields();
@@ -113,8 +112,8 @@ public class RegisterActivity extends AppCompatActivity {
                             userdataMap.put("password", password);
                             userdataMap.put("name", name);
                             userdataMap.put("age", age);
-                        /*userdataMap.put("sport1", sport1);
-                        userdataMap.put("sport2", sport2);*/
+                            /*userdataMap.put("sport1", sport1);
+                            userdataMap.put("sport2", sport2);*/
                             userdataMap.put("aboutMyself", aboutMyself);
 
                             RootRef.child("Users").child(username).updateChildren(userdataMap)

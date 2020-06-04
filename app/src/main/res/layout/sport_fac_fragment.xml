@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/search"
-        android:drawableRight="@drawable/search"
+        android:drawableEnd="@drawable/search"
 
         />
     <CheckBox
@@ -23,9 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/search_fac"
-        android:text="נגישות לנכים"
+        android:text="@string/disabledAccess"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="200dp"
+        android:layout_marginStart="200dp"
         android:shadowColor="@color/colorPrimary"
         android:visibility="visible"
         android:padding="6dp"

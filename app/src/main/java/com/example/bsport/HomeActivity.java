@@ -30,15 +30,11 @@ import io.paperdb.Paper;
 
 public class HomeActivity extends AppCompatActivity {
     private ProgressDialog loadingbar;
-    private Toolbar mToolBar;
-    private ViewPager myViewPager;
     private FirebaseUser currentUser;
     private ImageButton logoutImage;
     private String ba;
     private FirebaseAuth mAuth;
     private DatabaseReference RootRef;
-    private TabLayout myTabLayout;
-    private MenuAccessorAdapter myTabsAccessorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +42,14 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         loadingbar = new ProgressDialog(this);
         Paper.init(this);
-        mToolBar = (Toolbar) findViewById(R.id.main_page_toolbar);
+        Toolbar mToolBar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolBar);
         logoutImage = (ImageButton) findViewById(R.id.logout_button);
-        myViewPager = (ViewPager)findViewById(R.id.main_tabs_pager);
+        ViewPager myViewPager = (ViewPager) findViewById(R.id.main_tabs_pager);
 
-        myTabsAccessorAdapter = new MenuAccessorAdapter(getSupportFragmentManager());
+        MenuAccessorAdapter myTabsAccessorAdapter = new MenuAccessorAdapter(getSupportFragmentManager());
         myViewPager.setAdapter(myTabsAccessorAdapter);
-        myTabLayout = (TabLayout) findViewById(R.id.main_tabs);
+        TabLayout myTabLayout = (TabLayout) findViewById(R.id.main_tabs);
         myTabLayout.setupWithViewPager(myViewPager);
 
         String UserNameKey = Paper.book().read(Prevalent.UserNameKey);
@@ -144,6 +140,7 @@ public class HomeActivity extends AppCompatActivity {
     private void SendUserToLoginActivity() {
         Intent LoginIntent = new Intent( HomeActivity.this , LoginActivity.class);
         startActivity(LoginIntent);
+        finish();
     }
 
     @Override

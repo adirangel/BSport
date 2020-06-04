@@ -22,6 +22,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -212,7 +213,7 @@ public class SportFacFragment extends Fragment {
             }
         }
         else {
-            if (SearchTxt == "" )
+            if (SearchTxt.equals(""))
                 Collections.fill(FilterArray,1);
             else
                 filter(SearchTxt);
@@ -241,7 +242,7 @@ public class SportFacFragment extends Fragment {
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
-            json = new String(buffer, "UTF-8");
+            json = new String(buffer, StandardCharsets.UTF_8);
         } catch (IOException ex) {
             ex.printStackTrace();
             return null;

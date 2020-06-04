@@ -19,11 +19,11 @@ class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHolder>{
         this.Comment=comment;
     }
 
+    @NonNull
     @Override
     public CommentAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.comment_layout, parent, false);
-        CommentAdapter.MyViewHolder vh = new CommentAdapter.MyViewHolder(v); // pass the view to View Holder
-        return vh;    }
+        return new MyViewHolder(v);    }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {

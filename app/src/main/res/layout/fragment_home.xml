@@ -23,7 +23,7 @@
                 android:layout_height="250dp"
                 android:src="@drawable/homepage"
                 android:layout_marginTop="40dp"
-                android:layout_marginLeft="70dp"
+                android:layout_marginStart="70dp"
                 />
 
 
@@ -32,21 +32,23 @@
                 android:id="@+id/textView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingRight="30dp"
+                android:paddingEnd="30dp"
                 android:layout_marginTop="10dp"
-                android:text="חפש שותפים לפעילות ספורט ברחבי העיר באר שבע"
-                android:textSize="28dp"
+                android:text="@string/affiliateActivities"
+                android:textSize="28sp"
                 android:textStyle="bold"
-                android:layout_below="@id/homepage1"/>
+                android:layout_below="@id/homepage1"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingRight="30dp"
+                android:paddingEnd="30dp"
                 android:text="@string/chooseDay"
-                android:textSize="20dp"
-                android:layout_below="@id/textView5"/>
+                android:textSize="20sp"
+                android:layout_below="@id/textView5"
+                tools:ignore="RtlSymmetry" />
 
             <ImageView
 
@@ -54,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginEnd="8dp"
                 android:src="@drawable/homepage2"
                 android:layout_below="@id/textView6"
                 />
@@ -64,39 +66,43 @@
                 android:id="@+id/textView7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingRight="30dp"
-                android:text="עכשיו זה קל מתמיד למצוא מישהו לשחק איתו:"
-                android:textSize="28dp"
+                android:paddingEnd="30dp"
+                android:text="@string/someonePlayWith"
+                android:textSize="28sp"
                 android:textStyle="bold"
-                android:layout_below="@id/homepage2"/>
+                android:layout_below="@id/homepage2"
+                tools:ignore="RtlSymmetry" />
 
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingRight="30dp"
-                android:text="1. פרסם פעילות חדשה"
-                android:textSize="20dp"
-                android:layout_below="@id/textView7"/>
+                android:paddingEnd="30dp"
+                android:text="@string/postNewActivity"
+                android:textSize="20sp"
+                android:layout_below="@id/textView7"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingRight="30dp"
-                android:text="2. חכה לחברים שיצטרפו אליך"
-                android:textSize="20dp"
-                android:layout_below="@id/textView9"/>
+                android:paddingEnd="30dp"
+                android:text="@string/toJoinYou"
+                android:textSize="20sp"
+                android:layout_below="@id/textView9"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/textView11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingRight="30dp"
-                android:text="3. תפגש עם החברים ותתחילו להתאמן! \n\n\n"
-                android:textSize="20dp"
-                android:layout_below="@id/textView10"/>
+                android:paddingEnd="30dp"
+                android:text="@string/startPracticing"
+                android:textSize="20sp"
+                android:layout_below="@id/textView10"
+                tools:ignore="RtlSymmetry" />
 
 
         </RelativeLayout>

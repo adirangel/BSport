@@ -18,20 +18,15 @@ public class MenuAccessorAdapter extends FragmentPagerAdapter
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                HomeFragment homeFragment = new HomeFragment();
-                return homeFragment;
+                return new HomeFragment();
             case 1:
-                PrivateAreaFragment privateAreaFragment = new PrivateAreaFragment();
-                return privateAreaFragment;
+                return new PrivateAreaFragment();
             case 2:
-                ActivitiesListFragment activitiesListFragment = new ActivitiesListFragment();
-                return activitiesListFragment;
+                return new ActivitiesListFragment();
             case 3:
-                SportFacFragment sportFacFragment = new SportFacFragment();
-                return sportFacFragment;
+                return new SportFacFragment();
             case 4:
-                MyActivitiesFragment myActivitiesFragment = new MyActivitiesFragment();
-                return myActivitiesFragment;
+                return new MyActivitiesFragment();
             default:
                 return null;
 

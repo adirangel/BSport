@@ -30,15 +30,13 @@ import io.paperdb.Paper;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private FirebaseUser currentUser;
-    private FirebaseAuth mAuth;
     private ProgressDialog loadingbar;
     public static final Pattern  EMAIL_PATTERN = Pattern.compile("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" + "\\@" + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" + "(" + "\\." + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" + ")+");
     public static final Pattern USERNAME_PATTERN = Pattern.compile("[a-zA-Z0-9]+$");
     private Button LoginButton;
     public static EditText UserName;
     public static EditText UserPassword;
-    private TextView NeedNewAccountLink ,ForgetPasswordLink;
+    private TextView NeedNewAccountLink;
     private DatabaseReference UserRef;
     private TextView AdminLink, NotAdminLink;
     private CheckBox chkBoxRememberMe;
@@ -48,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__login);
 
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
         UserRef = FirebaseDatabase.getInstance().getReference();
 
         initilizedFields();
@@ -112,9 +110,9 @@ public class LoginActivity extends AppCompatActivity {
         else if(!Checking_password_notEmpty(password)){
             Toast.makeText(this,"אנא הכנס סיסמה",Toast.LENGTH_SHORT).show();
         }
-//        else if(!Valid_password_check(password)){
-//            Toast.makeText(this,"הסיסמה צריכה להיות באורך 6 ומעלה",Toast.LENGTH_SHORT).show();
-//        }
+        else if(!Valid_password_check(password)){
+            Toast.makeText(this,"הסיסמה צריכה להיות באורך 6 ומעלה",Toast.LENGTH_SHORT).show();
+        }
         else
         {
 
@@ -193,7 +191,7 @@ public class LoginActivity extends AppCompatActivity {
         LoginButton = (Button) findViewById(R.id.login_button);
         UserName = ( EditText) findViewById(R.id.login_userName);
         UserPassword = ( EditText) findViewById(R.id.login_password);
-        ForgetPasswordLink = ( TextView) findViewById(R.id.forget_password_link);
+        TextView forgetPasswordLink = (TextView) findViewById(R.id.forget_password_link);
         NeedNewAccountLink = ( TextView) findViewById(R.id.Sign_Up_link);
         loadingbar = new ProgressDialog(this);
         AdminLink = (TextView) findViewById(R.id.Im_Admin);
@@ -217,6 +215,7 @@ public class LoginActivity extends AppCompatActivity {
     private void SendUserToLRegisterActivity() {
         Intent RegisterIntent = new Intent(  LoginActivity.this,RegisterActivity.class );
         startActivity(RegisterIntent);
+
     }
 
 }
