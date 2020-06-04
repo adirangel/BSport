@@ -21,6 +21,7 @@
         <!--
         items for a single row of RecyclerView
         -->
+
             <TextView
                 android:id="@+id/type"
                 android:layout_width="wrap_content"

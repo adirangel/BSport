@@ -3,6 +3,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
     private CommentAdapter comment_adapter;
     private JoinAdapter join_adapter;
     private static DatabaseReference RootRef,CountActivityRef2,CountActivityRef1,CountActivityRef;
+    int flag=0;
     private int countPlayer = 0,size;
     ListOfActivitiesAdapter(
             ArrayList<String> My_created_By,
@@ -105,6 +107,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                                 if (bs.getValue().equals(username)) {
                                     if (size <= 0) {
                                         spotsLeft.setText(" אין עוד מקום בפעילות זו " );
+                                        submit_activity2.setBackgroundColor(Color.GRAY);
                                         submit_activity2.setClickable(false);
                                     }
                                     else {
@@ -175,6 +178,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                         size = countPlayer- countJoin+1;
                         if (size <= 0) {
                             spotsLeft.setText(" אין עוד מקום בפעילות זו " );
+                            submit_activity2.setBackgroundColor(Color.GRAY);
                             submit_activity2.setClickable(false);
                         }
                         else {
@@ -197,7 +201,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                             UserJoin.add(ds.getValue().toString());
                         }
                         join_adapter = new JoinAdapter(UserJoin);
-                        recyclerJoin.setLayoutManager(new GridLayoutManager(dialog.getContext(),4));
+                        recyclerJoin.setLayoutManager(new GridLayoutManager(dialog.getContext(),3));
                         recyclerJoin.setAdapter(join_adapter); // set the Adapter to RecyclerView
 
                     }
@@ -242,6 +246,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                 newActivitySub.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        flag=0;
                         RootRef = FirebaseDatabase.getInstance().getReference();
                         final String comment;
                         comment = ((EditText)dialog.findViewById(R.id.add_comments)).getText().toString();
@@ -251,26 +256,31 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                                 if ((dataSnapshot.child("comments")).exists()) {
                                     count = (int) dataSnapshot.child("comments").getChildrenCount() + 1;
 
-                                } else {
+                                }
+                                else {
                                     count = 1;
                                 }
+                                if(!comment.equals("") && flag==0){
+                                    Map<String, Object> map = new HashMap<>();
+                                    map.put("username",username);
+                                    map.put("comment",comment);
+                                    RootRef.child("Activities").child(My_id.get(position).toString()).child("comments").child(String.valueOf(count)).updateChildren(map);
+                                    flag=1;
+                                    return;
+                                }
+
                             }
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
 
                             }
                         });
-                        if(!comment.equals("")){
-                            Map<String, Object> map = new HashMap<>();
-                            //username = Paper.book().read(Prevalent.UserNameKey);
-                            map.put("username",username);
-                            map.put("comment",comment);
-                            RootRef.child("Activities").child(My_id.get(position).toString()).child("comments").child(String.valueOf(count)).updateChildren(map);
-                        }
+                        Toast.makeText(v.getContext(), "תגובה נוספה בהצלחה", Toast.LENGTH_SHORT).show();
 
                     }
 
                 });
+                flag=0;
                 dialog.show();
             }
         });

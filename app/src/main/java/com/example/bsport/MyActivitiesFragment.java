@@ -37,7 +37,7 @@ public class MyActivitiesFragment extends Fragment {
     private View view;
     private ActivityAdapter activityAdapter;
     private StringBuilder names = new StringBuilder();
-    private String username = Paper.book().read(Prevalent.UserNameKey).toString();
+    private String username ;
     private ArrayList<String> My_name_activity = new ArrayList<>();
     private String names2;
     private ArrayList<String> My_activity_type = new ArrayList<>();
@@ -90,7 +90,9 @@ public class MyActivitiesFragment extends Fragment {
                 My_date_created.clear();
                 My_id.clear();
                 My_Join.clear();
-
+                if(username==null){
+                    username=Prevalent.getUserNameKey();
+                }
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     names.setLength(0);
                     names2 = "";

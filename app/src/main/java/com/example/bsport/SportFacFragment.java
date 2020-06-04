@@ -73,7 +73,6 @@ public class SportFacFragment extends Fragment {
     private CustomAdapter customAdapter;
     private List<Integer> FilterArray;
     private static int count=0;
-    private int pos ;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

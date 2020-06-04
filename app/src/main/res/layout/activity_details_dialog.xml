@@ -189,7 +189,6 @@
         android:layout_marginTop="1dp"
         android:layout_below="@+id/submit_activity2"
         android:layout_centerHorizontal="true"
-
         android:layout_marginRight="140dp"
         android:background="#E6E6E6"
         />
@@ -202,7 +201,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="1dp"
         android:gravity="center"
-        android:hint="הוסף תגובה"
+        android:hint="הוסף את תגובתך"
         android:inputType="text"
         android:padding="6dp"
         android:textSize="18sp" />

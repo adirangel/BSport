@@ -86,7 +86,10 @@ public class PrivateAreaFragment extends Fragment {
 
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    username = Paper.book().read(Prevalent.UserNameKey).toString();
+                    if (username==null){
+                        username=Prevalent.getUserNameKey();
+                    }
+
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         if (ds.child("username").getValue().toString().equals(username)) {
                             UserAge = ds.child("age").getValue().toString();

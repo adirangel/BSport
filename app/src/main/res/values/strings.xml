@@ -34,7 +34,7 @@
     <string name="type_activity">הכנס את סוג הפעילות..\u200e</string>
     <string name="Quantity_of_players">הכנס כמות שחקנים לפעילות..\u200e</string>
     <string name="Create_activity">צור פעילות</string>
-    <string name="date_activity">הכנס תאריך פעילות…\u200e</string>
+    <string name="date_activity">הכנס תאריך ושעה\u200e</string>
     <string name="Create_new_activity">יצירת פעילות חדשה</string>
     <string name="type">Type</string>
     <string name="activity_type1">סוג הפעילות</string>

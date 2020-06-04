@@ -41,7 +41,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     ArrayList<String> FacStreets;
     private static int count=0;
     public static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+$");
-    public static final Pattern DATE_PATTERN = Pattern.compile("^([0-2][0-9]|(3)[0-1])(\\-)(((0)[0-9])|((1)[0-2]))(\\-)\\d{4}$");
+    public static final Pattern DATE_PATTERN = Pattern.compile("^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[012])-(2[0-9]{3}) (0[0-9]|1[0-9]|2[0123])\\:([012345][0-9])$");
 private DatabaseReference RootRef;
 
     public CustomAdapter( ArrayList<String> FacTypes,ArrayList<String> FacNames, ArrayList<String> FacNeighborhoods, ArrayList<String> FacStreets) {
@@ -85,7 +85,7 @@ private DatabaseReference RootRef;
                         @Override
 
                         public void onClick(final View v) {
-                            final String name = Paper.book().read(Prevalent.UserNameKey).toString();
+                            final String name = Prevalent.getUserNameKey();
                             final String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
                             DatabaseReference CountActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities");
 
@@ -117,10 +117,10 @@ private DatabaseReference RootRef;
                                 Toast.makeText(v.getContext(), "אנא הכנס מספרים בלבד לכמות שחקנים", Toast.LENGTH_SHORT).show();
                             }
                             else if (Checking_game_date_Empty(game_date)) {
-                                Toast.makeText(v.getContext(), "אנא הכנס את תאריך הפעילות שלך", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(v.getContext(), "אנא הכנס את תאריך ושעה לפעילות שלך", Toast.LENGTH_SHORT).show();
                             }
                             else if (Checking_game_date_valid_value(game_date)) {
-                                Toast.makeText(v.getContext(), "אנא הכנס תאריך מהצורה dd-mm-yyyy", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(v.getContext(), "אנא הכנס תאריך מהצורה dd-mm-yyyy hh:mm", Toast.LENGTH_SHORT).show();
                             }
                             else if(Check_that_date_after_today(game_date,date) ){
                                 Toast.makeText(v.getContext(), "תאריך זה כבר עבר", Toast.LENGTH_SHORT).show();
