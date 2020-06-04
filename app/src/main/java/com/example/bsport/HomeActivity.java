@@ -87,6 +87,7 @@ public class HomeActivity extends AppCompatActivity {
 
                         if(usersData.getPassword().equals(password)){
                             Prevalent.setUserAdminKey("false");
+                            Prevalent.setUserNameKey(userName);
 
                             Toast.makeText(HomeActivity.this," ברוך הבא",Toast.LENGTH_SHORT).show();
                             loadingbar.dismiss();
@@ -108,6 +109,7 @@ public class HomeActivity extends AppCompatActivity {
                         if(usersData.getPassword().equals(password)){
                             Prevalent.setUserAdminKey("true");
                             String UserAdminKey = Paper.book().read(Prevalent.UserAdminKey);
+                            Prevalent.setUserNameKey(userName);
 
                             Toast.makeText(HomeActivity.this,"ברוך הבא מנהל",Toast.LENGTH_SHORT).show();
                             loadingbar.dismiss();
@@ -154,11 +156,11 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
-//        if(item.getItemId()==R.id.logout_item){
-//            logoutImage = (ImageButton) findViewById(R.id.logout_button);
-//            Paper.book().destroy();
-//            SendUserToLoginActivity();
-//        }
+        if(item.getItemId()==R.id.logout_item){
+            logoutImage = (ImageButton) findViewById(R.id.logout_button);
+            Paper.book().destroy();
+            SendUserToLoginActivity();
+        }
         return true;
     }
 

@@ -56,7 +56,6 @@ public class ActivitiesListFragment extends Fragment {
     private static int count=0;
     private RecyclerView recyclerView;
     private ListOfActivitiesAdapter list_of_activity_adapter;
-    private String username = Paper.book().read(Prevalent.UserNameKey).toString();
     private ArrayList<String> My_Created_by = new ArrayList<>();
     private ArrayList<String> My_name_activity = new ArrayList<>();
     private ArrayList<String> My_game_date = new ArrayList<>();

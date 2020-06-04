@@ -101,11 +101,18 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                         if ((dataSnapshot.child("join")).exists()) {
                             countJoin = (int) dataSnapshot.child("join").getChildrenCount() + 1;
                             for (DataSnapshot bs : dataSnapshot.child("join").getChildren()){
+                                size = countPlayer- countJoin+1;
                                 if (bs.getValue().equals(username)) {
+                                    if (size <= 0) {
+                                        spotsLeft.setText(" אין עוד מקום בפעילות זו " );
+                                        submit_activity2.setClickable(false);
+                                    }
+                                    else {
+                                        spotsLeft.setText("נשארו עוד " + size + " מקומות");
+                                    }
                                     submit_activity2.setClickable(false);
                                     break;
                                 }
-                                size = countPlayer- countJoin;
 
                                 if (size <=0) {
 
@@ -212,7 +219,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                         }
                         else{
                             TextView spotsLeft = (TextView) dialog.findViewById(R.id.spotsLeft);
-                            int size = countPlayer - countJoin;
+                            size = countPlayer - countJoin;
                             spotsLeft.setText("נשארו עוד " + size + " מקומות");
                             Map<String, Object> map = new HashMap<>();
                             map.put("name"+String.valueOf(countJoin),username);
