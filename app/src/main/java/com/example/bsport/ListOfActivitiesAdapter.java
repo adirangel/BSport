@@ -52,7 +52,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
     private CommentAdapter comment_adapter;
     private JoinAdapter join_adapter;
     private static DatabaseReference RootRef,CountActivityRef2,CountActivityRef1,CountActivityRef;
-    private int countPlayer = 0;
+    private int countPlayer = 0,size;
     ListOfActivitiesAdapter(
             ArrayList<String> My_created_By,
             ArrayList<String> My_name_activity,
@@ -88,7 +88,8 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                final Dialog dialog = new Dialog(v.getContext());
+
+                final Dialog dialog = new Dialog(v.getContext(),android.R.style.Theme_Light_NoTitleBar_Fullscreen);
                 dialog.setContentView(R.layout.activity_details_dialog);
 
                 CountActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities").child(My_id.get(position).toString());
@@ -102,6 +103,13 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                             for (DataSnapshot bs : dataSnapshot.child("join").getChildren()){
                                 if (bs.getValue().equals(username)) {
                                     submit_activity2.setClickable(false);
+                                    break;
+                                }
+                                size = countPlayer- countJoin;
+
+                                if (size <=0) {
+
+                                    submit_activity2.setVisibility(View.INVISIBLE);
                                     break;
                                 }
                                 else {
@@ -120,8 +128,14 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                 num_of_playersTV.setText(num_of_players.get(position).toString());
                 spotsLeft = (TextView) dialog.findViewById(R.id.spotsLeft);
                 countPlayer = Integer.parseInt(num_of_playersTV.getText().toString());
-                int size = countPlayer- countJoin;
-                spotsLeft.setText("נשארו עוד " + size+ " מקומות");
+                size = countPlayer- countJoin;
+                if (size == 0) {
+                    spotsLeft.setText(" אין עוד מקום בפעילות זו " );
+                    submit_activity2.setClickable(false);
+                }
+                else {
+                    spotsLeft.setText("נשארו עוד " + size + " מקומות");
+                }
                 TextView createdbyTV = (TextView) dialog.findViewById(R.id.created_by11);
                 createdbyTV.setText(My_created_By.get(position).toString());
                 TextView My_name_activityTV = (TextView) dialog.findViewById(R.id.name11);
@@ -166,7 +180,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                             UserJoin.add(ds.getValue().toString());
                         }
                         join_adapter = new JoinAdapter(UserJoin);
-                        recyclerJoin.setLayoutManager(new GridLayoutManager(dialog.getContext(),2));
+                        recyclerJoin.setLayoutManager(new GridLayoutManager(dialog.getContext(),4));
                         recyclerJoin.setAdapter(join_adapter); // set the Adapter to RecyclerView
 
                     }

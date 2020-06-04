@@ -3,10 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:background="#E6E6E6"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     >
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/linearlayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
     <TextView
         android:id="@+id/nameTitle"
@@ -138,32 +149,35 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:text="blabla"
-
         android:layout_marginTop="1dp"
         android:gravity="center"
         />
     <TextView
         android:id="@+id/spotsLeft"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:padding="2dp"
         android:layout_below="@+id/created_by11"
         android:textSize="15sp"
+
         android:textStyle="bold"
         android:text="נותרו עוד 5 מקומות"
         android:layout_marginTop="1dp"
+
         android:gravity="center"
         />
 
     <Button
         android:id="@+id/submit_activity2"
-        android:layout_width="130dp"
-        android:layout_height="50dp"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
         android:layout_below="@+id/spotsLeft"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/buttons"
         android:gravity="center"
+        android:layout_centerHorizontal="true"
+
         android:text="הצטרף לפעילות זו"
         android:textColor="@android:color/background_light"
 
@@ -171,20 +185,22 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recylerJoin"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:layout_below="@+id/created_by11"
-        android:layout_marginLeft="135dp"
-        android:layout_marginRight="5dp"
-        android:background="#FFFFFF"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_below="@+id/submit_activity2"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginRight="140dp"
+        android:background="#E6E6E6"
         />
 
     <EditText
         android:id="@+id/add_comments"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/recylerJoin"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="1dp"
         android:gravity="center"
         android:hint="הוסף תגובה"
         android:inputType="text"
@@ -193,12 +209,12 @@
 
     <Button
         android:id="@+id/add_comments_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/add_comments"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="1dp"
         android:layout_marginRight="20dp"
 
         android:background="@drawable/buttons"
@@ -208,10 +224,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recylerCommit"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/add_comments_button"
-        android:background="#FFFFFF"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        />
+        </RelativeLayout>
 
+    </ScrollView>
 
 </RelativeLayout>
