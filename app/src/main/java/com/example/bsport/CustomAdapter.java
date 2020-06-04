@@ -85,7 +85,7 @@ private DatabaseReference RootRef;
                         @Override
 
                         public void onClick(final View v) {
-                            final String name = Prevalent.getUserNameKey();
+                            final String name = Prevalent.getUserName();
                             final String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
                             DatabaseReference CountActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities");
 

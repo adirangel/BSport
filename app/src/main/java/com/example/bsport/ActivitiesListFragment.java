@@ -63,7 +63,6 @@ public class ActivitiesListFragment extends Fragment {
     private ArrayList<Integer> Arr_image = new ArrayList<>();
     private ArrayList<String> locations = new ArrayList<>();
     private ArrayList<String> type_activity = new ArrayList<>();
-    //private ArrayList<String> date_created = new ArrayList<>();
     private ArrayList<String> num_of_players = new ArrayList<>();
     private ArrayList<String> My_id = new ArrayList<>();
 
@@ -99,7 +98,6 @@ public class ActivitiesListFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 My_Created_by.clear();
-                //date_created.clear();
                 My_name_activity.clear();
                 My_game_date.clear();
                 My_id.clear();
@@ -110,7 +108,6 @@ public class ActivitiesListFragment extends Fragment {
 
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     My_Created_by.add(ds.child("created_by").getValue().toString());
-                    //date_created.add(ds.child("date_created").getValue().toString());
                     My_name_activity.add(ds.child("description").getValue().toString());
                     My_game_date.add(ds.child("game_date").getValue().toString());
                     My_id.add(ds.child("id").getValue().toString());

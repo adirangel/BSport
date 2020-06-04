@@ -90,9 +90,9 @@ public class MyActivitiesFragment extends Fragment {
                 My_date_created.clear();
                 My_id.clear();
                 My_Join.clear();
-                if(username==null){
-                    username=Prevalent.getUserNameKey();
-                }
+
+                username=Prevalent.getUserName();
+
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     names.setLength(0);
                     names2 = "";

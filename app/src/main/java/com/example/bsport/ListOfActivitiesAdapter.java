@@ -48,7 +48,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
     private ArrayList<String> Comment = new ArrayList<>();
     private String isAdmin = Prevalent.getUserAdminKey();
     private TextView spotsLeft, num_of_playersTV;
-    private static String username = Paper.book().read(Prevalent.UserNameKey);
+    private static String username = Prevalent.getUserName();
     private static int count=1,countJoin=1;
     private CommentAdapter comment_adapter;
     private JoinAdapter join_adapter;
@@ -160,9 +160,9 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                 final RecyclerView recyclerView = (RecyclerView) dialog.findViewById(R.id.recylerCommit);
                 final RecyclerView recyclerJoin = (RecyclerView) dialog.findViewById(R.id.recylerJoin);
 
-                if(username==null){
-                    username=Prevalent.getUserNameKey();
-                }
+
+                username=Prevalent.getUserName();
+
                 CountActivityRef1.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -228,18 +228,23 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
 
                             }
                         });
-                        if(num_of_players.get(position).toString().equals(String.valueOf(countJoin))){
-                            Toast.makeText(v.getContext(),"לא נשארו מקומות פנויים", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
+
                             TextView spotsLeft = (TextView) dialog.findViewById(R.id.spotsLeft);
                             size = countPlayer - countJoin;
-                            spotsLeft.setText("נשארו עוד " + size + " מקומות");
-                            Map<String, Object> map = new HashMap<>();
-                            map.put("name"+String.valueOf(countJoin),username);
-                            RootRef.child("Activities").child(My_id.get(position).toString()).child("join").updateChildren(map);
-
-                        }
+                            if (size <= 0) {
+                                spotsLeft.setText(" אין עוד מקום בפעילות זו " );
+                                submit_activity2.setBackgroundColor(Color.GRAY);
+                                submit_activity2.setClickable(false);
+                                Map<String, Object> map = new HashMap<>();
+                                map.put("name"+String.valueOf(countJoin),username);
+                                RootRef.child("Activities").child(My_id.get(position).toString()).child("join").updateChildren(map);
+                            }
+                            else {
+                                spotsLeft.setText("נשארו עוד " + size + " מקומות");
+                                Map<String, Object> map = new HashMap<>();
+                                map.put("name" + String.valueOf(countJoin), username);
+                                RootRef.child("Activities").child(My_id.get(position).toString()).child("join").updateChildren(map);
+                            }
                     }
                 });
 

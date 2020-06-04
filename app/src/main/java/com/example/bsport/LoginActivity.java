@@ -129,17 +129,19 @@ public class LoginActivity extends AppCompatActivity {
                     if(dataSnapshot.child(parentDbName).child(userName).exists()){
                         Users usersData = dataSnapshot.child(parentDbName).child(userName).getValue(Users.class);
                         if(usersData.getUsername().equals(userName)){
-
                             if(usersData.getPassword().equals(password)){
                                 if(parentDbName.equals("Admin")){
                                     Prevalent.setUserAdminKey("true");
-
+                                    Paper.book().write(Prevalent.UserPasswordKey,userName);
+                                    Paper.book().write(Prevalent.UserPasswordKey,password);
                                     loadingbar.dismiss();
                                     SendUserToLMainActivityAdmin();
                                 }
                                 else if(parentDbName.equals("Users")){
-                                    Prevalent.setUserAdminKey("false");
+                                    Paper.book().write(Prevalent.UserPasswordKey,userName);
+                                    Paper.book().write(Prevalent.UserPasswordKey,password);
 
+                                    Prevalent.setUserAdminKey("false");
                                     loadingbar.dismiss();
                                     SendUserToLMainActivity();
                                 }

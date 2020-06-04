@@ -87,7 +87,7 @@ public class HomeActivity extends AppCompatActivity {
 
                         if(usersData.getPassword().equals(password)){
                             Prevalent.setUserAdminKey("false");
-                            Prevalent.setUserNameKey(userName);
+                            Prevalent.setUserName(userName);
 
                             Toast.makeText(HomeActivity.this," ברוך הבא",Toast.LENGTH_SHORT).show();
                             loadingbar.dismiss();
@@ -109,7 +109,7 @@ public class HomeActivity extends AppCompatActivity {
                         if(usersData.getPassword().equals(password)){
                             Prevalent.setUserAdminKey("true");
                             String UserAdminKey = Paper.book().read(Prevalent.UserAdminKey);
-                            Prevalent.setUserNameKey(userName);
+                            Prevalent.setUserName(userName);
 
                             Toast.makeText(HomeActivity.this,"ברוך הבא מנהל",Toast.LENGTH_SHORT).show();
                             loadingbar.dismiss();

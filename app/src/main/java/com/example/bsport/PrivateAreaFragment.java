@@ -38,8 +38,7 @@ public class PrivateAreaFragment extends Fragment {
     private String UserAge, UserFullName, User_about_myself,UserEmail;
     private TextView CurrentUser;
     private DatabaseReference RootRef;
-    private View theCurrentUser;
-    private String username;
+    private String username=Prevalent.getUserName();
     private TextView CurrentUserEmail,CurrentUserAge,CurrentUserDescription;
     private Button ChangePass,ChangePersonalDetails;
 
@@ -67,13 +66,13 @@ public class PrivateAreaFragment extends Fragment {
 
         RootRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
-        theCurrentUser = inflater.inflate(R.layout.fragment_private_area, container, false);
+        View theCurrentUser = inflater.inflate(R.layout.fragment_private_area, container, false);
         ChangePass = (Button) theCurrentUser.findViewById(R.id.ChangePass);
         ChangePersonalDetails = (Button) theCurrentUser.findViewById(R.id.ChangeDetails);
-        CurrentUser = (TextView)theCurrentUser.findViewById(R.id.UserFullName);
-        CurrentUserEmail = (TextView)theCurrentUser.findViewById(R.id.UserEmail);
-        CurrentUserAge = (TextView)theCurrentUser.findViewById(R.id.UserAge);
-        CurrentUserDescription = (TextView)theCurrentUser.findViewById(R.id.User_about_myself);
+        CurrentUser = (TextView) theCurrentUser.findViewById(R.id.UserFullName);
+        CurrentUserEmail = (TextView) theCurrentUser.findViewById(R.id.UserEmail);
+        CurrentUserAge = (TextView) theCurrentUser.findViewById(R.id.UserAge);
+        CurrentUserDescription = (TextView) theCurrentUser.findViewById(R.id.User_about_myself);
         return theCurrentUser;
     }
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -86,9 +85,8 @@ public class PrivateAreaFragment extends Fragment {
 
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (username==null){
-                        username=Prevalent.getUserNameKey();
-                    }
+
+                    username=Prevalent.getUserName();
 
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         if (ds.child("username").getValue().toString().equals(username)) {
