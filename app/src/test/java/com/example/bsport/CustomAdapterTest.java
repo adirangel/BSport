@@ -66,14 +66,14 @@ public class CustomAdapterTest {
     }
     @Test
     public void Checking_game_date_valid_value_oneTest_assertFalse() {
-        assertFalse(CustomAdapter.Checking_game_date_valid_value("30-02-2020"));
+        assertFalse(CustomAdapter.Checking_game_date_valid_value("30-02-2020 16:00"));
     }
     @Test
     public void Check_that_date_after_today_oneTest_ReturnTrue() {
-        assertTrue(CustomAdapter.Check_that_date_after_today("03-05-2020","04-05-2020"));
+        assertTrue(CustomAdapter.Check_that_date_after_today("03-05-2020 16:00","04-05-2020 16:00"));
     }
     @Test
     public void Check_that_date_after_today_oneTest_assertFalse() {
-        assertFalse(CustomAdapter.Check_that_date_after_today("03-05-2020","02-05-2020"));
+        assertFalse(CustomAdapter.Check_that_date_after_today("03-05-2020 16:00","02-05-2020 16:00"));
     }
 }
