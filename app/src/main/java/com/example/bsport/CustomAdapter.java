@@ -87,7 +87,7 @@ private DatabaseReference RootRef;
 
                         public void onClick(final View v) {
                             final String name = Prevalent.getUserName();
-                            final String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                            final String date = new SimpleDateFormat("dd-MM-yyyyhh:mm", Locale.getDefault()).format(new Date());
                             DatabaseReference CountActivityRef = FirebaseDatabase.getInstance().getReference().child("Activities");
 
                             CountActivityRef.addValueEventListener(new ValueEventListener() {
@@ -203,7 +203,7 @@ private DatabaseReference RootRef;
         }
     }
     public static boolean Check_that_date_after_today(String game_date, String dateToday) {
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyyhh:mm");
         try {
             Date date1=format.parse(game_date);
             Date date2=format.parse(dateToday);
@@ -211,6 +211,7 @@ private DatabaseReference RootRef;
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         return true;
     }
 

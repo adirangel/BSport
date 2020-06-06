@@ -153,11 +153,11 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
-      /*  if(item.getItemId()==R.id.logout_item){
+        if(item.getItemId()==R.id.logout_item){
             logoutImage = (ImageButton) findViewById(R.id.logout_button);
             Paper.book().destroy();
             SendUserToLoginActivity();
-        }*/
+        }
         return true;
     }
 
