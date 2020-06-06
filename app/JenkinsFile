@@ -88,6 +88,7 @@ pipeline {
       mail to: 'asafrdt@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
     }
   }
+  def jobPattern='pattern'
   Hudson.instance.getItems(Project).each {project ->
   def results = [:]
   if (project.name.contains(jobPattern)) {
