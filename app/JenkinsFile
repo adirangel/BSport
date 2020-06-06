@@ -88,4 +88,21 @@ pipeline {
       mail to: 'asafrdt@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
     }
   }
+  Hudson.instance.getItems(Project).each {project ->
+  def results = [:]
+  if (project.name.contains(jobPattern)) {
+    results."$project.name" = [SUCCESS:0,UNSTABLE:0,FAILURE:0,ABORTED:0]
+    def build = project.getLastBuild()
+    while (build){
+      //println "$project.name;$build.id;$build.result"
+      results."$project.name"."$build.result" = results."$project.name"."$build.result" +1
+      build=build.getPreviousBuild()
+    }
+  }
+  results.each{name,map->
+    map.each{result,count->
+      println "$name : $result = $count"
+    }
+  }
+}
 }
