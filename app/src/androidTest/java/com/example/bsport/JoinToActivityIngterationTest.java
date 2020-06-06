@@ -36,13 +36,12 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class JoinToActivityTest {
-
+public class JoinToActivityIngterationTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void joinToActivityTest() {
+    public void mainActivityTest() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
@@ -59,10 +58,10 @@ public class JoinToActivityTest {
                                         withClassName(is("android.widget.ScrollView")),
                                         0),
                                 1)));
-        appCompatEditText.perform(scrollTo(), replaceText("tairhadad"), closeSoftKeyboard());
+        appCompatEditText.perform(scrollTo(), replaceText("asafrdt"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.login_userName), withText("tairhadad"),
+                allOf(withId(R.id.login_userName), withText("asafrdt"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.ScrollView")),
@@ -77,10 +76,10 @@ public class JoinToActivityTest {
                                         withClassName(is("android.widget.ScrollView")),
                                         0),
                                 2)));
-        appCompatEditText3.perform(scrollTo(), replaceText("123456"), closeSoftKeyboard());
+        appCompatEditText3.perform(scrollTo(), replaceText("1234567"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.login_password), withText("123456"),
+                allOf(withId(R.id.login_password), withText("1234567"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.ScrollView")),
@@ -88,14 +87,32 @@ public class JoinToActivityTest {
                                 2)));
         appCompatEditText4.perform(pressImeActionButton());
 
+        ViewInteraction appCompatTextView = onView(
+                allOf(withId(R.id.Im_Admin), withText("מנהל - לחץ כאן\u200E"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.ScrollView")),
+                                        0),
+                                5)));
+        appCompatTextView.perform(scrollTo(), click());
+
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.login_button), withText("התחבר"),
+                allOf(withId(R.id.login_button), withText("התחבר כמנהל"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.ScrollView")),
                                         0),
                                 7)));
         appCompatButton.perform(scrollTo(), click());
+
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(7000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         ViewInteraction tabView = onView(
                 allOf(withContentDescription("רשימת פעילויות"),
@@ -112,20 +129,20 @@ public class JoinToActivityTest {
                         childAtPosition(
                                 withClassName(is("android.widget.RelativeLayout")),
                                 0)));
-        recyclerView.perform(actionOnItemAtPosition(3, click()));
+        recyclerView.perform(actionOnItemAtPosition(0, click()));
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.submit_activity2), withText("הצטרף לפעילות זו"),
                         childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                11),
-                        isDisplayed()));
-        appCompatButton2.perform(click());
+                                allOf(withId(R.id.linearlayout1),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.ScrollView")),
+                                                0)),
+                                11)));
+        appCompatButton2.perform(scrollTo(), click());
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.nameJoin), withText("tairhadad"),
+                allOf(withId(R.id.nameJoin), withText("asafrdt"),
                         childAtPosition(
                                 allOf(withId(R.id.card_view1),
                                         childAtPosition(
@@ -133,7 +150,7 @@ public class JoinToActivityTest {
                                                 0)),
                                 0),
                         isDisplayed()));
-        textView.check(matches(withText("tairhadad")));
+        textView.check(matches(withText("asafrdt")));
     }
 
     private static Matcher<View> childAtPosition(

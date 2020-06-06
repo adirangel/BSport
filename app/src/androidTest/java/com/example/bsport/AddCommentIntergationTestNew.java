@@ -36,13 +36,13 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class CommentsTesting {
+public class AddCommentIntergationTestNew {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void commentsTesting() {
+    public void mainActivityTest() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
@@ -59,10 +59,10 @@ public class CommentsTesting {
                                         withClassName(is("android.widget.ScrollView")),
                                         0),
                                 1)));
-        appCompatEditText.perform(scrollTo(), replaceText("tairhadad"), closeSoftKeyboard());
+        appCompatEditText.perform(scrollTo(), replaceText("asafrdt"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.login_userName), withText("tairhadad"),
+                allOf(withId(R.id.login_userName), withText("asafrdt"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.ScrollView")),
@@ -77,10 +77,10 @@ public class CommentsTesting {
                                         withClassName(is("android.widget.ScrollView")),
                                         0),
                                 2)));
-        appCompatEditText3.perform(scrollTo(), replaceText("123456"), closeSoftKeyboard());
+        appCompatEditText3.perform(scrollTo(), replaceText("1234567"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.login_password), withText("123456"),
+                allOf(withId(R.id.login_password), withText("1234567"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.ScrollView")),
@@ -88,14 +88,32 @@ public class CommentsTesting {
                                 2)));
         appCompatEditText4.perform(pressImeActionButton());
 
+        ViewInteraction appCompatTextView = onView(
+                allOf(withId(R.id.Im_Admin), withText("מנהל - לחץ כאן\u200E"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.ScrollView")),
+                                        0),
+                                5)));
+        appCompatTextView.perform(scrollTo(), click());
+
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.login_button), withText("התחבר"),
+                allOf(withId(R.id.login_button), withText("התחבר כמנהל"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.ScrollView")),
                                         0),
                                 7)));
         appCompatButton.perform(scrollTo(), click());
+
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(7000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         ViewInteraction tabView = onView(
                 allOf(withContentDescription("רשימת פעילויות"),
@@ -112,30 +130,41 @@ public class CommentsTesting {
                         childAtPosition(
                                 withClassName(is("android.widget.RelativeLayout")),
                                 0)));
-        recyclerView.perform(actionOnItemAtPosition(0, click()));
+        recyclerView.perform(actionOnItemAtPosition(4, click()));
 
-        ViewInteraction appCompatEditText5 = onView(
+        ViewInteraction appCompatEditText55 = onView(
                 allOf(withId(R.id.add_comments),
                         childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                13),
-                        isDisplayed()));
-        appCompatEditText5.perform(replaceText("message"), closeSoftKeyboard());
+                                allOf(withId(R.id.linearlayout1),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.ScrollView")),
+                                                0)),
+                                13)));
+        appCompatEditText55.perform(scrollTo(), replaceText("integration test"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.add_comments_button), withText("הוסף תגובה"),
                         childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                14),
-                        isDisplayed()));
-        appCompatButton2.perform(click());
+                                allOf(withId(R.id.linearlayout1),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.ScrollView")),
+                                                0)),
+                                14)));
+        appCompatButton2.perform(scrollTo(), click());
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.comment), withText("message"),
+                allOf(withId(R.id.name), withText("asafrdt"),
+                        childAtPosition(
+                                allOf(withId(R.id.card_view1),
+                                        childAtPosition(
+                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                                0)),
+                                0),
+                        isDisplayed()));
+        textView.check(matches(withText("asafrdt")));
+
+        ViewInteraction textView2 = onView(
+                allOf(withId(R.id.comment), withText("integration test"),
                         childAtPosition(
                                 allOf(withId(R.id.card_view1),
                                         childAtPosition(
@@ -143,7 +172,7 @@ public class CommentsTesting {
                                                 0)),
                                 1),
                         isDisplayed()));
-        textView.check(matches(withText("message")));
+        textView2.check(matches(withText("integration test")));
     }
 
     private static Matcher<View> childAtPosition(
