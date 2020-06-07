@@ -173,6 +173,20 @@ public class AddCommentIntergationTestNew {
                                 1),
                         isDisplayed()));
         textView2.check(matches(withText("integration test")));
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ViewInteraction actionMenuItemView = onView(
+                allOf(withId(R.id.logout_item), withContentDescription("logout_label"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.main_page_toolbar),
+                                        1),
+                                0),
+                        isDisplayed()));
+        actionMenuItemView.perform(click());
     }
 
     private static Matcher<View> childAtPosition(

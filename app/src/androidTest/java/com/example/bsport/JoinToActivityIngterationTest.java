@@ -151,6 +151,7 @@ public class JoinToActivityIngterationTest {
                                 0),
                         isDisplayed()));
         textView.check(matches(withText("asafrdt")));
+
     }
 
     private static Matcher<View> childAtPosition(

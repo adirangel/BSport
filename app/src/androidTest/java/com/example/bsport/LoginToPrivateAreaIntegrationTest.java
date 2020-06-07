@@ -147,6 +147,20 @@ public class LoginToPrivateAreaIntegrationTest {
                                 2),
                         isDisplayed()));
         textView3.check(matches(withText("Asaf Arditi")));
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ViewInteraction actionMenuItemView = onView(
+                allOf(withId(R.id.logout_item), withContentDescription("logout_label"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.main_page_toolbar),
+                                        1),
+                                0),
+                        isDisplayed()));
+        actionMenuItemView.perform(click());
     }
 
     private static Matcher<View> childAtPosition(

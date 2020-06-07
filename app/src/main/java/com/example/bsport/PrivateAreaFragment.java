@@ -134,7 +134,7 @@ public class PrivateAreaFragment extends Fragment {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful())
                                             Toast.makeText(getActivity(), "הסיסמא הוחלפה בהצלחה !", Toast.LENGTH_SHORT).show();
-
+                                    dialog.dismiss();
                                     }
                                 });
                             }
@@ -171,9 +171,10 @@ public class PrivateAreaFragment extends Fragment {
                                     RootRef.child(username).updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful())
+                                            if (task.isSuccessful()) {
                                                 Toast.makeText(getActivity(), "החלפת פרטיים אישיים בוצעה בהצלחה", Toast.LENGTH_SHORT).show();
-
+                                                dialog1.dismiss();
+                                            }
                                         }
                                     });
                                 }
