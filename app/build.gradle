@@ -48,6 +48,8 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+//    implementation 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
     // Required -- JUnit 4 framework
     testImplementation 'junit:junit:4.12'
     testImplementation "org.json:json:20140107"
@@ -67,14 +69,22 @@ dependencies {
     }
 
 }
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
 
+//task copyToLib(type: Copy) {
+//    into "$buildDir/libs"
+//    from(configurations.compile)
+//}
+//
+//stage.dependsOn(copyToLib)
 
-task copyToLib(type: Copy) {
-    into "$buildDir/libs"
-    from(configurations.compile)
+gradle.taskGraph.whenReady {
+    taskGraph ->
+        if (taskGraph.hasTask(stage)) {
+            test.enabled = false
+        }
 }
-stage.dependsOn(copyToLib)
-
 tasks.withType(Test) {
     testLogging {
         exceptionFormat "full"
