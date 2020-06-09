@@ -87,5 +87,10 @@ pipeline {
       mail to: 'yoni6232@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
       mail to: 'asafrdt@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
     }
+    always{
+              sh 'cp -r app/build/test-results $WORKSPACE/test-results'
+              junit(keepLongStdio: true, testResults: '**/test-results/**/*.xml')
+        }
+
   }
 }
