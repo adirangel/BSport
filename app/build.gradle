@@ -1,9 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'checkstyle'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.example.bsport"
@@ -92,3 +93,25 @@ tasks.withType(Test) {
         showStandardStreams true
     }
 }
+task checkstyle(type: Checkstyle) {
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+
+    source 'src/main/java'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    ignoreFailures true
+    showViolations true
+
+    classpath = files()
+}
+
+
+checkstyle {
+    toolVersion "8.17"
+}
+
+project.afterEvaluate {
+    preBuild.dependsOn 'checkstyle'
+}
+
