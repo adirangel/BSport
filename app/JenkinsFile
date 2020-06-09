@@ -76,6 +76,11 @@ pipeline {
           mail to: 'yoni6232@gmail.com', subject: 'New build available!', body: "Build ${env.BUILD_NUMBER} succeeded; ${env.BUILD_URL}"
           mail to: 'asafrdt@gmail.com', subject: 'New build available!', body: "Build ${env.BUILD_NUMBER} succeeded; ${env.BUILD_URL}"
         }
+        always{
+              sh 'cp -r app/build/test-results $WORKSPACE/test-results'
+              junit(keepLongStdio: true, testResults: '**/test-results/**/*.xml')
+        }
+
       }
     }
   }
