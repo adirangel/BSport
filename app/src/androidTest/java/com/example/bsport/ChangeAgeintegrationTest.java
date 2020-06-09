@@ -23,23 +23,24 @@ import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class CreateActivityTest {
-
+public class ChangeAgeintegrationTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void createActivityTest() {
+    public void mainActivityTest() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
@@ -56,10 +57,10 @@ public class CreateActivityTest {
                                         withClassName(is("android.widget.ScrollView")),
                                         0),
                                 1)));
-        appCompatEditText.perform(scrollTo(), replaceText("tairhadad"), closeSoftKeyboard());
+        appCompatEditText.perform(scrollTo(), replaceText("asafrdt"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.login_userName), withText("tairhadad"),
+                allOf(withId(R.id.login_userName), withText("asafrdt"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.ScrollView")),
@@ -74,10 +75,10 @@ public class CreateActivityTest {
                                         withClassName(is("android.widget.ScrollView")),
                                         0),
                                 2)));
-        appCompatEditText3.perform(scrollTo(), replaceText("123456"), closeSoftKeyboard());
+        appCompatEditText3.perform(scrollTo(), replaceText("1234567"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.login_password), withText("123456"),
+                allOf(withId(R.id.login_password), withText("1234567"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.ScrollView")),
@@ -85,8 +86,17 @@ public class CreateActivityTest {
                                 2)));
         appCompatEditText4.perform(pressImeActionButton());
 
+        ViewInteraction appCompatTextView = onView(
+                allOf(withId(R.id.Im_Admin), withText("מנהל - לחץ כאן\u200E"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.ScrollView")),
+                                        0),
+                                5)));
+        appCompatTextView.perform(scrollTo(), click());
+
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.login_button), withText("התחבר"),
+                allOf(withId(R.id.login_button), withText("התחבר כמנהל"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.ScrollView")),
@@ -94,26 +104,61 @@ public class CreateActivityTest {
                                 7)));
         appCompatButton.perform(scrollTo(), click());
 
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(7000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         ViewInteraction tabView = onView(
-                allOf(withContentDescription("ספורט בעיר"),
+                allOf(withContentDescription("איזור\nאישי"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.main_tabs),
                                         0),
-                                3),
+                                1),
                         isDisplayed()));
         tabView.perform(click());
 
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withId(R.id.create_activity_image),
+        ViewInteraction appCompatButton2 = onView(
+                allOf(withId(R.id.ChangeDetails), withText("שינוי פרטים אישיים"),
                         childAtPosition(
-                                allOf(withId(R.id.card_view),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                0)),
-                                4),
+                                withParent(withId(R.id.main_tabs_pager)),
+                                6),
                         isDisplayed()));
-        appCompatImageButton.perform(click());
+        appCompatButton2.perform(click());
+
+        ViewInteraction appCompatEditText55 = onView(
+                allOf(withId(R.id.change_age),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.custom),
+                                        0),
+                                2),
+                        isDisplayed()));
+        appCompatEditText55.perform(replaceText("26"), closeSoftKeyboard());
+
+        ViewInteraction appCompatButton3 = onView(
+                allOf(withId(R.id.submit_activity2), withText("שנה פרטים אישיים"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.custom),
+                                        0),
+                                3),
+                        isDisplayed()));
+        appCompatButton3.perform(click());
+
+
+//        ViewInteraction textView2 = onView(
+//                allOf(withId(R.id.UserAge), withText("26"),
+//                        childAtPosition(
+//                                withParent(withId(R.id.main_tabs_pager)),
+//                                3),
+//                        isDisplayed()));
+//        textView2.check(matches(withText("26")));
     }
 
     private static Matcher<View> childAtPosition(
