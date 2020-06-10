@@ -64,7 +64,14 @@ pipeline {
         sh './gradlew assembleDebug'
       }
     }
-
+    stage('Static Code Analysis') {
+            steps {
+                script {
+                    sh './gradlew checkstyle' 
+                    recordIssues enabledForFailure: true, aggregatingResults: true, tool: checkStyle(pattern: 'app/build/reports/checkstyle/checkstyle.xml')
+                }
+            }
+        }
 
     stage('Email Posting') {
       steps{
@@ -84,6 +91,8 @@ pipeline {
       mail to: 'tairhadad1@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
       mail to: 'yoni6232@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
       mail to: 'asafrdt@gmail.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
+      
+
    }
         always{
               sh 'cp -r app/build/test-results $WORKSPACE/test-results'
