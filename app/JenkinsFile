@@ -64,6 +64,8 @@ pipeline {
         sh './gradlew assembleDebug'
       }
     }
+
+
     stage('Email Posting') {
       steps{
         echo 'email posting stage'
