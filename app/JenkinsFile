@@ -64,6 +64,15 @@ pipeline {
         sh './gradlew assembleDebug'
       }
     }
+    stage('Static Code Analysis') {
+            steps {
+                script {
+                    sh './gradlew checkstyle' --stacktrace
+                    recordIssues enabledForFailure: true, aggregatingResults: true, tool: checkStyle(pattern: 'app/build/reports/checkstyle/checkstyle.xml')
+                }
+            }
+        }
+
     stage('Email Posting') {
       steps{
         echo 'email posting stage'
