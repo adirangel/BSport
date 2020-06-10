@@ -27,7 +27,7 @@ public class UtilsTest {
     @Test
     public void testEmailValidityPartTwo() {
         String testEmail = "   anupamchugh@gmail.com  ";
-        Assert.assertThat(String.format("Email Validity Test failed for %s ", testEmail), Utils.checkEmailForValidity(testEmail), is(true));
+        Assert.assertThat(String.format("Email Validity Test failed for: %s ", testEmail), Utils.checkEmailForValidity(testEmail), is(true));
     }
     
     @Test
