@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import io.paperdb.Paper;
 
 
 public class MyActivitiesFragment extends Fragment {

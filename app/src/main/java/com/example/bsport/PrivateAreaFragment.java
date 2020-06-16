@@ -27,7 +27,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import io.paperdb.Paper;
 
 
 public class PrivateAreaFragment extends Fragment {

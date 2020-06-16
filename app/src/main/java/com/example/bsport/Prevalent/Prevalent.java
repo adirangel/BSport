@@ -1,6 +1,5 @@
 package com.example.bsport.Prevalent;
 
-import com.example.bsport.Model.Users;
 
 public class Prevalent {
     public static String UserNameKey = "UserName";

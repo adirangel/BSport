@@ -1,7 +1,6 @@
 package com.example.bsport;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bsport.Prevalent.Prevalent;
@@ -32,7 +30,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import io.paperdb.Paper;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     ArrayList<String> FacTypes;
