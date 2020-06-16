@@ -39,14 +39,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private static int count=0;
     public static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]+$");
     public static final Pattern DATE_PATTERN = Pattern.compile("^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[012])-(2[0-9]{3}) (0[0-9]|1[0-9]|2[0123])\\:([012345][0-9])$");
-private DatabaseReference RootRef;
+    private DatabaseReference RootRef;
 
-    public CustomAdapter( ArrayList<String> FacTypes,ArrayList<String> FacNames, ArrayList<String> FacNeighborhoods, ArrayList<String> FacStreets) {
+    public CustomAdapter( ArrayList<String> FacTypes,ArrayList<String> FacNames, ArrayList<String> FacNeighborhoods, ArrayList<String> FacStreets){
         this.FacNames = FacNames;
         this.FacNeighborhoods = FacNeighborhoods;
         this.FacStreets = FacStreets;
         this.FacTypes = FacTypes;
-
     }
     @NonNull
     @Override
@@ -120,7 +119,7 @@ private DatabaseReference RootRef;
                             else if (Checking_game_date_valid_value(game_date)) {
                                 Toast.makeText(v.getContext(), "אנא הכנס תאריך מהצורה dd-mm-yyyy hh:mm", Toast.LENGTH_SHORT).show();
                             }
-                            else if(Check_that_date_after_today(game_date,date) ){
+                            else if(Check_that_date_after_today(game_date,date)){
                                 Toast.makeText(v.getContext(), "תאריך זה כבר עבר", Toast.LENGTH_SHORT).show();
                             }
                             else {
