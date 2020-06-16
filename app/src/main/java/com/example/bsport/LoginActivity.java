@@ -188,10 +188,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initilizedFields() {
         LoginButton = (Button) findViewById(R.id.login_button);
-        UserName = ( EditText) findViewById(R.id.login_userName);
-        UserPassword = ( EditText) findViewById(R.id.login_password);
+        UserName = (EditText) findViewById(R.id.login_userName);
+        UserPassword = (EditText) findViewById(R.id.login_password);
         TextView forgetPasswordLink = (TextView) findViewById(R.id.forget_password_link);
-        NeedNewAccountLink = ( TextView) findViewById(R.id.Sign_Up_link);
+        NeedNewAccountLink = (TextView) findViewById(R.id.Sign_Up_link);
         loadingbar = new ProgressDialog(this);
         AdminLink = (TextView) findViewById(R.id.Im_Admin);
         NotAdminLink = (TextView) findViewById(R.id.Im_not_Admin);
@@ -202,17 +202,17 @@ public class LoginActivity extends AppCompatActivity {
 
     private void SendUserToLMainActivity() {
 
-        Intent MainIntent = new Intent(  LoginActivity.this,HomeActivity.class );
+        Intent MainIntent = new Intent(LoginActivity.this,HomeActivity.class);
         startActivity(MainIntent);
         finish();
     }
     private void SendUserToLMainActivityAdmin() {
-        Intent MainIntent = new Intent(  LoginActivity.this,HomeActivity.class );
+        Intent MainIntent = new Intent(LoginActivity.this,HomeActivity.class);
         startActivity(MainIntent);
         finish();
     }
     private void SendUserToLRegisterActivity() {
-        Intent RegisterIntent = new Intent(  LoginActivity.this,RegisterActivity.class );
+        Intent RegisterIntent = new Intent(LoginActivity.this,RegisterActivity.class);
         startActivity(RegisterIntent);
 
     }

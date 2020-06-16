@@ -55,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
         String UserPasswordKey = Paper.book().read(Prevalent.UserPasswordKey);
         if(UserNameKey != null && UserPasswordKey != null){
             if(!TextUtils.isEmpty(UserNameKey) && !TextUtils.isEmpty(UserPasswordKey)){
-                AllowAccess (UserNameKey,UserPasswordKey);
+                AllowAccess(UserNameKey,UserPasswordKey);
                 loadingbar.setTitle("Already Logged in");
                 loadingbar.setMessage("Please Wait..");
                 loadingbar.setCanceledOnTouchOutside(false);
@@ -97,7 +97,7 @@ public class HomeActivity extends AppCompatActivity {
                         loadingbar.dismiss();
                     }
                 }
-                else if (dataSnapshot.child("Admin").child(userName).exists() ){
+                else if (dataSnapshot.child("Admin").child(userName).exists()){
                     Users usersData = dataSnapshot.child("Admin").child(userName).getValue(Users.class);
                     if(usersData.getUsername().equals(userName)){
 
@@ -137,7 +137,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private void SendUserToLoginActivity() {
-        Intent LoginIntent = new Intent( HomeActivity.this , LoginActivity.class);
+        Intent LoginIntent = new Intent(HomeActivity.this,LoginActivity.class);
         startActivity(LoginIntent);
         finish();
     }

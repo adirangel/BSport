@@ -105,7 +105,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                                 size = countPlayer- countJoin+1;
                                 if (bs.getValue().equals(username)) {
                                     if (size <= 0) {
-                                        spotsLeft.setText(" אין עוד מקום בפעילות זו " );
+                                        spotsLeft.setText(" אין עוד מקום בפעילות זו ");
                                         submit_activity2.setBackgroundColor(Color.GRAY);
                                         submit_activity2.setClickable(false);
                                     }
@@ -139,7 +139,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                 countPlayer = Integer.parseInt(num_of_playersTV.getText().toString());
                 size = countPlayer- countJoin;
                 if (size == 0) {
-                    spotsLeft.setText(" אין עוד מקום בפעילות זו " );
+                    spotsLeft.setText(" אין עוד מקום בפעילות זו ");
                     submit_activity2.setClickable(false);
                 }
                 else {
@@ -175,8 +175,8 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                         }
                         comment_adapter = new CommentAdapter(UserCommit,Comment);
                         size = countPlayer- countJoin+1;
-                        if (size <= 0) {
-                            spotsLeft.setText(" אין עוד מקום בפעילות זו " );
+                        if (size <= 0){
+                            spotsLeft.setText(" אין עוד מקום בפעילות זו ");
                             submit_activity2.setBackgroundColor(Color.GRAY);
                             submit_activity2.setClickable(false);
                         }
@@ -231,7 +231,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                             TextView spotsLeft = (TextView) dialog.findViewById(R.id.spotsLeft);
                             size = countPlayer - countJoin;
                             if (size <= 0) {
-                                spotsLeft.setText(" אין עוד מקום בפעילות זו " );
+                                spotsLeft.setText(" אין עוד מקום בפעילות זו ");
                                 submit_activity2.setBackgroundColor(Color.GRAY);
                                 submit_activity2.setClickable(false);
                                 Map<String, Object> map = new HashMap<>();
@@ -288,7 +288,7 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
                 dialog.show();
             }
         });
-        if(My_location.get(position).toLowerCase().contains("זמינה".toLowerCase()) ){
+        if(My_location.get(position).toLowerCase().contains("זמינה".toLowerCase())){
             holder.location.setVisibility(View.INVISIBLE);
         }
         else {
@@ -352,10 +352,10 @@ public class ListOfActivitiesAdapter extends RecyclerView.Adapter<ListOfActiviti
         return My_game_date.size();
     }
 
-    private Integer isCheckedWord(String type) {
-        if( type.toLowerCase().contains("סל".toLowerCase()))
+    private Integer isCheckedWord(String type){
+        if(type.toLowerCase().contains("סל".toLowerCase()))
             return 0;
-        else if( type.toLowerCase().contains("כדוררגל".toLowerCase()) || type.toLowerCase().contains("כדורגל".toLowerCase()))
+        else if(type.toLowerCase().contains("כדוררגל".toLowerCase()) || type.toLowerCase().contains("כדורגל".toLowerCase()))
             return 1;
         else if (type.toLowerCase().contains("טניס".toLowerCase()))
             return 2;

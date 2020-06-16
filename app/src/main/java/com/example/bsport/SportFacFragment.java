@@ -143,10 +143,14 @@ public class SportFacFragment extends Fragment {
 
 
     private boolean isCheckedWord(String type) {
-        return type.toLowerCase().contains("כדור".toLowerCase()) || type.toLowerCase().contains("מיני".toLowerCase()) ||
-                type.toLowerCase().contains("שחיה".toLowerCase()) || type.toLowerCase().contains("בריכה".toLowerCase()) ||
-                type.toLowerCase().contains("בריכת".toLowerCase()) || type.toLowerCase().contains("כושר".toLowerCase()) ||
-                type.toLowerCase().contains("טניס".toLowerCase()) || type.toLowerCase().contains("אתלטיקה".toLowerCase()) ||
+        return type.toLowerCase().contains("כדור".toLowerCase()) || type.toLowerCase().contains("מיני".toLowerCase())
+                ||
+                type.toLowerCase().contains("שחיה".toLowerCase()) || type.toLowerCase().contains("בריכה".toLowerCase())
+                ||
+                type.toLowerCase().contains("בריכת".toLowerCase()) || type.toLowerCase().contains("כושר".toLowerCase())
+                ||
+                type.toLowerCase().contains("טניס".toLowerCase()) || type.toLowerCase().contains("אתלטיקה".toLowerCase())
+                ||
                 type.toLowerCase().contains("פטנאק".toLowerCase()) || type.toLowerCase().contains("רגל".toLowerCase());
     }
 
