@@ -91,15 +91,7 @@ public class LoginActivity extends AppCompatActivity {
 
         final String userName = UserName.getText().toString();
         final String password = UserPassword.getText().toString();
-        if(chkBoxRememberMe.isChecked()){
-            Paper.book().write(Prevalent.UserNameKey, userName);
-            Paper.book().write(Prevalent.UserPasswordKey, password);
-
-        }
-        else {
-            Paper.book().write(Prevalent.UserNameKey, userName);
-            Paper.book().write(Prevalent.UserPasswordKey, password);
-        } //TextUtils.isEmpty(userName)
+         //TextUtils.isEmpty(userName)
         if(!Checking_username_notEmpty(userName)){
             Toast.makeText(this,"אנא הכנס שם משתמש",Toast.LENGTH_SHORT).show();
         }
@@ -128,6 +120,15 @@ public class LoginActivity extends AppCompatActivity {
                         if(usersData.getUsername().equals(userName)){
                             if(usersData.getPassword().equals(password)){
                                 if(parentDbName.equals("Admin")){
+                                    if(chkBoxRememberMe.isChecked()){
+                                        Paper.book().write(Prevalent.UserNameKey, userName);
+                                        Paper.book().write(Prevalent.UserPasswordKey, password);
+
+                                    }
+                                    else {
+                                        Paper.book().write(Prevalent.UserNameKey, userName);
+                                        Paper.book().write(Prevalent.UserPasswordKey, password);
+                                    }
                                     Prevalent.setUserAdminKey("true");
                                     Paper.book().write(Prevalent.UserPasswordKey,userName);
                                     Paper.book().write(Prevalent.UserPasswordKey,password);
@@ -135,6 +136,15 @@ public class LoginActivity extends AppCompatActivity {
                                     SendUserToLMainActivityAdmin();
                                 }
                                 else if(parentDbName.equals("Users")){
+                                    if(chkBoxRememberMe.isChecked()){
+                                        Paper.book().write(Prevalent.UserNameKey, userName);
+                                        Paper.book().write(Prevalent.UserPasswordKey, password);
+
+                                    }
+                                    else {
+                                        Paper.book().write(Prevalent.UserNameKey, userName);
+                                        Paper.book().write(Prevalent.UserPasswordKey, password);
+                                    }
                                     Paper.book().write(Prevalent.UserPasswordKey,userName);
                                     Paper.book().write(Prevalent.UserPasswordKey,password);
 
