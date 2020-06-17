@@ -93,6 +93,7 @@ public class PrivateAreaFragment extends Fragment {
                             UserFullName = ds.child("name").getValue().toString();
                             UserEmail = ds.child("email").getValue().toString();
                             User_about_myself = ds.child("aboutMyself").getValue().toString();
+                            break;
                         }
                     }
                     CurrentUser.setText(UserFullName);
